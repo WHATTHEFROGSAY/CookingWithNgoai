@@ -2881,12 +2881,29 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
             </div>
 
             <!-- Card 3 -->
-            <div class="mb-img-card">
-              <div class="mb-tape right"></div>
-              <div class="mb-img-ph" id="ph-e3" style="display:none;"></div>
-              <img id="img-e3" src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;">
-              <div class="mb-img-caption" id="cap-e3"><div class="mb-tag-pill">Nhân vật</div><br>Con người &amp; Cảm xúc</div>
-            </div>
+            <!-- Card 3: Character gallery -->
+<div class="mb-img-card hero-gallery-card">
+  <div class="mb-tape right"></div>
+
+  <div class="mb-img-ph" id="ph-e3" style="display:none;"></div>
+
+  <img
+    id="img-e3"
+    src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_1.jpg"
+    alt="Nhân vật và cảm xúc"
+    class="hero-gallery-img"
+  >
+
+  <button type="button" class="hero-gallery-btn character-gallery-prev" aria-label="Ảnh trước">‹</button>
+  <button type="button" class="hero-gallery-btn character-gallery-next" aria-label="Ảnh tiếp theo">›</button>
+
+  <div class="hero-gallery-count" id="characterGalleryCount">1 / 10</div>
+
+  <div class="mb-img-caption hero-gallery-caption" id="cap-e3">
+    <div class="mb-tag-pill">Nhân vật</div><br>
+    Con người &amp; Cảm xúc
+  </div>
+</div>
 
             <!-- Card 4 -->
             <div class="mb-img-card">
@@ -4079,7 +4096,58 @@ enterSiteBtn?.addEventListener('click', () => {
 
   renderFoodImage();
 })();
-</script>
 
+
+</script>
+<script>
+(function() {
+  const characterImages = [
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_1.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_2.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_3.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_4.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_5.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_6.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_7.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_8.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_9.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_10.jpg'
+];
+  let characterIndex = 0;
+
+  const characterImg = document.getElementById('img-e3');
+  const characterCount = document.getElementById('characterGalleryCount');
+  const characterPrev = document.querySelector('.character-gallery-prev');
+  const characterNext = document.querySelector('.character-gallery-next');
+
+  function renderCharacterImage() {
+    if (!characterImg) return;
+
+    characterImg.src = characterImages[characterIndex];
+
+    if (characterCount) {
+      characterCount.textContent = (characterIndex + 1) + ' / ' + characterImages.length;
+    }
+  }
+
+  characterPrev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    characterIndex = (characterIndex - 1 + characterImages.length) % characterImages.length;
+    renderCharacterImage();
+  });
+
+  characterNext?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    characterIndex = (characterIndex + 1) % characterImages.length;
+    renderCharacterImage();
+  });
+
+  renderCharacterImage();
+})();
+</script>
 </body>
 </html>

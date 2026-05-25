@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mood Board — Cooking with Ngoại</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #f6ead2;
+      --ink: #2d241c;
+      --brown: #7a4f2b;
+      --orange: #d9823b;
+      --green: #6f8f55;
+      --red: #b94b3f;
+      --cream: #fff8ea;
+      --shadow: rgba(61, 38, 20, 0.18);
+      --pin-yellow: #f5c842;
+      --pin-red: #e84545;
+      --pin-blue: #4591e8;
+      --cork: #c8a96e;
+      --tape: rgba(220, 200, 150, 0.55);
+    }
+
+    body {
+      background: #1a1208;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 16px;
+    }
+
+    /* ===== TRIGGER BUTTONS ===== */
+    .trigger-wrap {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      background: var(--ink);
+      color: var(--cream);
+      border: 1.5px solid rgba(255,248,234,0.1);
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: transform 0.18s, background 0.18s, border-color 0.18s;
+    }
+
+    .open-btn:hover { transform: translateY(-2px); background: #3d3226; border-color: rgba(255,248,234,0.2); }
+
+    .open-btn .icon {
+      width: 28px; height: 28px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: grid; place-items: center;
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--cream);
+    }
+
+    .open-btn.secondary {
+      background: rgba(255,248,234,0.08);
+      color: var(--cream);
+      border: 1.5px solid rgba(255,248,234,0.14);
+    }
+
+    .open-btn.secondary:hover { background: rgba(255,248,234,0.14); }
+
+    .page-title {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,248,234,0.35);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* ===== OVERLAY ===== */
+    .mb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(10, 6, 2, 0.88);
+      backdrop-filter: blur(12px);
+      overflow-y: auto;
+      padding: 2rem 1rem 4rem;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .mb-overlay.active { display: flex; }
+
+    /* ===== PANEL ===== */
+    .mb-panel {
+      width: 100%;
+      max-width: 1100px;
+      background: var(--cork);
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 80px 160px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(255,248,234,0.08) inset;
+      background-image:
+        radial-gradient(circle at 20% 40%, rgba(255,255,255,0.05) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(160,120,64,0.07) 8px, rgba(160,120,64,0.07) 9px);
+      animation: panelIn 0.5s cubic-bezier(0.2,0.9,0.2,1) forwards;
+    }
+
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ===== HEADER ===== */
+    .mb-header {
+      background: var(--ink);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mb-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mb-logo {
+      width: 36px; height: 36px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: grid; place-items: center;
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--cream);
+      flex-shrink: 0;
+    }
+
+    .mb-title { font-size: 15px; font-weight: 700; color: var(--cream); letter-spacing: 0.02em; }
+    .mb-subtitle { font-size: 11px; color: rgba(255,248,234,0.45); margin-top: 2px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .mb-tabs {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .mb-tab {
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      background: rgba(255,248,234,0.08);
+      color: rgba(255,248,234,0.5);
+      font-family: 'Space Grotesk', sans-serif;
+      transition: all 0.15s;
+      letter-spacing: 0.03em;
+    }
+
+    .mb-tab.active { background: var(--orange); color: var(--cream); }
+    .mb-tab:hover:not(.active) { background: rgba(255,248,234,0.16); color: rgba(255,248,234,0.85); }
+
+    .mb-close {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,248,234,0.1);
+      color: rgba(255,248,234,0.7);
+      cursor: pointer;
+      font-size: 18px;
+      display: grid; place-items: center;
+      transition: all 0.2s;
+      line-height: 1;
+      font-family: inherit;
+    }
+
+    .mb-close:hover { background: var(--red); color: white; transform: rotate(90deg); }
+
+    /* ===== BOARD CONTENT ===== */
+    .mb-content { padding: 28px; min-height: 600px; position: relative; }
+    .mb-board { display: none; }
+    .mb-board.active { display: block; }
+
+    .board-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    /* ===== TOOLBAR ===== */
+    .mb-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(45,36,28,0.5);
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .tool-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid rgba(255,248,234,0.18);
+      background: rgba(255,248,234,0.08);
+      color: rgba(255,248,234,0.7);
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 0.04em;
+      transition: all 0.15s;
+    }
+
+    .tool-btn:hover { background: rgba(255,248,234,0.16); color: rgba(255,248,234,0.95); }
+    .tool-sep { width: 1px; height: 20px; background: rgba(255,248,234,0.15); }
+
+    .tool-badge {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .tool-badge.emotional { background: rgba(185,75,63,0.35); color: #f5a49a; }
+    .tool-badge.visual    { background: rgba(111,143,85,0.35); color: #a4f5b0; }
+    .tool-badge.free      { background: rgba(217,130,59,0.35); color: #f5c88a; }
+
+    /* ===== IMAGE CARD ===== */
+    .img-card {
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: rgba(45,36,28,0.4);
+      border: 2px solid rgba(255,248,234,0.14);
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .img-card:hover { transform: scale(1.01) rotate(0.3deg); border-color: rgba(255,248,234,0.4); }
+    .img-card.span-row { grid-row: 1 / 3; }
+
+    .img-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: none;
+      position: absolute;
+      inset: 0;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    .img-card:hover img { opacity: 1; }
+
+    /* PIN */
+    .pin {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.3);
+      z-index: 5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+    .pin.yellow { background: var(--pin-yellow); }
+    .pin.red    { background: var(--pin-red); }
+    .pin.blue   { background: var(--pin-blue); }
+
+    /* TAPE */
+    .tape {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px; height: 18px;
+      background: var(--tape);
+      border-radius: 2px;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .tape.left  { left: 25%; }
+    .tape.right { left: 75%; }
+
+    /* CAPTION OVERLAY ON IMAGE */
+    .img-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 24px 14px 12px;
+      background: linear-gradient(transparent, rgba(15,8,3,0.88));
+      color: var(--cream);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      line-height: 1.45;
+      display: none;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--cream);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    /* UPLOAD PLACEHOLDER */
+    .img-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: rgba(255,248,234,0.45);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .img-placeholder:hover { color: rgba(255,248,234,0.78); background: rgba(255,248,234,0.05); }
+
+    .upload-icon {
+      width: 40px; height: 40px;
+      border: 2px dashed rgba(255,248,234,0.28);
+      border-radius: 10px;
+      display: grid; place-items: center;
+      font-size: 20px;
+      color: rgba(255,248,234,0.5);
+      transition: border-color 0.2s;
+    }
+
+    .img-placeholder:hover .upload-icon { border-color: rgba(255,248,234,0.6); }
+
+    .img-placeholder input[type=file] {
+      position: absolute; inset: 0;
+      opacity: 0; cursor: pointer;
+      width: 100%; height: 100%;
+    }
+
+    /* ===== SECTION LABEL ===== */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,248,234,0.42);
+      margin-bottom: 12px;
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,248,234,0.12);
+    }
+
+    /* ===== CAPTION ROW (textareas) ===== */
+    .caption-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .caption-card {
+      background: rgba(45,36,28,0.45);
+      border-radius: 10px;
+      padding: 14px;
+      border: 1px solid rgba(255,248,234,0.1);
+      position: relative;
+    }
+
+    .caption-card.has-tape::before {
+      content: '';
+      position: absolute;
+      top: -6px; left: 20px;
+      width: 40px; height: 14px;
+      background: rgba(220,200,150,0.5);
+      border-radius: 2px;
+    }
+
+    .caption-card label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,248,234,0.45);
+      margin-bottom: 7px;
+    }
+
+    .caption-card textarea {
+      width: 100%;
+      background: rgba(255,248,234,0.07);
+      border: 1px solid rgba(255,248,234,0.15);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: rgba(255,248,234,0.82);
+      resize: vertical;
+      min-height: 64px;
+      outline: none;
+      line-height: 1.55;
+    }
+
+    .caption-card textarea:focus { border-color: var(--orange); }
+    .caption-card textarea::placeholder { color: rgba(255,248,234,0.28); }
+
+    /* ===== INSIGHT CHIPS ===== */
+    .insight-strip { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+    .insight-chip {
+      background: rgba(45,36,28,0.6);
+      border: 1px solid rgba(255,248,234,0.15);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,248,234,0.82);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+    .dot.green { background: var(--green); }
+    .dot.red   { background: var(--red); }
+
+    /* ===== BOARD 1: EMOTIONAL ===== */
+    .board-emotional .hero-zone {
+      display: grid;
+      grid-template-columns: 1.3fr 0.85fr 0.85fr;
+      grid-template-rows: 240px 180px;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    /* ===== BOARD 2: VISUAL DIRECTION ===== */
+    .board-visual .palette-zone {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .swatch-card { border-radius: 10px; overflow: hidden; }
+    .swatch-color { height: 100px; }
+    .swatch-info { background: rgba(45,36,28,0.75); padding: 8px 10px; }
+    .swatch-name { font-size: 11px; font-weight: 700; color: rgba(255,248,234,0.92); display: block; letter-spacing: 0.02em; }
+    .swatch-hex  { font-size: 10px; color: rgba(255,248,234,0.42); font-family: monospace; }
+
+    .board-visual .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .ref-card {
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(45,36,28,0.4);
+      border: 2px solid rgba(255,248,234,0.1);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .ref-card:hover { border-color: rgba(255,248,234,0.32); transform: translateY(-3px); }
+    .ref-card-img { height: 150px; position: relative; overflow: hidden; }
+
+    .ref-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: none;
+      position: absolute; inset: 0;
+      opacity: 0.88;
+    }
+
+    .ref-card-body { padding: 12px; }
+    .ref-card-title { font-size: 13px; font-weight: 700; color: rgba(255,248,234,0.92); margin-bottom: 4px; }
+    .ref-card-desc  { font-size: 11px; color: rgba(255,248,234,0.48); line-height: 1.55; }
+
+    /* ===== BOARD 3: FREE LAYOUT ===== */
+    .board-free .canvas-area {
+      min-height: 560px;
+      position: relative;
+      border-radius: 8px;
+      border: 1px dashed rgba(255,248,234,0.14);
+      overflow: hidden;
+    }
+
+    .sticky-note {
+      position: absolute;
+      width: 148px;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 600;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.25);
+      transform: rotate(var(--rot, 0deg));
+      cursor: grab;
+      user-select: none;
+      z-index: 5;
+      transition: box-shadow 0.15s;
+    }
+
+    .sticky-note:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.4); z-index: 20; }
+    .sticky-note:active { cursor: grabbing; }
+
+    .sticky-note.yellow { background: #f5e04a; color: #3d3000; --rot: -2.5deg; }
+    .sticky-note.orange { background: #f5a44a; color: #3d1800; --rot:  1.8deg; }
+    .sticky-note.pink   { background: #f5a4c8; color: #3d0020; --rot: -1.2deg; }
+    .sticky-note.green  { background: #a4f5b0; color: #003d10; --rot:  2.2deg; }
+    .sticky-note.blue   { background: #a4c8f5; color: #00173d; --rot: -3deg;   }
+
+    .sticky-label {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .free-img-slot {
+      position: absolute;
+      background: rgba(45,36,28,0.42);
+      border: 2px solid rgba(255,248,234,0.16);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      z-index: 5;
+    }
+
+    .free-img-slot:hover { border-color: rgba(255,248,234,0.45); }
+
+    .free-img-slot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: none;
+      position: absolute; inset: 0;
+    }
+
+    .free-img-slot input[type=file] {
+      position: absolute; inset: 0;
+      opacity: 0; cursor: pointer;
+      width: 100%; height: 100%;
+    }
+
+    .free-img-slot .slot-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,248,234,0.38);
+      text-align: center;
+      padding: 8px;
+      line-height: 1.4;
+    }
+
+    /* Board quote */
+    .board-quote {
+      position: absolute;
+      bottom: 18px; left: 20px; right: 430px;
+      padding: 16px;
+      background: rgba(45,36,28,0.6);
+      border-radius: 8px;
+      border: 1px solid rgba(255,248,234,0.1);
+    }
+
+    .board-quote .q-text {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: rgba(255,248,234,0.85);
+      line-height: 1.5;
+    }
+
+    .board-quote .q-label {
+      font-size: 10px;
+      color: rgba(255,248,234,0.38);
+      margin-top: 6px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* SVG connectors */
+    .connector-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 720px) {
+      .board-emotional .hero-zone {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .img-card.span-row { grid-row: auto; }
+      .board-visual .palette-zone { grid-template-columns: repeat(3, 1fr); }
+      .board-visual .ref-grid { grid-template-columns: repeat(2, 1fr); }
+      .caption-row { grid-template-columns: 1fr; }
+      .mb-tabs { gap: 4px; }
+      .mb-tab { padding: 6px 10px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">Cooking with Ngoại · Mood Board System</div>
+
+  <div class="trigger-wrap">
+    <button class="open-btn" id="openMoodboard">
+      <span class="icon">M</span>
+      Mở Mood Board
+    </button>
+    <button class="open-btn secondary" id="openVisual">
+      <span style="font-size:13px;">🎨</span>
+      Visual Direction Board
+    </button>
+    <button class="open-btn secondary" id="openFree">
+      <span style="font-size:13px;">📌</span>
+      Free Layout Board
+    </button>
+  </div>
+
+  <!-- ===================================================
+       OVERLAY
+  ==================================================== -->
+  <div class="mb-overlay" id="mbOverlay">
+    <div class="mb-panel">
+
+      <!-- HEADER -->
+      <div class="mb-header">
+        <div class="mb-header-left">
+          <div class="mb-logo">N</div>
+          <div>
+            <div class="mb-title">Cooking with Ngoại — Mood Board</div>
+            <div class="mb-subtitle">Creative Direction · Visual Reference</div>
+          </div>
+        </div>
+        <div class="mb-tabs">
+          <button class="mb-tab active" data-board="emotional">Emotional</button>
+          <button class="mb-tab" data-board="visual">Visual Direction</button>
+          <button class="mb-tab" data-board="free">Free Layout</button>
+        </div>
+        <button class="mb-close" id="closeMb">✕</button>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="mb-content">
+
+        <!-- ============================================================
+             BOARD 1 · EMOTIONAL MOODBOARD
+        ============================================================= -->
+        <div class="mb-board board-emotional active" id="board-emotional">
+          <div class="board-label">
+            <span style="color:var(--orange);">●</span>
+            Emotional &amp; Memory Moodboard — QUAN TRỌNG NHẤT
+          </div>
+
+          <div class="mb-toolbar">
+            <span class="tool-badge emotional">Emotional</span>
+            <div class="tool-sep"></div>
+            <span style="font-size:11px;color:rgba(255,248,234,0.48);">Nhấp vào ô ảnh để tải ảnh · Chỉnh sửa ghi chú bên dưới</span>
+          </div>
+
+          <!-- 5 image cards -->
+          <div class="hero-zone">
+
+            <!-- Card 1 — hero (spans 2 rows) -->
+            <div class="img-card span-row">
+              <div class="pin red" style="left:30%;"></div>
+              <div class="img-placeholder" id="ph-e1">
+                <div class="upload-icon">+</div>
+                <span>Thêm ảnh chủ đạo</span>
+                <span style="font-size:10px;opacity:0.5;">Bếp lửa · Ngoại · Ký ức</span>
+                <input type="file" accept="image/*" data-img="img-e1" data-ph="ph-e1" data-cap="cap-e1" class="img-input">
+              </div>
+              <img id="img-e1">
+              <div class="img-caption" id="cap-e1">
+                <div class="tag-pill">Hero Image</div><br>
+                Cảm xúc trung tâm
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="img-card">
+              <div class="tape left"></div>
+              <div class="img-placeholder" id="ph-e2">
+                <div class="upload-icon">+</div>
+                <span>Mâm cơm Việt</span>
+                <input type="file" accept="image/*" data-img="img-e2" data-ph="ph-e2" data-cap="cap-e2" class="img-input">
+              </div>
+              <img id="img-e2">
+              <div class="img-caption" id="cap-e2">
+                <div class="tag-pill">Ẩm thực</div><br>
+                Màu sắc &amp; Kết cấu
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="img-card">
+              <div class="tape right"></div>
+              <div class="img-placeholder" id="ph-e3">
+                <div class="upload-icon">+</div>
+                <span>Ký ức gia đình</span>
+                <input type="file" accept="image/*" data-img="img-e3" data-ph="ph-e3" data-cap="cap-e3" class="img-input">
+              </div>
+              <img id="img-e3">
+              <div class="img-caption" id="cap-e3">
+                <div class="tag-pill">Nhân vật</div><br>
+                Con người &amp; Cảm xúc
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="img-card">
+              <div class="pin yellow"></div>
+              <div class="img-placeholder" id="ph-e4">
+                <div class="upload-icon">+</div>
+                <span>Thiên nhiên / Vật liệu</span>
+                <input type="file" accept="image/*" data-img="img-e4" data-ph="ph-e4" data-cap="cap-e4" class="img-input">
+              </div>
+              <img id="img-e4">
+              <div class="img-caption" id="cap-e4">
+                <div class="tag-pill">Texture</div><br>
+                Vật liệu &amp; Nền
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="img-card">
+              <div class="pin blue"></div>
+              <div class="img-placeholder" id="ph-e5">
+                <div class="upload-icon">+</div>
+                <span>Góc nấu / Bếp</span>
+                <input type="file" accept="image/*" data-img="img-e5" data-ph="ph-e5" data-cap="cap-e5" class="img-input">
+              </div>
+              <img id="img-e5">
+              <div class="img-caption" id="cap-e5">
+                <div class="tag-pill">Environment</div><br>
+                Không gian bếp
+              </div>
+            </div>
+
+          </div><!-- /hero-zone -->
+
+          <div class="section-label">Ghi chú &amp; Insight</div>
+          <div class="caption-row">
+            <div class="caption-card has-tape">
+              <label>Mục tiêu cảm xúc</label>
+              <textarea placeholder="Cảm giác: ấm – chậm – thân – thật&#10;Ánh sáng: vàng nhẹ, hoàng hôn&#10;Texture: gỗ cũ, bát sứ, khói bếp..."></textarea>
+            </div>
+            <div class="caption-card">
+              <label>Insight người chơi</label>
+              <textarea placeholder="Người chơi không chỉ 'chơi game'&#10;→ mà là trở về nhà&#10;→ mà là nhớ Ngoại..."></textarea>
+            </div>
+            <div class="caption-card has-tape">
+              <label>Từ khoá hình ảnh</label>
+              <textarea placeholder="Khói bếp · Tay Ngoại · Gạo nếp&#10;Đèn dầu · Chợ quê · Mâm cơm&#10;Lá chuối · Đất nung..."></textarea>
+            </div>
+          </div>
+
+          <div class="section-label">Insight nhanh</div>
+          <div class="insight-strip">
+            <div class="insight-chip"><div class="dot"></div>Ấm – Chậm – Thân – Thật</div>
+            <div class="insight-chip"><div class="dot green"></div>Ánh sáng vàng nhẹ, bếp than</div>
+            <div class="insight-chip"><div class="dot red"></div>Không quá nghèo, không nostalgia sến</div>
+            <div class="insight-chip"><div class="dot"></div>Ký ức được nâng cấp, không bụi bặm</div>
+            <div class="insight-chip"><div class="dot green"></div>Game kia KHÔNG có — đây là điểm khác biệt</div>
+          </div>
+        </div>
+        <!-- /board-emotional -->
+
+
+        <!-- ============================================================
+             BOARD 2 · VISUAL DIRECTION
+        ============================================================= -->
+        <div class="mb-board board-visual" id="board-visual">
+          <div class="board-label">
+            <span style="color:var(--green);">●</span>
+            Visual Direction &amp; Art Style Reference
+          </div>
+
+          <div class="mb-toolbar">
+            <span class="tool-badge visual">Visual</span>
+            <div class="tool-sep"></div>
+            <span style="font-size:11px;color:rgba(255,248,234,0.48);">Bảng màu · Art style ref · Tải ảnh tham khảo</span>
+          </div>
+
+          <div class="section-label">Bảng màu</div>
+          <div class="palette-zone">
+            <div class="swatch-card">
+              <div class="swatch-color" style="background:#f6ead2;"></div>
+              <div class="swatch-info"><span class="swatch-name">Giấy dó</span><span class="swatch-hex">#f6ead2</span></div>
+            </div>
+            <div class="swatch-card">
+              <div class="swatch-color" style="background:#d9823b;"></div>
+              <div class="swatch-info"><span class="swatch-name">Bếp lửa</span><span class="swatch-hex">#d9823b</span></div>
+            </div>
+            <div class="swatch-card">
+              <div class="swatch-color" style="background:#6f8f55;"></div>
+              <div class="swatch-info"><span class="swatch-name">Lá chuối</span><span class="swatch-hex">#6f8f55</span></div>
+            </div>
+            <div class="swatch-card">
+              <div class="swatch-color" style="background:#b94b3f;"></div>
+              <div class="swatch-info"><span class="swatch-name">Gấc đỏ</span><span class="swatch-hex">#b94b3f</span></div>
+            </div>
+            <div class="swatch-card">
+              <div class="swatch-color" style="background:#7a4f2b;"></div>
+              <div class="swatch-info"><span class="swatch-name">Đất nung</span><span class="swatch-hex">#7a4f2b</span></div>
+            </div>
+            <div class="swatch-card">
+              <div class="swatch-color" style="background:#8b5f9f;"></div>
+              <div class="swatch-info"><span class="swatch-name">Khoai môn</span><span class="swatch-hex">#8b5f9f</span></div>
+            </div>
+          </div>
+
+          <div class="section-label">Art Style Reference — tải ảnh tham khảo</div>
+          <div class="ref-grid">
+
+            <div class="ref-card">
+              <div class="ref-card-img">
+                <div class="img-placeholder" id="ph-v1" style="height:150px;background:rgba(45,36,28,0.4);">
+                  <div class="upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,0.38);">Art Style Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v1" data-ph="ph-v1" class="img-input-ref">
+                </div>
+                <img id="img-v1" style="position:absolute;inset:0;">
+              </div>
+              <div class="ref-card-body">
+                <div class="ref-card-title">Hand-drawn cozy</div>
+                <div class="ref-card-desc">Nét mực mềm, nhân vật dễ thương, texture giấy, màu pastel ấm</div>
+              </div>
+            </div>
+
+            <div class="ref-card">
+              <div class="ref-card-img">
+                <div class="img-placeholder" id="ph-v2" style="height:150px;background:rgba(45,36,28,0.4);">
+                  <div class="upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,0.38);">UI / UX Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v2" data-ph="ph-v2" class="img-input-ref">
+                </div>
+                <img id="img-v2" style="position:absolute;inset:0;">
+              </div>
+              <div class="ref-card-body">
+                <div class="ref-card-title">UX Feel</div>
+                <div class="ref-card-desc">Chậm vừa đủ, ít áp lực, phản hồi mềm, âm thanh bếp</div>
+              </div>
+            </div>
+
+            <div class="ref-card">
+              <div class="ref-card-img">
+                <div class="img-placeholder" id="ph-v3" style="height:150px;background:rgba(45,36,28,0.4);">
+                  <div class="upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,0.38);">Game Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v3" data-ph="ph-v3" class="img-input-ref">
+                </div>
+                <img id="img-v3" style="position:absolute;inset:0;">
+              </div>
+              <div class="ref-card-body">
+                <div class="ref-card-title">Game Reference</div>
+                <div class="ref-card-desc">Tựa game tham khảo: style, màu, cảm giác chơi</div>
+              </div>
+            </div>
+
+            <div class="ref-card">
+              <div class="ref-card-img">
+                <div class="img-placeholder" id="ph-v4" style="height:150px;background:rgba(45,36,28,0.4);">
+                  <div class="upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,0.38);">Branding Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v4" data-ph="ph-v4" class="img-input-ref">
+                </div>
+                <img id="img-v4" style="position:absolute;inset:0;">
+              </div>
+              <div class="ref-card-body">
+                <div class="ref-card-title">Branding / Package</div>
+                <div class="ref-card-desc">Thương hiệu, bao bì, collab product tham khảo</div>
+              </div>
+            </div>
+
+          </div><!-- /ref-grid -->
+
+          <div class="section-label">Ghi chú Art Direction</div>
+          <div class="caption-row">
+            <div class="caption-card has-tape">
+              <label>Không được dùng</label>
+              <textarea placeholder="Không quá tối, u ám&#10;Không pixel art thô&#10;Không màu neon&#10;Không chibi quá đà..."></textarea>
+            </div>
+            <div class="caption-card">
+              <label>Nên hướng tới</label>
+              <textarea placeholder="Nét vẽ tay mềm&#10;Giấy dó, lá chuối, đất nung&#10;Ánh sáng ấm golden hour&#10;UI hiện đại nhưng có hồn..."></textarea>
+            </div>
+            <div class="caption-card has-tape">
+              <label>Tham khảo game</label>
+              <textarea placeholder="Cooking Mama (thao tác)&#10;Stardew Valley (cozy)&#10;Spiritfarer (cảm xúc)&#10;Venba (văn hoá bếp)..."></textarea>
+            </div>
+          </div>
+        </div>
+        <!-- /board-visual -->
+
+
+        <!-- ============================================================
+             BOARD 3 · FREE LAYOUT
+        ============================================================= -->
+        <div class="mb-board board-free" id="board-free">
+          <div class="board-label">
+            <span style="color:var(--pin-yellow);">●</span>
+            Free Layout — Bảng tự do kiểu họp thật
+          </div>
+
+          <div class="mb-toolbar">
+            <span class="tool-badge free">Free</span>
+            <div class="tool-sep"></div>
+            <span style="font-size:11px;color:rgba(255,248,234,0.48);">Tải ảnh · Ghi note · Kéo thả tự do</span>
+            <div class="tool-sep"></div>
+            <button class="tool-btn" id="addStickyBtn">+ Sticky Note</button>
+            <button class="tool-btn" id="addImgSlotBtn">+ Ô ảnh</button>
+          </div>
+
+          <div class="canvas-area" id="freeCanvas">
+
+            <!-- Pre-placed sticky notes -->
+            <div class="sticky-note yellow" style="top:18px;left:20px;">
+              <span class="sticky-label">Insight</span>
+              Người chơi không chỉ "chơi game" → mà là trở về nhà
+            </div>
+
+            <div class="sticky-note orange" style="top:18px;left:195px;">
+              <span class="sticky-label">Cảm giác</span>
+              Ấm – Chậm – Thân – Thật
+            </div>
+
+            <div class="sticky-note pink" style="top:22px;left:370px;">
+              <span class="sticky-label">Target</span>
+              Người trẻ xa nhà, 20–32 tuổi, nhớ Ngoại
+            </div>
+
+            <div class="sticky-note green" style="top:185px;left:20px;">
+              <span class="sticky-label">Hook</span>
+              Mỗi món = một ký ức được mở khoá
+            </div>
+
+            <div class="sticky-note blue" style="top:185px;left:185px;">
+              <span class="sticky-label">Reward</span>
+              Quà thật: voucher, postcard, lớp học nấu ăn
+            </div>
+
+            <div class="sticky-note yellow" style="top:185px;left:365px;--rot:1.5deg;">
+              <span class="sticky-label">Risk</span>
+              Đừng quá hoài cổ, phải commercial được
+            </div>
+
+            <!-- Pre-placed image slots -->
+            <div class="free-img-slot" style="right:20px;top:16px;width:200px;height:200px;">
+              <div class="pin red" style="top:-8px;left:50%;transform:translateX(-50%);"></div>
+              <div class="img-placeholder" id="ph-f1" style="height:100%;width:100%;background:transparent;">
+                <div class="upload-icon">+</div>
+                <span class="slot-label">Ảnh cảm hứng 1</span>
+                <input type="file" accept="image/*" data-img="img-f1" data-ph="ph-f1" class="img-input-slot">
+              </div>
+              <img id="img-f1" style="position:absolute;inset:0;">
+            </div>
+
+            <div class="free-img-slot" style="right:238px;top:230px;width:148px;height:148px;">
+              <div class="tape"></div>
+              <div class="img-placeholder" id="ph-f2" style="height:100%;width:100%;background:transparent;">
+                <div class="upload-icon">+</div>
+                <span class="slot-label">Ảnh ref 2</span>
+                <input type="file" accept="image/*" data-img="img-f2" data-ph="ph-f2" class="img-input-slot">
+              </div>
+              <img id="img-f2" style="position:absolute;inset:0;">
+            </div>
+
+            <div class="free-img-slot" style="right:20px;top:240px;width:200px;height:148px;">
+              <div class="pin yellow" style="top:-8px;left:50%;transform:translateX(-50%);"></div>
+              <div class="img-placeholder" id="ph-f3" style="height:100%;width:100%;background:transparent;">
+                <div class="upload-icon">+</div>
+                <span class="slot-label">Ảnh ref 3</span>
+                <input type="file" accept="image/*" data-img="img-f3" data-ph="ph-f3" class="img-input-slot">
+              </div>
+              <img id="img-f3" style="position:absolute;inset:0;">
+            </div>
+
+            <!-- SVG connector arrows -->
+            <svg class="connector-svg">
+              <defs>
+                <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="rgba(255,248,234,0.28)"/>
+                </marker>
+              </defs>
+              <path d="M 320 90 Q 400 80 400 90" stroke="rgba(255,248,234,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#arrowhead)"/>
+              <path d="M 165 248 Q 200 250 200 260" stroke="rgba(255,248,234,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#arrowhead)"/>
+            </svg>
+
+            <!-- Core tagline quote -->
+            <div class="board-quote">
+              <div class="q-text">"Một lần nấu, một lần trở về"</div>
+              <div class="q-label">Core Tagline</div>
+            </div>
+
+          </div><!-- /canvas-area -->
+        </div>
+        <!-- /board-free -->
+
+      </div><!-- /mb-content -->
+    </div><!-- /mb-panel -->
+  </div><!-- /mb-overlay -->
+
+
+  <script>
+    /* ===== TAB & OVERLAY ===== */
+    const overlay = document.getElementById('mbOverlay');
+    const tabs    = document.querySelectorAll('.mb-tab');
+    const boards  = document.querySelectorAll('.mb-board');
+
+    function openBoard(boardId) {
+      overlay.classList.add('active');
+      tabs.forEach(t   => t.classList.toggle('active', t.dataset.board === boardId));
+      boards.forEach(b => b.classList.toggle('active', b.id === 'board-' + boardId));
+    }
+
+    function closeOverlay() { overlay.classList.remove('active'); }
+
+    document.getElementById('openMoodboard').onclick = () => openBoard('emotional');
+    document.getElementById('openVisual').onclick    = () => openBoard('visual');
+    document.getElementById('openFree').onclick      = () => openBoard('free');
+    document.getElementById('closeMb').onclick       = closeOverlay;
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeOverlay(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
+
+    tabs.forEach(tab => tab.addEventListener('click', () => openBoard(tab.dataset.board)));
+
+    /* ===== IMAGE UPLOAD — Board 1 (with caption reveal) ===== */
+    document.querySelectorAll('.img-input').forEach(input => {
+      input.addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        const img = document.getElementById(this.dataset.img);
+        const ph  = document.getElementById(this.dataset.ph);
+        const cap = this.dataset.cap ? document.getElementById(this.dataset.cap) : null;
+        img.src = url;
+        img.style.display = 'block';
+        ph.style.display  = 'none';
+        if (cap) cap.style.display = 'block';
+      });
+    });
+
+    /* ===== IMAGE UPLOAD — Board 2 ref cards ===== */
+    document.querySelectorAll('.img-input-ref').forEach(input => {
+      input.addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        const img = document.getElementById(this.dataset.img);
+        const ph  = document.getElementById(this.dataset.ph);
+        img.src = url;
+        img.style.display = 'block';
+        ph.style.display  = 'none';
+      });
+    });
+
+    /* ===== IMAGE UPLOAD — Board 3 free slots ===== */
+    function bindSlotInput(input) {
+      input.addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        const img = document.getElementById(this.dataset.img);
+        const ph  = document.getElementById(this.dataset.ph);
+        if (img) { img.src = url; img.style.display = 'block'; }
+        if (ph)  { ph.style.display = 'none'; }
+      });
+    }
+
+    document.querySelectorAll('.img-input-slot').forEach(bindSlotInput);
+
+    /* ===== DRAG ===== */
+    function makeDraggable(el) {
+      el.addEventListener('mousedown', startDrag);
+    }
+
+    function startDrag(e) {
+      const el = e.currentTarget;
+      const skip = ['INPUT','TEXTAREA','BUTTON'];
+      if (skip.includes(e.target.tagName) || e.target.contentEditable === 'true') return;
+      e.preventDefault();
+
+      const startX = e.clientX, startY = e.clientY;
+      const origLeft = el.offsetLeft, origTop = el.offsetTop;
+
+      el.style.zIndex = 50;
+
+      function onMove(ev) {
+        el.style.left = Math.max(0, origLeft + ev.clientX - startX) + 'px';
+        el.style.top  = Math.max(0, origTop  + ev.clientY - startY) + 'px';
+        el.style.right = 'auto';
+      }
+
+      function onUp() {
+        el.style.zIndex = 5;
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      }
+
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    }
+
+    document.querySelectorAll('.sticky-note, .free-img-slot').forEach(makeDraggable);
+
+    /* ===== ADD STICKY NOTE ===== */
+    let stickyCount = 0;
+    const stickyColors = ['yellow','orange','pink','green','blue'];
+    const stickyRots   = ['-2.5deg','1.8deg','-1.2deg','2.2deg','-3deg','1.5deg'];
+
+    document.getElementById('addStickyBtn').addEventListener('click', () => {
+      const canvas = document.getElementById('freeCanvas');
+      const note   = document.createElement('div');
+      const color  = stickyColors[stickyCount % stickyColors.length];
+      const rot    = stickyRots[stickyCount % stickyRots.length];
+
+      note.className = 'sticky-note ' + color;
+      note.style.cssText = `top:${40 + Math.random() * 200}px;left:${20 + Math.random() * 300}px;--rot:${rot};z-index:20;`;
+      note.innerHTML = `<span class="sticky-label">Note ${stickyCount + 1}</span>
+        <div contenteditable="true" style="outline:none;min-height:40px;">Ghi chú mới...</div>`;
+
+      canvas.appendChild(note);
+      makeDraggable(note);
+      stickyCount++;
+    });
+
+    /* ===== ADD IMAGE SLOT ===== */
+    let dynCount = 10;
+    document.getElementById('addImgSlotBtn').addEventListener('click', () => {
+      const canvas = document.getElementById('freeCanvas');
+      const id     = 'dyn-' + dynCount;
+
+      const slot = document.createElement('div');
+      slot.className = 'free-img-slot';
+      slot.style.cssText = `top:${30 + Math.random() * 180}px;left:${20 + Math.random() * 300}px;width:140px;height:140px;z-index:20;`;
+
+      slot.innerHTML = `
+        <div class="pin red" style="top:-8px;left:50%;transform:translateX(-50%);"></div>
+        <div class="img-placeholder" id="ph-${id}" style="height:100%;width:100%;background:transparent;">
+          <div class="upload-icon">+</div>
+          <span class="slot-label">Ô ảnh mới</span>
+          <input type="file" accept="image/*" data-img="img-${id}" data-ph="ph-${id}" class="img-input-slot-dyn">
+        </div>
+        <img id="img-${id}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;">`;
+
+      canvas.appendChild(slot);
+      makeDraggable(slot);
+
+      slot.querySelector('.img-input-slot-dyn').addEventListener('change', function() {
+        const file = this.files[0]; if (!file) return;
+        const url  = URL.createObjectURL(file);
+        const img  = document.getElementById(this.dataset.img);
+        const ph   = document.getElementById(this.dataset.ph);
+        if (img) { img.src = url; img.style.display = 'block'; }
+        if (ph)  { ph.style.display = 'none'; }
+      });
+
+      dynCount++;
+    });
+  </script>
+</body>
+</html>

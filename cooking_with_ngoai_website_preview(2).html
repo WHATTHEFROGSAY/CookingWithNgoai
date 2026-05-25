@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cooking with Ngoại — Game Concept Preview</title>
+  <style>
+    :root {
+      --paper: #f6ead2;
+      --paper-dark: #ead5ad;
+      --ink: #2d241c;
+      --brown: #7a4f2b;
+      --orange: #d9823b;
+      --green: #6f8f55;
+      --red: #b94b3f;
+      --cream: #fff8ea;
+      --shadow: rgba(61, 38, 20, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.55), transparent 24%),
+        radial-gradient(circle at 80% 30%, rgba(217,130,59,.18), transparent 28%),
+        linear-gradient(135deg, var(--paper), #f9efdc 45%, var(--paper-dark));
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .22;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 6vw;
+      background: rgba(246, 234, 210, .78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(122, 79, 43, .16);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: 0 8px 20px var(--shadow);
+    }
+
+    .nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      opacity: .78;
+      margin-left: 18px;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 48px;
+      align-items: center;
+      padding: 72px 6vw 90px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 14px;
+      border: 1px solid rgba(122,79,43,.26);
+      border-radius: 999px;
+      background: rgba(255,248,234,.5);
+      color: var(--brown);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      max-width: 900px;
+    }
+
+    .hero-title.one-layout {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 3vw, 34px);
+      overflow: visible;
+      position: relative;
+      letter-spacing: 0;
+    }
+
+    .big-one {
+      display: block;
+      font-size: clamp(120px, 17vw, 250px);
+      line-height: .78;
+      font-weight: 900;
+      letter-spacing: -0.075em;
+      opacity: 0;
+      transform: translateY(28px) scale(.92);
+      filter: blur(8px);
+      animation: bigOneReveal .9s cubic-bezier(.2,.9,.2,1) .08s forwards;
+    }
+
+    .one-side {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(18px, 2vw, 34px);
+      padding-top: clamp(8px, 1.4vw, 18px);
+      font-size: clamp(22px, 2.45vw, 40px);
+      line-height: 1.05;
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      white-space: nowrap;
+    }
+
+    .one-side span {
+      display: block;
+      opacity: 0;
+      transform: translateX(-18px);
+      filter: blur(6px);
+      animation: sideWordsReveal .72s cubic-bezier(.2,.85,.2,1) forwards;
+    }
+
+    .one-side span:nth-child(1) { animation-delay: .52s; }
+    .one-side span:nth-child(2) { animation-delay: .7s; }
+
+    @keyframes bigOneReveal {
+      0% { opacity: 0; transform: translateY(28px) scale(.92); filter: blur(8px); }
+      68% { opacity: 1; transform: translateY(-3px) scale(1.02); filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes sideWordsReveal {
+      0% { opacity: 0; transform: translateX(-18px); filter: blur(6px); }
+      100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+    }
+
+    .hero p {
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.65;
+      max-width: 680px;
+      color: rgba(45, 36, 28, .82);
+      margin: 0 0 32px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(45,36,28,.16);
+      background: var(--ink);
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 16px 30px var(--shadow);
+    }
+
+    .btn.secondary {
+      background: rgba(255,248,234,.55);
+      color: var(--ink);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 540px;
+      border-radius: 42px;
+      padding: 34px;
+      background: rgba(255, 248, 234, .68);
+      border: 1px solid rgba(122,79,43,.22);
+      box-shadow: 0 30px 80px var(--shadow);
+      overflow: hidden;
+    }
+
+    .sun {
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(217,130,59,.28);
+    }
+
+    .grandma {
+      position: absolute;
+      left: 50%;
+      top: 53%;
+      transform: translate(-50%, -50%);
+      width: 290px;
+      height: 350px;
+    }
+
+    .face, .body, .pot, .fire, .steam span, .headscarf {
+      position: absolute;
+      border: 4px solid var(--ink);
+    }
+
+    .headscarf {
+      left: 82px;
+      top: 18px;
+      width: 112px;
+      height: 100px;
+      border-radius: 46% 54% 55% 45%;
+      background: #fff4dc;
+      transform: rotate(-8deg);
+    }
+
+    .face {
+      left: 103px;
+      top: 55px;
+      width: 78px;
+      height: 82px;
+      border-radius: 50%;
+      background: #f7caa4;
+      border-width: 3px;
+    }
+
+    .face::before, .face::after {
+      content: "";
+      position: absolute;
+      top: 32px;
+      width: 10px;
+      height: 5px;
+      border-bottom: 2px solid var(--ink);
+      border-radius: 50%;
+    }
+
+    .face::before { left: 18px; }
+    .face::after { right: 18px; }
+
+    .smile {
+      position: absolute;
+      left: 31px;
+      top: 50px;
+      width: 18px;
+      height: 8px;
+      border-bottom: 2px solid var(--red);
+      border-radius: 50%;
+    }
+
+    .body {
+      left: 82px;
+      top: 135px;
+      width: 120px;
+      height: 138px;
+      border-radius: 28px 28px 10px 10px;
+      background: #fff8ea;
+    }
+
+    .body::before {
+      content: "";
+      position: absolute;
+      left: 56px;
+      top: 0;
+      height: 134px;
+      border-left: 3px solid rgba(45,36,28,.55);
+    }
+
+    .arm {
+      position: absolute;
+      left: 174px;
+      top: 158px;
+      width: 105px;
+      height: 4px;
+      background: var(--ink);
+      transform: rotate(-16deg);
+      transform-origin: left;
+    }
+
+    .chopsticks {
+      position: absolute;
+      left: 184px;
+      top: 148px;
+      width: 108px;
+      height: 3px;
+      background: var(--ink);
+      transform: rotate(-12deg);
+    }
+
+    .chopsticks::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 108px;
+      height: 3px;
+      background: var(--ink);
+    }
+
+    .pot {
+      right: 8px;
+      bottom: 76px;
+      width: 86px;
+      height: 70px;
+      border-radius: 0 0 28px 28px;
+      background: #f5dec0;
+    }
+
+    .fire {
+      right: 25px;
+      bottom: 24px;
+      width: 54px;
+      height: 54px;
+      border-radius: 4px;
+      background: linear-gradient(var(--orange), var(--red));
+      border-width: 3px;
+      clip-path: polygon(50% 0%, 85% 52%, 65% 100%, 35% 100%, 15% 52%);
+      border-color: transparent;
+    }
+
+    .steam span {
+      width: 22px;
+      height: 34px;
+      border-color: transparent transparent transparent rgba(45,36,28,.55);
+      border-width: 3px;
+      border-radius: 50%;
+    }
+
+    .steam span:nth-child(1) { right: 56px; bottom: 160px; }
+    .steam span:nth-child(2) { right: 28px; bottom: 170px; }
+    .steam span:nth-child(3) { right: 75px; bottom: 183px; }
+
+    .quote {
+      position: absolute;
+      left: 32px;
+      bottom: 32px;
+      right: 32px;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(45,36,28,.88);
+      color: var(--cream);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    section { padding: 88px 6vw; }
+
+    .section-title {
+      font-size: clamp(34px, 4vw, 64px);
+      line-height: .95;
+      letter-spacing: -.06em;
+      margin: 0 0 18px;
+    }
+
+    .section-lead {
+      max-width: 760px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: rgba(45,36,28,.75);
+      margin-bottom: 36px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(255,248,234,.62);
+      border: 1px solid rgba(122,79,43,.18);
+      box-shadow: 0 18px 44px rgba(61, 38, 20, .09);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -.035em;
+    }
+
+    .card p, .card li {
+      line-height: 1.65;
+      color: rgba(45,36,28,.76);
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(111,143,85,.16);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .loop {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .loop div {
+      min-height: 120px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 18px;
+      border-radius: 26px;
+      background: var(--ink);
+      color: var(--cream);
+      font-weight: 900;
+      box-shadow: 0 18px 38px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .motion-flow {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .motion-flow::before {
+      content: "";
+      position: absolute;
+      left: 5%;
+      right: 5%;
+      top: 50%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(122,79,43,.22), rgba(217,130,59,.42), rgba(122,79,43,.22), transparent);
+      transform: translateY(-50%);
+      z-index: -1;
+    }
+
+    .motion-flow::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 4%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,248,234,.96), rgba(217,130,59,.1));
+      box-shadow: 0 0 34px rgba(217,130,59,.42);
+      transform: translateY(-50%);
+      animation: flowOrb 8.5s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .flow-step {
+      position: relative;
+      overflow: hidden;
+      will-change: transform, box-shadow, opacity;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      grid-template-rows: auto auto auto;
+      gap: 8px;
+      z-index: 1;
+      transition: transform .16s cubic-bezier(.2,.9,.2,1), box-shadow .16s cubic-bezier(.2,.9,.2,1), border-color .12s ease-out, color .12s ease-out;
+      --cozy-a: rgba(217,130,59,.14);
+      --cozy-b: rgba(255,248,234,.08);
+      --cozy-glow: rgba(217,130,59,.24);
+    }
+
+    .flow-step::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 0%, var(--cozy-glow), transparent 58%), linear-gradient(135deg, var(--cozy-b), var(--cozy-a));
+      opacity: 0;
+      transition: opacity .12s ease-out;
+      z-index: -1;
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at center, rgba(255,248,234,.22), transparent 70%);
+      opacity: 0;
+      transition: opacity .12s ease-out;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .market { --cozy-a: rgba(217,130,59,.18); --cozy-b: rgba(255,248,234,.08); --cozy-glow: rgba(217,130,59,.32); }
+    .ingredient { --cozy-a: rgba(111,143,85,.18); --cozy-b: rgba(255,248,234,.08); --cozy-glow: rgba(111,143,85,.32); }
+    .cooking { --cozy-a: rgba(185,75,63,.16); --cozy-b: rgba(217,130,59,.12); --cozy-glow: rgba(217,130,59,.34); }
+    .complete { --cozy-a: rgba(246,234,210,.18); --cozy-b: rgba(255,248,234,.12); --cozy-glow: rgba(255,248,234,.32); }
+    .memory { --cozy-a: rgba(255,248,234,.16); --cozy-b: rgba(139,95,159,.08); --cozy-glow: rgba(255,248,234,.36); }
+    .reward { --cozy-a: rgba(139,95,159,.16); --cozy-b: rgba(255,248,234,.08); --cozy-glow: rgba(139,95,159,.28); }
+
+    .flow-step:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 18px 36px rgba(61,38,20,.18), 0 0 14px var(--cozy-glow);
+      border-color: rgba(255,248,234,.14);
+      color: var(--cream);
+    }
+
+    .flow-step:hover::before,
+    .flow-step:hover::after { opacity: 1; }
+
+    .step-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 2px;
+      border-radius: 18px;
+      background: rgba(255,248,234,.12);
+      font-size: 24px;
+      box-shadow: inset 0 0 0 1px rgba(255,248,234,.15);
+      transition: transform .16s cubic-bezier(.2,.9,.2,1), background .12s ease-out, box-shadow .12s ease-out, filter .12s ease-out;
+    }
+
+    .flow-step:hover .step-icon {
+      transform: scale(1.12) rotate(-3deg);
+      background: rgba(255,248,234,.18);
+      box-shadow: inset 0 0 0 1px rgba(255,248,234,.22), 0 10px 22px rgba(255,248,234,.08);
+      filter: brightness(1.06) saturate(1.06);
+    }
+
+    .step-title {
+      display: block;
+      font-size: 15.5px;
+      line-height: 1.22;
+      font-weight: 900;
+    }
+
+    .step-note {
+      display: block;
+      font-size: 9.5px;
+      line-height: 1.15;
+      font-weight: 600;
+      color: rgba(255,248,234,.52);
+      letter-spacing: .015em;
+      opacity: .82;
+    }
+
+    .flow-step:hover .step-title { color: #fff8ea; }
+    .flow-step:hover .step-note { color: rgba(255,248,234,.66); opacity: .9; }
+
+    @keyframes flowOrb {
+      0%, 7% { left: 4%; opacity: .2; }
+      13%, 20% { left: 18%; opacity: 1; }
+      27%, 34% { left: 34%; opacity: 1; }
+      41%, 48% { left: 50%; opacity: 1; }
+      55%, 62% { left: 66%; opacity: 1; }
+      69%, 76% { left: 82%; opacity: 1; }
+      86%, 100% { left: 94%; opacity: 0; }
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: .88fr 1.12fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .chapters {
+      display: grid;
+      gap: 14px;
+    }
+
+    .chapter {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,248,234,.6);
+      border: 1px solid rgba(122,79,43,.18);
+    }
+
+    .chapter strong { display: block; margin-bottom: 6px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 24px;
+      background: rgba(255,248,234,.62);
+      box-shadow: 0 18px 44px rgba(61, 38, 20, .09);
+    }
+
+    th, td {
+      padding: 18px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(122,79,43,.14);
+    }
+
+    th {
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .swatch {
+      min-height: 150px;
+      border-radius: 26px;
+      padding: 16px;
+      display: flex;
+      align-items: end;
+      color: #fff;
+      font-weight: 900;
+      box-shadow: 0 18px 38px var(--shadow);
+    }
+
+    .footer {
+      padding: 52px 6vw;
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+    }
+
+    /* Motion System */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes softFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    @keyframes warmPulse {
+      0%, 100% { opacity: .25; transform: scale(1); }
+      50% { opacity: .42; transform: scale(1.08); }
+    }
+
+    @keyframes steamRise {
+      0% { opacity: 0; transform: translateY(14px) scale(.82); }
+      35% { opacity: .75; }
+      100% { opacity: 0; transform: translateY(-38px) scale(1.15); }
+    }
+
+    @keyframes fireFlicker {
+      0%, 100% { transform: scaleY(1) rotate(-2deg); filter: brightness(1); }
+      50% { transform: scaleY(1.16) rotate(2deg); filter: brightness(1.16); }
+    }
+
+    @keyframes chopstickTap {
+      0%, 100% { transform: rotate(-12deg) translateX(0); }
+      50% { transform: rotate(-16deg) translateX(5px); }
+    }
+
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(34px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .hero .eyebrow,
+    .hero p,
+    .actions {
+      opacity: 0;
+      animation: fadeUp .9s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .hero p { animation-delay: 1.05s; }
+    .actions { animation-delay: 1.18s; }
+
+    .hero-card {
+      opacity: 0;
+      animation: cardReveal 1s cubic-bezier(.2,.8,.2,1) .28s forwards, softFloat 5.5s ease-in-out 1.4s infinite;
+    }
+
+    .sun { animation: warmPulse 4.5s ease-in-out infinite; }
+    .steam span { animation: steamRise 2.4s ease-in-out infinite; }
+    .steam span:nth-child(2) { animation-delay: .55s; }
+    .steam span:nth-child(3) { animation-delay: 1.05s; }
+    .fire { animation: fireFlicker .82s ease-in-out infinite; transform-origin: bottom center; }
+    .chopsticks { animation: chopstickTap 2.8s ease-in-out infinite; transform-origin: left center; }
+
+    .card,
+    .chapter,
+    table,
+    .swatch,
+    .loop div {
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .card:hover,
+    .chapter:hover,
+    .swatch:hover,
+    .loop div:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 26px 58px rgba(61, 38, 20, .15);
+      border-color: rgba(122,79,43,.32);
+    }
+
+    .motion-flow .flow-step:hover {
+      background: linear-gradient(180deg, rgba(45,36,28,.94), rgba(45,36,28,.88)), var(--ink);
+      border-color: rgba(255,248,234,.18);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .loop div:nth-child(1) { transition-delay: .02s; }
+    .loop div:nth-child(2) { transition-delay: .07s; }
+    .loop div:nth-child(3) { transition-delay: .12s; }
+    .loop div:nth-child(4) { transition-delay: .17s; }
+    .loop div:nth-child(5) { transition-delay: .22s; }
+    .loop div:nth-child(6) { transition-delay: .27s; }
+
+    @media (max-width: 980px) {
+      .hero, .story { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .loop { grid-template-columns: repeat(2, 1fr); }
+      .palette { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .motion-flow::before,
+      .motion-flow::after { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-title.one-layout { gap: 14px; }
+      .big-one { font-size: clamp(92px, 31vw, 150px); }
+      .one-side { font-size: clamp(18px, 6vw, 28px); gap: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  
+
+    /* ===== FIX HERO TITLE: 1 BIG 'MỘT' + 2 SIDE LINES ===== */
+    .hero-title.one-big-layout {
+      display: inline-grid;
+      grid-template-columns: max-content max-content;
+      align-items: center;
+      column-gap: clamp(18px, 2.8vw, 44px);
+      margin: 0 0 28px;
+      max-width: 100%;
+      overflow: visible;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .big-one {
+      display: block;
+      font-size: clamp(110px, 15vw, 230px);
+      line-height: .78;
+      font-weight: 950;
+      letter-spacing: -0.085em;
+      color: var(--ink);
+      opacity: 0;
+      transform: translateY(24px) scale(.96);
+      filter: blur(6px);
+      animation: bigOneIn .82s cubic-bezier(.2,.9,.2,1) .08s forwards;
+    }
+
+    .side-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(18px, 2.2vw, 34px);
+      padding-top: .12em;
+      font-size: clamp(24px, 2.45vw, 42px);
+      line-height: 1.05;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .side-text span {
+      display: block;
+      opacity: 0;
+      transform: translateX(-16px);
+      filter: blur(5px);
+      animation: sideTextIn .68s cubic-bezier(.2,.85,.2,1) forwards;
+    }
+
+    .side-text span:nth-child(1) { animation-delay: .52s; }
+    .side-text span:nth-child(2) { animation-delay: .68s; }
+
+    @keyframes bigOneIn {
+      0% { opacity: 0; transform: translateY(24px) scale(.96); filter: blur(6px); }
+      70% { opacity: 1; transform: translateY(-2px) scale(1.015); filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes sideTextIn {
+      0% { opacity: 0; transform: translateX(-16px); filter: blur(5px); }
+      100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+    }
+
+    @media (max-width: 720px) {
+      .hero-title.one-big-layout {
+        column-gap: 14px;
+      }
+
+      .big-one {
+        font-size: clamp(88px, 30vw, 150px);
+      }
+
+      .side-text {
+        font-size: clamp(18px, 6vw, 28px);
+        gap: 14px;
+      }
+    }
+  
+
+    /* ===== FINAL HERO TITLE FIX: compact, balanced, no overflow ===== */
+    .hero-title.compact-one-layout {
+      display: grid;
+      grid-template-columns: minmax(0, auto) max-content;
+      grid-template-rows: 1fr 1fr;
+      align-items: center;
+      column-gap: clamp(18px, 2.4vw, 36px);
+      width: fit-content;
+      max-width: min(100%, 760px);
+      margin: 0 0 clamp(30px, 4vw, 52px);
+      overflow: visible;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .compact-one-layout .big-one {
+      grid-row: 1 / 3;
+      display: flex;
+      align-items: center;
+      font-size: clamp(92px, 12vw, 172px);
+      line-height: .78;
+      font-weight: 950;
+      letter-spacing: -0.08em;
+      color: var(--ink);
+      opacity: 0;
+      transform: translateY(18px) scale(.96);
+      filter: blur(6px);
+      animation: bigOneIn .82s cubic-bezier(.2,.9,.2,1) .08s forwards;
+    }
+
+    .compact-one-layout .side-text {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      align-items: center;
+      gap: clamp(8px, 1vw, 14px);
+      padding-top: .08em;
+      font-size: clamp(28px, 3vw, 48px);
+      line-height: 1.02;
+      font-weight: 780;
+      letter-spacing: -0.055em;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .compact-one-layout .side-text span {
+      display: block;
+      opacity: 0;
+      transform: translateX(-14px);
+      filter: blur(5px);
+      animation: sideTextIn .62s cubic-bezier(.2,.85,.2,1) forwards;
+    }
+
+    .compact-one-layout .side-text span:nth-child(1) { animation-delay: .46s; }
+    .compact-one-layout .side-text span:nth-child(2) { animation-delay: .6s; }
+
+    @media (max-width: 980px) {
+      .hero-title.compact-one-layout {
+        max-width: 100%;
+      }
+
+      .compact-one-layout .big-one {
+        font-size: clamp(82px, 22vw, 150px);
+      }
+
+      .compact-one-layout .side-text {
+        font-size: clamp(22px, 6vw, 36px);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-title.compact-one-layout {
+        column-gap: 12px;
+      }
+
+      .compact-one-layout .big-one {
+        font-size: clamp(74px, 25vw, 118px);
+      }
+
+      .compact-one-layout .side-text {
+        font-size: clamp(18px, 6vw, 28px);
+        letter-spacing: -0.04em;
+      }
+    }
+  
+
+    /* ===== HERO TITLE LOCKUP FIX ===== */
+    .hero-title.hero-lockup {
+      display: grid;
+      grid-template-columns: auto max-content;
+      grid-template-rows: auto auto;
+      align-items: center;
+      column-gap: clamp(18px, 2.2vw, 34px);
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 0 34px;
+      overflow: visible;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .hero-lockup .big-one {
+      grid-row: 1 / 3;
+      display: block;
+      font-size: clamp(118px, 12.8vw, 198px);
+      line-height: .78;
+      font-weight: 950;
+      letter-spacing: -0.085em;
+      white-space: nowrap;
+      color: var(--ink);
+      transform: translateY(-1.5%);
+    }
+
+    .hero-lockup .right-text {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      align-items: center;
+      gap: clamp(8px, 1vw, 14px);
+      min-width: max-content;
+      white-space: nowrap;
+      color: var(--ink);
+    }
+
+    .hero-lockup .right-text span {
+      display: block;
+      font-size: clamp(52px, 6.1vw, 96px);
+      line-height: .86;
+      font-weight: 900;
+      letter-spacing: -0.065em;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-title.hero-lockup {
+        column-gap: clamp(12px, 2vw, 22px);
+      }
+
+      .hero-lockup .big-one {
+        font-size: clamp(88px, 22vw, 150px);
+      }
+
+      .hero-lockup .right-text span {
+        font-size: clamp(34px, 9vw, 64px);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-title.hero-lockup {
+        transform: scale(.9);
+        transform-origin: left center;
+      }
+    }
+  
+
+    /* ===== NAME SELECTION PAGE ===== */
+    .name-btn {
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .name-page {
+      display: none;
+      min-height: 100vh;
+      padding-top: 96px;
+    }
+
+    .name-page.active {
+      display: block;
+    }
+
+    .name-page-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .back-btn {
+      border: 1px solid rgba(122,79,43,.22);
+      background: rgba(255,248,234,.58);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(61,38,20,.08);
+    }
+
+    .name-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .name-card {
+      position: relative;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255,248,234,.66);
+      border: 1px solid rgba(122,79,43,.18);
+      box-shadow: 0 20px 48px rgba(61,38,20,.1);
+      overflow: hidden;
+      color: var(--ink);
+      transition:
+        transform .28s cubic-bezier(.2,.85,.2,1),
+        background .28s ease,
+        color .28s ease,
+        border-color .28s ease,
+        box-shadow .28s ease;
+    }
+
+    .name-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 25% 0%, rgba(217,130,59,.22), transparent 46%),
+        linear-gradient(135deg, rgba(45,36,28,.96), rgba(61,45,34,.92));
+      opacity: 0;
+      transition: opacity .28s ease;
+      pointer-events: none;
+    }
+
+    .name-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .featured-name {
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+      border-color: rgba(255,248,234,.2);
+    }
+
+    .featured-name::before {
+      opacity: 1;
+    }
+
+    .name-card:hover {
+      transform: translateY(-8px);
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+      border-color: rgba(255,248,234,.2);
+      box-shadow:
+        0 30px 70px rgba(61,38,20,.22),
+        0 0 0 1px rgba(255,248,234,.08) inset;
+    }
+
+    .name-card:hover::before {
+      opacity: 1;
+    }
+
+    .name-label {
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--orange);
+      margin-bottom: 18px;
+      transition: color .28s ease, transform .28s ease;
+    }
+
+    .name-card h3 {
+      margin: 0 0 14px;
+      font-size: clamp(42px, 4.5vw, 76px);
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      word-spacing: 0.02em;
+      transition:
+        color .28s ease,
+        transform .28s cubic-bezier(.2,.85,.2,1),
+        letter-spacing .28s ease;
+    }
+
+    .name-card:hover h3 {
+      color: #D9823B;
+      transform: translateY(-4px);
+      letter-spacing: 0.005em;
+    }
+
+    .name-sentence {
+      font-size: 17px;
+      line-height: 1.55;
+      color: rgba(45,36,28,.74);
+      margin-bottom: 24px;
+      transition: color .28s ease;
+    }
+
+    .name-analysis p {
+      line-height: 1.65;
+      color: rgba(45,36,28,.74);
+      margin: 0 0 14px;
+      transition: color .28s ease;
+    }
+
+    .featured-name p,
+    .featured-name .name-sentence,
+    .featured-name .name-analysis p,
+    .name-card:hover p,
+    .name-card:hover .name-sentence,
+    .name-card:hover .name-analysis p {
+      color: rgba(255,248,234,.78);
+    }
+
+    .name-verdict {
+      margin-top: 22px;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255,248,234,.62);
+      border: 1px solid rgba(122,79,43,.18);
+      box-shadow: 0 18px 44px rgba(61,38,20,.09);
+    }
+
+    .name-verdict h3 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      letter-spacing: -.04em;
+    }
+
+    .name-verdict p {
+      max-width: 980px;
+      line-height: 1.7;
+      color: rgba(45,36,28,.78);
+    }
+
+    .final-pick span {
+      color: var(--brown);
+      font-weight: 900;
+    }
+
+    body.show-name-page .hero,
+    body.show-name-page #concept,
+    body.show-name-page #story,
+    body.show-name-page #research,
+    body.show-name-page #direction,
+    body.show-name-page .footer {
+      display: none;
+    }
+
+    body.show-name-page #name-page {
+      display: block;
+    }
+
+    @media (max-width: 980px) {
+      .name-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .name-page-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand"><span class="brand-mark">N</span> Cooking with Ngoại</div>
+    <div class="nav-links">
+      <a href="#concept">Concept</a>
+      <a href="#story">Story</a>
+      <a href="#research">Research</a>
+      <a href="#direction">Creative Direction</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">#GrandmaKitchen · Gamification Marketing</div>
+        <h1 class="hero-title hero-lockup" aria-label="Một lần nấu, một lần trở về">
+          <span class="big-one">MỘT</span>
+          <span class="right-text">
+            <span>lần nấu,</span>
+            <span>lần trở về</span>
+          </span>
+        </h1>
+        <p><strong>Cooking with Ngoại</strong> không chỉ là một trò chơi ẩm thực Việt Nam, mà còn là hành trình trở về. Trở về căn bếp thân quen của Ngoại, nơi từng làn khói bếp mang theo ký ức, nơi từng món ăn là một câu chuyện được nấu bằng yêu thương. <br> Người chơi sẽ học cách nấu từng món Việt, từng bước chạm vào tinh hoa ẩm thực ba miền, mở khoá những vùng đất, những ký ức đã ngủ yên theo năm tháng. Mỗi công thức không chỉ là kỹ năng, mà là một mảnh ghép văn hóa, một sợi dây kết nối với gia đình, với cội nguồn. <br> Trên hành trình ấy, những trải nghiệm trong game dần hoá thành giá trị thật. Nơi người chơi có thể nhận về những phần quà đời thực, như một cách mang hương vị ký ức bước ra ngoài cuộc sống. Cooking with Ngoại: nơi bạn không chỉ chơi, mà còn Cảm, Nhớ và Mang một phần quê nhà theo mình.</p>
+        <div class="actions">
+          <a class="btn" href="#concept">Xem concept</a>
+          <a class="btn secondary" href="#research">Xem research framework</a>
+          <button class="btn name-btn" type="button" data-open-name-page>Chọn tên trò chơi</button>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="sun"></div>
+        <div class="grandma">
+          <div class="headscarf"></div>
+          <div class="face"><div class="smile"></div></div>
+          <div class="body"></div>
+          <div class="arm"></div>
+          <div class="chopsticks"></div>
+          <div class="pot"></div>
+          <div class="fire"></div>
+          <div class="steam"><span></span><span></span><span></span></div>
+        </div>
+        <div class="quote">Bà Ngoại nuôi dưỡng niềm tin hơn 9 năm hơn đợi cháu về... "Troll only"</div>
+      </div>
+    </section>
+
+    <section id="concept" class="reveal">
+      <span class="tag">01 · Game Concept</span>
+      <h2 class="section-title">Không chỉ là game nấu ăn. Đây là game ký ức ẩm thực Việt</h2>
+      <p class="section-lead">Trò chơi kết hợp <strong>3C: Cooking mini game, Cultural discovery, Cozy storytelling</strong> và hệ thống reward có thể gắn với voucher, sản phẩm, lớp học nấu ăn/chiến dịch thương mại.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Core Pillar (Nền tảng trải nghiệm) </h3>
+          <p>Ẩm thực Việt, ký ức gia đình, khám phá vùng miền thông qua..., cảm giác ấm áp và phần thưởng thật.</p>
+        </div>
+        <div class="card">
+          <h3>Redemption (Hành trình phục hồi & chữa lành ký ức)</h3>
+          <p>Người chơi “nuôi lại” một căn bếp cũ, phục hồi công thức, mở khóa ký ức và chữa lành cảm xúc.</p>
+        </div>
+        <div class="card">
+          <h3>Award (Phần thưởng)</h3>
+          <p>Hoàn thành nhiệm vụ để tích điểm, đổi gift, voucher, nguyên liệu, postcard, sticker/sản phẩm thương mại.</p>
+        </div>
+      </div>
+
+      <div class="loop motion-flow">
+        <div class="flow-step market">
+          <span class="step-icon">🧺</span>
+          <span class="step-title">Đi chợ</span>
+          <span class="step-note">tìm hương vị</span>
+        </div>
+        <div class="flow-step ingredient">
+          <span class="step-icon">🥬</span>
+          <span class="step-title">Chọn nguyên liệu</span>
+          <span class="step-note">chạm vào mùa</span>
+        </div>
+        <div class="flow-step cooking">
+          <span class="step-icon">🍳</span>
+          <span class="step-title">Nấu ăn vs mini game</span>
+          <span class="step-note">canh đúng nhịp</span>
+        </div>
+        <div class="flow-step complete">
+          <span class="step-icon">🍲</span>
+          <span class="step-title">Hoàn thành món</span>
+          <span class="step-note">món ăn hiện ra</span>
+        </div>
+        <div class="flow-step memory">
+          <span class="step-icon">✨</span>
+          <span class="step-title">Mở ký ức</span>
+          <span class="step-note">ánh sáng trở về</span>
+        </div>
+        <div class="flow-step reward">
+          <span class="step-icon">🎁</span>
+          <span class="step-title">Đổi quà</span>
+          <span class="step-note">giá trị thật</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="story" class="reveal">
+      <span class="tag">02 · Story</span>
+      <h2 class="section-title">Mỗi món ăn là một lần được trở về</h2>
+      <p class="section-lead">Người chơi trở về căn bếp của Ngoại. Trong bếp còn lại công thức, mùi khói, tiếng dao thớt, chợ quê và những mảnh ký ức gia đình.</p>
+
+      <div class="story">
+        <div class="card">
+          <h3>Story Premise</h3>
+          <p>Căn bếp cũ không biến mất. Nó chỉ chờ một người quay về, nhóm lại lửa, nấu lại những món từng làm nên tuổi thơ. (Cùng Ngoại) </p>
+          <p><strong>Tagline:</strong> Một lần nấu, một lần trở về - Jamie da Hood</p>
+        </div>
+        <div class="chapters">
+          <div class="chapter"><strong>Chương 1 · Bếp lửa cũ</strong> Mở khóa cơm cháy, canh chua, cá kho, bánh ít.</div>
+          <div class="chapter"><strong>Chương 2 · Chợ quê buổi sớm</strong> Chọn nguyên liệu, trả giá, gặp nhân vật địa phương.</div>
+          <div class="chapter"><strong>Chương 3 · Hương vị ba miền</strong> Khám phá Hà Nội, Huế, Hội An, Tây Nguyên, Đà Lạt, Sài Gòn v...v</div>
+          <div class="chapter"><strong>Chương 4 · Mâm cơm đoàn viên</strong> Hoàn thành combo món để mở ký ức lớn.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="reveal">
+      <span class="tag">03 · Competitor & Game Product Research</span>
+      <h2 class="section-title">Tìm khe hở thị trường</h2>
+      <p class="section-lead">Mỗi game product cần được mổ xẻ theo: core loop, meta progression, reward system, retention, monetization và emotion/UX feel.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Game / Product</th>
+            <th>Cần học gì</th>
+            <th>Cơ hội cho Cooking with Ngoại</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Cooking Mama</strong></td>
+            <td>Thao tác nấu ăn đơn giản, vui, dễ hiểu.</td>
+            <td>Biến thao tác nấu thành mini game Việt: xắt rau, kho cá, nêm canh, cuốn bánh.</td>
+          </tr>
+          <tr>
+            <td><strong>Good Pizza, Great Pizza</strong></td>
+            <td>Story nhẹ, khách hàng có personality, loop phục vụ đơn hàng.</td>
+            <td>Thay khách hàng bằng hàng xóm, cô bán chợ, em nhỏ, du khách, người thân.</td>
+          </tr>
+          <tr>
+            <td><strong>Cooking Diary / Cooking Fever</strong></td>
+            <td>Progression, nâng cấp, retention, daily quest.</td>
+            <td>Giữ nhịp chơi vừa đủ, không quá stress; tập trung cozy reward.</td>
+          </tr>
+          <tr>
+            <td><strong>Loyalty App / Campaign đổi quà</strong></td>
+            <td>Điểm, streak, voucher, membership, gift redemption.</td>
+            <td>Điểm khác biệt lớn: game gắn với quà thật, sản phẩm thật, lớp học thật.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="direction" class="reveal">
+      <span class="tag">04 · Mood Board & Creative Direction</span>
+      <h2 class="section-title">Ấm áp, Việt Nam, thủ công, sạch sẽ và có khả năng thương mại</h2>
+      <p class="section-lead">Visual không nên quá nghèo khổ hay cũ kỹ. Nên là ký ức được nâng cấp: giấy dó &gt; bếp lửa &gt; màu lá chuối &gt; đất nung &gt; nét vẽ tay &gt; UI hiện đại.</p>
+
+      <div class="palette">
+        <div class="swatch" style="background:#f6ead2;color:#2d241c">Giấy dó</div>
+        <div class="swatch" style="background:#d9823b">Bếp lửa</div>
+        <div class="swatch" style="background:#6f8f55">Lá chuối</div>
+        <div class="swatch" style="background:#b94b3f">Gấc đỏ</div>
+        <div class="swatch" style="background:#7a4f2b">Đất nung</div>
+        <div class="swatch" style="background:#8b5f9f">Khoai môn</div>
+      </div>
+
+      <div class="grid" style="margin-top:18px">
+        <div class="card">
+          <h3>Art Style</h3>
+          <p>Hand-drawn cozy, texture giấy, nét mực mềm, nhân vật dễ thương nhưng không trẻ con quá mức.</p>
+        </div>
+        <div class="card">
+          <h3>UX Feel</h3>
+          <p>Chậm vừa đủ, ấm, ít áp lực. Mỗi click nên có phản hồi mềm: khói, ánh lửa, tiếng dao thớt, tiếng chợ.</p>
+        </div>
+        <div class="card">
+          <h3>Marketing Hook</h3>
+          <p>Daily mission, badge món Việt, region pass, voucher, gift box, sản phẩm collab và sự kiện theo mùa.</p>
+        </div>
+      </div>
+    </section>
+  
+    <section id="name-page" class="name-page reveal" aria-hidden="true">
+      <div class="name-page-head">
+        <span class="tag">05 · Game Naming Direction</span>
+        <button class="back-btn" type="button" data-close-name-page>← Quay lại concept</button>
+      </div>
+
+      <h2 class="section-title">Chọn tên cho trò chơi</h2>
+      <p class="section-lead">Ba tên dưới đây đều đi theo tinh thần ẩm thực Việt, ký ức gia đình và cảm giác trở về. Khác nhau nằm ở trọng tâm cảm xúc: <strong>thời gian</strong>, <strong>mái nhà</strong> hoặc <strong>nhân vật Ngoại</strong>.</p>
+
+      <div class="name-grid">
+        <article class="name-card">
+          <div class="name-label">Option 01</div>
+          <h3>Vị Xưa</h3>
+          <p class="name-sentence">Một cái tên ngắn, giàu chất thơ, gợi cảm giác nếm lại hương vị của ký ức.</p>
+          <div class="name-analysis">
+            <p><strong>Điểm mạnh:</strong> “Vị” gắn trực tiếp với ẩm thực, còn “Xưa” mở ra chiều sâu ký ức, văn hóa và thời gian. Tên này phù hợp nếu trò chơi muốn nhấn mạnh hành trình tìm lại những món ăn, phong tục và cảm xúc đã cũ nhưng chưa mất.</p>
+            <p><strong>Cảm xúc thương hiệu:</strong> trầm, đẹp, hoài niệm, có chiều sâu văn học. Rất hợp với art direction giấy dó, màu bếp lửa, texture thủ công.</p>
+            <p><strong>Rủi ro:</strong> hơi nghiêng về hoài niệm, có thể ít trực diện về nhân vật “Ngoại” nếu muốn xây mascot mạnh.</p>
+            <p><strong>Kết luận:</strong> mạnh nhất về chất văn hóa và cảm xúc “redemption”. Đây là tên có khả năng đi xa nếu muốn game mang màu sắc nghệ thuật, healing và Việt Nam.</p>
+          </div>
+        </article>
+
+        <article class="name-card">
+          <div class="name-label">Option 02</div>
+          <h3>Vị Nhà</h3>
+          <p class="name-sentence">Một cái tên ấm, gần, dễ hiểu, đánh thẳng vào cảm giác “món ăn của nhà”.</p>
+          <div class="name-analysis">
+            <p><strong>Điểm mạnh:</strong> rất dễ nhớ, dễ truyền thông và dễ mở rộng sang thương mại. “Vị Nhà” không chỉ là món ăn, mà là cảm giác an toàn, thân thuộc và được chăm sóc.</p>
+            <p><strong>Cảm xúc thương hiệu:</strong> ấm áp, đại chúng, thân thiện, dễ chạm tới nhiều nhóm người chơi, đặc biệt là người trẻ xa nhà.</p>
+            <p><strong>Rủi ro:</strong> tên khá rộng, có thể giống một brand F&B hoặc chương trình ẩm thực hơn là một game nếu không có visual identity đủ riêng.</p>
+            <p><strong>Kết luận:</strong> tốt nhất nếu dự án thiên về gamification marketing, voucher, sản phẩm thật, cộng đồng và chiến dịch thương mại.</p>
+          </div>
+        </article>
+
+        <article class="name-card">
+          <div class="name-label">Option 03</div>
+          <h3>Bếp Ngoại</h3>
+          <p class="name-sentence">Một cái tên trực diện, có nhân vật trung tâm, dễ kể chuyện và dễ xây thế giới game.</p>
+          <div class="name-analysis">
+            <p><strong>Điểm mạnh:</strong> rõ concept ngay lập tức. Người chơi hiểu đây là căn bếp của Ngoại, nơi có công thức, ký ức, bài học và tình thương. Tên này cực hợp để xây mascot, NPC, story chapter và hệ thống ký ức.</p>
+            <p><strong>Cảm xúc thương hiệu:</strong> gần gũi, dễ thương, giàu tính nhân vật. Rất phù hợp với phong cách cozy game, lớp học nấu ăn và nội dung social.</p>
+            <p><strong>Rủi ro:</strong> ít chất thơ hơn “Vị Xưa”, và có thể hơi cụ thể nếu sau này game muốn mở rộng ra nhiều nhân vật/vùng miền khác ngoài Ngoại.</p>
+            <p><strong>Kết luận:</strong> an toàn nhất về mặt game concept. Nếu muốn người chơi nhớ ngay nhân vật và bối cảnh, “Bếp Ngoại” là lựa chọn rất mạnh.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="name-verdict">
+        <h3>Gợi ý chọn hướng</h3>
+        <p><strong>Vị Xưa</strong> nếu muốn game có chất nghệ thuật, healing và văn hóa sâu. <strong>Vị Nhà</strong> nếu muốn mở mạnh sang thương mại, loyalty và cộng đồng. <strong>Bếp Ngoại</strong> nếu muốn giữ nhân vật Ngoại làm linh hồn game và dễ truyền thông nhất.</p>
+        <p class="final-pick"><strong>Đề xuất hiện tại:</strong> dùng <span>“Bếp Ngoại”</span> cho tên game chính, và dùng <span>“Một lần nấu, một lần trở về”</span> làm tagline. “Vị Xưa” có thể dùng làm tên chương, event hoặc campaign văn hóa.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <h2>Cooking with Ngoại</h2>
+    <p>A Vietnamese culinary memory game - redemption, culture, reward and commerce.</p>
+  </footer>
+
+  <script>
+    (() => {
+      const revealItems = document.querySelectorAll('.reveal');
+      const openNamePageButton = document.querySelector('[data-open-name-page]');
+      const closeNamePageButton = document.querySelector('[data-close-name-page]');
+      const namePage = document.querySelector('#name-page');
+
+      openNamePageButton?.addEventListener('click', () => {
+        document.body.classList.add('show-name-page');
+        namePage?.classList.add('active');
+        namePage?.setAttribute('aria-hidden', 'false');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      closeNamePageButton?.addEventListener('click', () => {
+        document.body.classList.remove('show-name-page');
+        namePage?.classList.remove('active');
+        namePage?.setAttribute('aria-hidden', 'true');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.16 });
+
+      revealItems.forEach((item) => observer.observe(item));
+
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          event.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cooking with Ngoại — Game Concept Preview</title>
+  <style>
+    :root {
+      --paper: #f6ead2;
+      --paper-dark: #ead5ad;
+      --ink: #2d241c;
+      --brown: #7a4f2b;
+      --orange: #d9823b;
+      --green: #6f8f55;
+      --red: #b94b3f;
+      --cream: #fff8ea;
+      --shadow: rgba(61, 38, 20, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.55), transparent 24%),
+        radial-gradient(circle at 80% 30%, rgba(217,130,59,.18), transparent 28%),
+        linear-gradient(135deg, var(--paper), #f9efdc 45%, var(--paper-dark));
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .22;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 6vw;
+      background: rgba(246, 234, 210, .78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(122, 79, 43, .16);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: 0 8px 20px var(--shadow);
+    }
+
+    .nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      opacity: .78;
+      margin-left: 18px;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 48px;
+      align-items: center;
+      padding: 72px 6vw 90px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 14px;
+      border: 1px solid rgba(122,79,43,.26);
+      border-radius: 999px;
+      background: rgba(255,248,234,.5);
+      color: var(--brown);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      max-width: 900px;
+    }
+
+    .hero-title.one-layout {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 3vw, 34px);
+      overflow: visible;
+      position: relative;
+      letter-spacing: 0;
+    }
+
+    .big-one {
+      display: block;
+      font-size: clamp(120px, 17vw, 250px);
+      line-height: .78;
+      font-weight: 900;
+      letter-spacing: -0.075em;
+      opacity: 0;
+      transform: translateY(28px) scale(.92);
+      filter: blur(8px);
+      animation: bigOneReveal .9s cubic-bezier(.2,.9,.2,1) .08s forwards;
+    }
+
+    .one-side {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(18px, 2vw, 34px);
+      padding-top: clamp(8px, 1.4vw, 18px);
+      font-size: clamp(22px, 2.45vw, 40px);
+      line-height: 1.05;
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      white-space: nowrap;
+    }
+
+    .one-side span {
+      display: block;
+      opacity: 0;
+      transform: translateX(-18px);
+      filter: blur(6px);
+      animation: sideWordsReveal .72s cubic-bezier(.2,.85,.2,1) forwards;
+    }
+
+    .one-side span:nth-child(1) { animation-delay: .52s; }
+    .one-side span:nth-child(2) { animation-delay: .7s; }
+
+    @keyframes bigOneReveal {
+      0% { opacity: 0; transform: translateY(28px) scale(.92); filter: blur(8px); }
+      68% { opacity: 1; transform: translateY(-3px) scale(1.02); filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes sideWordsReveal {
+      0% { opacity: 0; transform: translateX(-18px); filter: blur(6px); }
+      100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+    }
+
+    .hero p {
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.65;
+      max-width: 680px;
+      color: rgba(45, 36, 28, .82);
+      margin: 0 0 32px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(45,36,28,.16);
+      background: var(--ink);
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 16px 30px var(--shadow);
+    }
+
+    .btn.secondary {
+      background: rgba(255,248,234,.55);
+      color: var(--ink);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 540px;
+      border-radius: 42px;
+      padding: 34px;
+      background: rgba(255, 248, 234, .68);
+      border: 1px solid rgba(122,79,43,.22);
+      box-shadow: 0 30px 80px var(--shadow);
+      overflow: hidden;
+    }
+
+    .sun {
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(217,130,59,.28);
+    }
+
+    .grandma {
+      position: absolute;
+      left: 50%;
+      top: 53%;
+      transform: translate(-50%, -50%);
+      width: 290px;
+      height: 350px;
+    }
+
+    .face, .body, .pot, .fire, .steam span, .headscarf {
+      position: absolute;
+      border: 4px solid var(--ink);
+    }
+
+    .headscarf {
+      left: 82px;
+      top: 18px;
+      width: 112px;
+      height: 100px;
+      border-radius: 46% 54% 55% 45%;
+      background: #fff4dc;
+      transform: rotate(-8deg);
+    }
+
+    .face {
+      left: 103px;
+      top: 55px;
+      width: 78px;
+      height: 82px;
+      border-radius: 50%;
+      background: #f7caa4;
+      border-width: 3px;
+    }
+
+    .face::before, .face::after {
+      content: "";
+      position: absolute;
+      top: 32px;
+      width: 10px;
+      height: 5px;
+      border-bottom: 2px solid var(--ink);
+      border-radius: 50%;
+    }
+
+    .face::before { left: 18px; }
+    .face::after { right: 18px; }
+
+    .smile {
+      position: absolute;
+      left: 31px;
+      top: 50px;
+      width: 18px;
+      height: 8px;
+      border-bottom: 2px solid var(--red);
+      border-radius: 50%;
+    }
+
+    .body {
+      left: 82px;
+      top: 135px;
+      width: 120px;
+      height: 138px;
+      border-radius: 28px 28px 10px 10px;
+      background: #fff8ea;
+    }
+
+    .body::before {
+      content: "";
+      position: absolute;
+      left: 56px;
+      top: 0;
+      height: 134px;
+      border-left: 3px solid rgba(45,36,28,.55);
+    }
+
+    .arm {
+      position: absolute;
+      left: 174px;
+      top: 158px;
+      width: 105px;
+      height: 4px;
+      background: var(--ink);
+      transform: rotate(-16deg);
+      transform-origin: left;
+    }
+
+    .chopsticks {
+      position: absolute;
+      left: 184px;
+      top: 148px;
+      width: 108px;
+      height: 3px;
+      background: var(--ink);
+      transform: rotate(-12deg);
+    }
+
+    .chopsticks::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 108px;
+      height: 3px;
+      background: var(--ink);
+    }
+
+    .pot {
+      right: 8px;
+      bottom: 76px;
+      width: 86px;
+      height: 70px;
+      border-radius: 0 0 28px 28px;
+      background: #f5dec0;
+    }
+
+    .fire {
+      right: 25px;
+      bottom: 24px;
+      width: 54px;
+      height: 54px;
+      border-radius: 4px;
+      background: linear-gradient(var(--orange), var(--red));
+      border-width: 3px;
+      clip-path: polygon(50% 0%, 85% 52%, 65% 100%, 35% 100%, 15% 52%);
+      border-color: transparent;
+    }
+
+    .steam span {
+      width: 22px;
+      height: 34px;
+      border-color: transparent transparent transparent rgba(45,36,28,.55);
+      border-width: 3px;
+      border-radius: 50%;
+    }
+
+    .steam span:nth-child(1) { right: 56px; bottom: 160px; }
+    .steam span:nth-child(2) { right: 28px; bottom: 170px; }
+    .steam span:nth-child(3) { right: 75px; bottom: 183px; }
+
+    .quote {
+      position: absolute;
+      left: 32px;
+      bottom: 32px;
+      right: 32px;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(45,36,28,.88);
+      color: var(--cream);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    section { padding: 88px 6vw; }
+
+    .section-title {
+      font-size: clamp(34px, 4vw, 64px);
+      line-height: .95;
+      letter-spacing: -.06em;
+      margin: 0 0 18px;
+    }
+
+    .section-lead {
+      max-width: 760px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: rgba(45,36,28,.75);
+      margin-bottom: 36px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(255,248,234,.62);
+      border: 1px solid rgba(122,79,43,.18);
+      box-shadow: 0 18px 44px rgba(61, 38, 20, .09);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -.035em;
+    }
+
+    .card p, .card li {
+      line-height: 1.65;
+      color: rgba(45,36,28,.76);
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(111,143,85,.16);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .loop {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .loop div {
+      min-height: 120px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 18px;
+      border-radius: 26px;
+      background: var(--ink);
+      color: var(--cream);
+      font-weight: 900;
+      box-shadow: 0 18px 38px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .motion-flow {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .motion-flow::before {
+      content: "";
+      position: absolute;
+      left: 5%;
+      right: 5%;
+      top: 50%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(122,79,43,.22), rgba(217,130,59,.42), rgba(122,79,43,.22), transparent);
+      transform: translateY(-50%);
+      z-index: -1;
+    }
+
+    .motion-flow::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 4%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,248,234,.96), rgba(217,130,59,.1));
+      box-shadow: 0 0 34px rgba(217,130,59,.42);
+      transform: translateY(-50%);
+      animation: flowOrb 8.5s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .flow-step {
+      position: relative;
+      overflow: hidden;
+      will-change: transform, box-shadow, opacity;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      grid-template-rows: auto auto auto;
+      gap: 8px;
+      z-index: 1;
+      transition: transform .16s cubic-bezier(.2,.9,.2,1), box-shadow .16s cubic-bezier(.2,.9,.2,1), border-color .12s ease-out, color .12s ease-out;
+      --cozy-a: rgba(217,130,59,.14);
+      --cozy-b: rgba(255,248,234,.08);
+      --cozy-glow: rgba(217,130,59,.24);
+    }
+
+    .flow-step::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 0%, var(--cozy-glow), transparent 58%), linear-gradient(135deg, var(--cozy-b), var(--cozy-a));
+      opacity: 0;
+      transition: opacity .12s ease-out;
+      z-index: -1;
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at center, rgba(255,248,234,.22), transparent 70%);
+      opacity: 0;
+      transition: opacity .12s ease-out;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .market { --cozy-a: rgba(217,130,59,.18); --cozy-b: rgba(255,248,234,.08); --cozy-glow: rgba(217,130,59,.32); }
+    .ingredient { --cozy-a: rgba(111,143,85,.18); --cozy-b: rgba(255,248,234,.08); --cozy-glow: rgba(111,143,85,.32); }
+    .cooking { --cozy-a: rgba(185,75,63,.16); --cozy-b: rgba(217,130,59,.12); --cozy-glow: rgba(217,130,59,.34); }
+    .complete { --cozy-a: rgba(246,234,210,.18); --cozy-b: rgba(255,248,234,.12); --cozy-glow: rgba(255,248,234,.32); }
+    .memory { --cozy-a: rgba(255,248,234,.16); --cozy-b: rgba(139,95,159,.08); --cozy-glow: rgba(255,248,234,.36); }
+    .reward { --cozy-a: rgba(139,95,159,.16); --cozy-b: rgba(255,248,234,.08); --cozy-glow: rgba(139,95,159,.28); }
+
+    .flow-step:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 18px 36px rgba(61,38,20,.18), 0 0 14px var(--cozy-glow);
+      border-color: rgba(255,248,234,.14);
+      color: var(--cream);
+    }
+
+    .flow-step:hover::before,
+    .flow-step:hover::after { opacity: 1; }
+
+    .step-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 2px;
+      border-radius: 18px;
+      background: rgba(255,248,234,.12);
+      font-size: 24px;
+      box-shadow: inset 0 0 0 1px rgba(255,248,234,.15);
+      transition: transform .16s cubic-bezier(.2,.9,.2,1), background .12s ease-out, box-shadow .12s ease-out, filter .12s ease-out;
+    }
+
+    .flow-step:hover .step-icon {
+      transform: scale(1.12) rotate(-3deg);
+      background: rgba(255,248,234,.18);
+      box-shadow: inset 0 0 0 1px rgba(255,248,234,.22), 0 10px 22px rgba(255,248,234,.08);
+      filter: brightness(1.06) saturate(1.06);
+    }
+
+    .step-title {
+      display: block;
+      font-size: 15.5px;
+      line-height: 1.22;
+      font-weight: 900;
+    }
+
+    .step-note {
+      display: block;
+      font-size: 9.5px;
+      line-height: 1.15;
+      font-weight: 600;
+      color: rgba(255,248,234,.52);
+      letter-spacing: .015em;
+      opacity: .82;
+    }
+
+    .flow-step:hover .step-title { color: #fff8ea; }
+    .flow-step:hover .step-note { color: rgba(255,248,234,.66); opacity: .9; }
+
+    @keyframes flowOrb {
+      0%, 7% { left: 4%; opacity: .2; }
+      13%, 20% { left: 18%; opacity: 1; }
+      27%, 34% { left: 34%; opacity: 1; }
+      41%, 48% { left: 50%; opacity: 1; }
+      55%, 62% { left: 66%; opacity: 1; }
+      69%, 76% { left: 82%; opacity: 1; }
+      86%, 100% { left: 94%; opacity: 0; }
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: .88fr 1.12fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .chapters {
+      display: grid;
+      gap: 14px;
+    }
+
+    .chapter {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,248,234,.6);
+      border: 1px solid rgba(122,79,43,.18);
+    }
+
+    .chapter strong { display: block; margin-bottom: 6px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 24px;
+      background: rgba(255,248,234,.62);
+      box-shadow: 0 18px 44px rgba(61, 38, 20, .09);
+    }
+
+    th, td {
+      padding: 18px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(122,79,43,.14);
+    }
+
+    th {
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .swatch {
+      min-height: 150px;
+      border-radius: 26px;
+      padding: 16px;
+      display: flex;
+      align-items: end;
+      color: #fff;
+      font-weight: 900;
+      box-shadow: 0 18px 38px var(--shadow);
+    }
+
+    .footer {
+      padding: 52px 6vw;
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+    }
+
+    /* Motion System */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes softFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    @keyframes warmPulse {
+      0%, 100% { opacity: .25; transform: scale(1); }
+      50% { opacity: .42; transform: scale(1.08); }
+    }
+
+    @keyframes steamRise {
+      0% { opacity: 0; transform: translateY(14px) scale(.82); }
+      35% { opacity: .75; }
+      100% { opacity: 0; transform: translateY(-38px) scale(1.15); }
+    }
+
+    @keyframes fireFlicker {
+      0%, 100% { transform: scaleY(1) rotate(-2deg); filter: brightness(1); }
+      50% { transform: scaleY(1.16) rotate(2deg); filter: brightness(1.16); }
+    }
+
+    @keyframes chopstickTap {
+      0%, 100% { transform: rotate(-12deg) translateX(0); }
+      50% { transform: rotate(-16deg) translateX(5px); }
+    }
+
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(34px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .hero .eyebrow,
+    .hero p,
+    .actions {
+      opacity: 0;
+      animation: fadeUp .9s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .hero p { animation-delay: 1.05s; }
+    .actions { animation-delay: 1.18s; }
+
+    .hero-card {
+      opacity: 0;
+      animation: cardReveal 1s cubic-bezier(.2,.8,.2,1) .28s forwards, softFloat 5.5s ease-in-out 1.4s infinite;
+    }
+
+    .sun { animation: warmPulse 4.5s ease-in-out infinite; }
+    .steam span { animation: steamRise 2.4s ease-in-out infinite; }
+    .steam span:nth-child(2) { animation-delay: .55s; }
+    .steam span:nth-child(3) { animation-delay: 1.05s; }
+    .fire { animation: fireFlicker .82s ease-in-out infinite; transform-origin: bottom center; }
+    .chopsticks { animation: chopstickTap 2.8s ease-in-out infinite; transform-origin: left center; }
+
+    .card,
+    .chapter,
+    table,
+    .swatch,
+    .loop div {
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .card:hover,
+    .chapter:hover,
+    .swatch:hover,
+    .loop div:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 26px 58px rgba(61, 38, 20, .15);
+      border-color: rgba(122,79,43,.32);
+    }
+
+    .motion-flow .flow-step:hover {
+      background: linear-gradient(180deg, rgba(45,36,28,.94), rgba(45,36,28,.88)), var(--ink);
+      border-color: rgba(255,248,234,.18);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .loop div:nth-child(1) { transition-delay: .02s; }
+    .loop div:nth-child(2) { transition-delay: .07s; }
+    .loop div:nth-child(3) { transition-delay: .12s; }
+    .loop div:nth-child(4) { transition-delay: .17s; }
+    .loop div:nth-child(5) { transition-delay: .22s; }
+    .loop div:nth-child(6) { transition-delay: .27s; }
+
+    @media (max-width: 980px) {
+      .hero, .story { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .loop { grid-template-columns: repeat(2, 1fr); }
+      .palette { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .motion-flow::before,
+      .motion-flow::after { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-title.one-layout { gap: 14px; }
+      .big-one { font-size: clamp(92px, 31vw, 150px); }
+      .one-side { font-size: clamp(18px, 6vw, 28px); gap: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand"><span class="brand-mark">N</span> Cooking with Ngoại</div>
+    <div class="nav-links">
+      <a href="#concept">Concept</a>
+      <a href="#story">Story</a>
+      <a href="#research">Research</a>
+      <a href="#direction">Creative Direction</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">#GrandmaKitchen · Gamification Marketing</div>
+        <h1 class="hero-title one-layout" aria-label="Một lần nấu, một lần trở về">
+          <span class="big-one">MỘT</span>
+          <span class="one-side">
+            <span>lần nấu</span>
+            <span>lần trở về</span>
+          </span>
+        </h1>
+        <p><strong>Cooking with Ngoại</strong> không chỉ là một trò chơi ẩm thực Việt Nam, mà còn là hành trình trở về. Trở về căn bếp thân quen của Ngoại, nơi từng làn khói bếp mang theo ký ức, nơi từng món ăn là một câu chuyện được nấu bằng yêu thương. <br> Người chơi sẽ học cách nấu từng món Việt, từng bước chạm vào tinh hoa ẩm thực ba miền, mở khoá những vùng đất, những ký ức đã ngủ yên theo năm tháng. Mỗi công thức không chỉ là kỹ năng, mà là một mảnh ghép văn hóa, một sợi dây kết nối với gia đình, với cội nguồn. <br> Trên hành trình ấy, những trải nghiệm trong game dần hoá thành giá trị thật. Nơi người chơi có thể nhận về những phần quà đời thực, như một cách mang hương vị ký ức bước ra ngoài cuộc sống. Cooking with Ngoại: nơi bạn không chỉ chơi, mà còn Cảm, Nhớ và Mang một phần quê nhà theo mình.</p>
+        <div class="actions">
+          <a class="btn" href="#concept">Xem concept</a>
+          <a class="btn secondary" href="#research">Xem research framework</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="sun"></div>
+        <div class="grandma">
+          <div class="headscarf"></div>
+          <div class="face"><div class="smile"></div></div>
+          <div class="body"></div>
+          <div class="arm"></div>
+          <div class="chopsticks"></div>
+          <div class="pot"></div>
+          <div class="fire"></div>
+          <div class="steam"><span></span><span></span><span></span></div>
+        </div>
+        <div class="quote">Bà Ngoại nuôi dưỡng niềm tin hơn 9 năm hơn đợi cháu về... "Troll only"</div>
+      </div>
+    </section>
+
+    <section id="concept" class="reveal">
+      <span class="tag">01 · Game Concept</span>
+      <h2 class="section-title">Không chỉ là game nấu ăn. Đây là game ký ức ẩm thực Việt</h2>
+      <p class="section-lead">Trò chơi kết hợp <strong>3C: Cooking mini game, Cultural discovery, Cozy storytelling</strong> và hệ thống reward có thể gắn với voucher, sản phẩm, lớp học nấu ăn/chiến dịch thương mại.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Core Pillar (Nền tảng trải nghiệm) </h3>
+          <p>Ẩm thực Việt, ký ức gia đình, khám phá vùng miền thông qua..., cảm giác ấm áp và phần thưởng thật.</p>
+        </div>
+        <div class="card">
+          <h3>Redemption (Hành trình phục hồi & chữa lành ký ức)</h3>
+          <p>Người chơi “nuôi lại” một căn bếp cũ, phục hồi công thức, mở khóa ký ức và chữa lành cảm xúc.</p>
+        </div>
+        <div class="card">
+          <h3>Award (Phần thưởng)</h3>
+          <p>Hoàn thành nhiệm vụ để tích điểm, đổi gift, voucher, nguyên liệu, postcard, sticker/sản phẩm thương mại.</p>
+        </div>
+      </div>
+
+      <div class="loop motion-flow">
+        <div class="flow-step market">
+          <span class="step-icon">🧺</span>
+          <span class="step-title">Đi chợ</span>
+          <span class="step-note">tìm hương vị</span>
+        </div>
+        <div class="flow-step ingredient">
+          <span class="step-icon">🥬</span>
+          <span class="step-title">Chọn nguyên liệu</span>
+          <span class="step-note">chạm vào mùa</span>
+        </div>
+        <div class="flow-step cooking">
+          <span class="step-icon">🍳</span>
+          <span class="step-title">Nấu ăn vs mini game</span>
+          <span class="step-note">canh đúng nhịp</span>
+        </div>
+        <div class="flow-step complete">
+          <span class="step-icon">🍲</span>
+          <span class="step-title">Hoàn thành món</span>
+          <span class="step-note">món ăn hiện ra</span>
+        </div>
+        <div class="flow-step memory">
+          <span class="step-icon">✨</span>
+          <span class="step-title">Mở ký ức</span>
+          <span class="step-note">ánh sáng trở về</span>
+        </div>
+        <div class="flow-step reward">
+          <span class="step-icon">🎁</span>
+          <span class="step-title">Đổi quà</span>
+          <span class="step-note">giá trị thật</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="story" class="reveal">
+      <span class="tag">02 · Story</span>
+      <h2 class="section-title">Mỗi món ăn là một lần được trở về</h2>
+      <p class="section-lead">Người chơi trở về căn bếp của Ngoại. Trong bếp còn lại công thức, mùi khói, tiếng dao thớt, chợ quê và những mảnh ký ức gia đình.</p>
+
+      <div class="story">
+        <div class="card">
+          <h3>Story Premise</h3>
+          <p>Căn bếp cũ không biến mất. Nó chỉ chờ một người quay về, nhóm lại lửa, nấu lại những món từng làm nên tuổi thơ. (Cùng Ngoại) </p>
+          <p><strong>Tagline:</strong> Một lần nấu, một lần trở về - Jamie da Hood</p>
+        </div>
+        <div class="chapters">
+          <div class="chapter"><strong>Chương 1 · Bếp lửa cũ</strong> Mở khóa cơm cháy, canh chua, cá kho, bánh ít.</div>
+          <div class="chapter"><strong>Chương 2 · Chợ quê buổi sớm</strong> Chọn nguyên liệu, trả giá, gặp nhân vật địa phương.</div>
+          <div class="chapter"><strong>Chương 3 · Hương vị ba miền</strong> Khám phá Hà Nội, Huế, Hội An, Tây Nguyên, Đà Lạt, Sài Gòn v...v</div>
+          <div class="chapter"><strong>Chương 4 · Mâm cơm đoàn viên</strong> Hoàn thành combo món để mở ký ức lớn.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="reveal">
+      <span class="tag">03 · Competitor & Game Product Research</span>
+      <h2 class="section-title">Tìm khe hở thị trường</h2>
+      <p class="section-lead">Mỗi game product cần được mổ xẻ theo: core loop, meta progression, reward system, retention, monetization và emotion/UX feel.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Game / Product</th>
+            <th>Cần học gì</th>
+            <th>Cơ hội cho Cooking with Ngoại</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Cooking Mama</strong></td>
+            <td>Thao tác nấu ăn đơn giản, vui, dễ hiểu.</td>
+            <td>Biến thao tác nấu thành mini game Việt: xắt rau, kho cá, nêm canh, cuốn bánh.</td>
+          </tr>
+          <tr>
+            <td><strong>Good Pizza, Great Pizza</strong></td>
+            <td>Story nhẹ, khách hàng có personality, loop phục vụ đơn hàng.</td>
+            <td>Thay khách hàng bằng hàng xóm, cô bán chợ, em nhỏ, du khách, người thân.</td>
+          </tr>
+          <tr>
+            <td><strong>Cooking Diary / Cooking Fever</strong></td>
+            <td>Progression, nâng cấp, retention, daily quest.</td>
+            <td>Giữ nhịp chơi vừa đủ, không quá stress; tập trung cozy reward.</td>
+          </tr>
+          <tr>
+            <td><strong>Loyalty App / Campaign đổi quà</strong></td>
+            <td>Điểm, streak, voucher, membership, gift redemption.</td>
+            <td>Điểm khác biệt lớn: game gắn với quà thật, sản phẩm thật, lớp học thật.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="direction" class="reveal">
+      <span class="tag">04 · Mood Board & Creative Direction</span>
+      <h2 class="section-title">Ấm áp, Việt Nam, thủ công, sạch sẽ và có khả năng thương mại</h2>
+      <p class="section-lead">Visual không nên quá nghèo khổ hay cũ kỹ. Nên là ký ức được nâng cấp: giấy dó &gt; bếp lửa &gt; màu lá chuối &gt; đất nung &gt; nét vẽ tay &gt; UI hiện đại.</p>
+
+      <div class="palette">
+        <div class="swatch" style="background:#f6ead2;color:#2d241c">Giấy dó</div>
+        <div class="swatch" style="background:#d9823b">Bếp lửa</div>
+        <div class="swatch" style="background:#6f8f55">Lá chuối</div>
+        <div class="swatch" style="background:#b94b3f">Gấc đỏ</div>
+        <div class="swatch" style="background:#7a4f2b">Đất nung</div>
+        <div class="swatch" style="background:#8b5f9f">Khoai môn</div>
+      </div>
+
+      <div class="grid" style="margin-top:18px">
+        <div class="card">
+          <h3>Art Style</h3>
+          <p>Hand-drawn cozy, texture giấy, nét mực mềm, nhân vật dễ thương nhưng không trẻ con quá mức.</p>
+        </div>
+        <div class="card">
+          <h3>UX Feel</h3>
+          <p>Chậm vừa đủ, ấm, ít áp lực. Mỗi click nên có phản hồi mềm: khói, ánh lửa, tiếng dao thớt, tiếng chợ.</p>
+        </div>
+        <div class="card">
+          <h3>Marketing Hook</h3>
+          <p>Daily mission, badge món Việt, region pass, voucher, gift box, sản phẩm collab và sự kiện theo mùa.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <h2>Cooking with Ngoại</h2>
+    <p>A Vietnamese culinary memory game - redemption, culture, reward and commerce.</p>
+  </footer>
+
+  <script>
+    (() => {
+      const revealItems = document.querySelectorAll('.reveal');
+      const openNamePageButton = document.querySelector('[data-open-name-page]');
+      const closeNamePageButton = document.querySelector('[data-close-name-page]');
+      const namePage = document.querySelector('#name-page');
+
+      openNamePageButton?.addEventListener('click', () => {
+        document.body.classList.add('show-name-page');
+        namePage?.classList.add('active');
+        namePage?.setAttribute('aria-hidden', 'false');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      closeNamePageButton?.addEventListener('click', () => {
+        document.body.classList.remove('show-name-page');
+        namePage?.classList.remove('active');
+        namePage?.setAttribute('aria-hidden', 'true');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.16 });
+
+      revealItems.forEach((item) => observer.observe(item));
+
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          event.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

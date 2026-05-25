@@ -1,0 +1,2619 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cooking with Ngoại — Game Concept Preview</title>
+  <style>
+    :root {
+      --paper: #f6ead2;
+      --paper-dark: #ead5ad;
+      --ink: #2d241c;
+      --brown: #7a4f2b;
+      --orange: #d9823b;
+      --green: #6f8f55;
+      --red: #b94b3f;
+      --cream: #fff8ea;
+      --shadow: rgba(61, 38, 20, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.55), transparent 24%),
+        radial-gradient(circle at 80% 30%, rgba(217,130,59,.18), transparent 28%),
+        linear-gradient(135deg, var(--paper), #f9efdc 45%, var(--paper-dark));
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .22;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='[w3.org](http://www.w3.org/2000/svg)' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 6vw;
+      background: rgba(246, 234, 210, .78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(122, 79, 43, .16);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: 0 8px 20px var(--shadow);
+    }
+
+    .nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      opacity: .78;
+      margin-left: 18px;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 48px;
+      align-items: center;
+      padding: 72px 6vw 90px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 14px;
+      border: 1px solid rgba(122,79,43,.26);
+      border-radius: 999px;
+      background: rgba(255,248,234,.5);
+      color: var(--brown);
+      font-weight: 700;
+      font-size: 13px;
+  margin-bottom: 44px;
+  transform: translateY(-18px);
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      max-width: 900px;
+    }
+
+    .hero-title.one-layout {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 3vw, 34px);
+      overflow: visible;
+      position: relative;
+      letter-spacing: 0;
+    }
+
+    .big-one {
+      display: block;
+      font-size: clamp(120px, 17vw, 250px);
+      line-height: .78;
+      font-weight: 900;
+      letter-spacing: -0.075em;
+      opacity: 0;
+      transform: translateY(28px) scale(.92);
+      filter: blur(8px);
+      animation: bigOneReveal .9s cubic-bezier(.2,.9,.2,1) .08s forwards;
+    }
+
+    .one-side {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(18px, 2vw, 34px);
+      padding-top: clamp(8px, 1.4vw, 18px);
+      font-size: clamp(22px, 2.45vw, 40px);
+      line-height: 1.05;
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      white-space: nowrap;
+    }
+
+    .one-side span {
+      display: block;
+      opacity: 0;
+      transform: translateX(-18px);
+      filter: blur(6px);
+      animation: sideWordsReveal .72s cubic-bezier(.2,.85,.2,1) forwards;
+    }
+
+    .one-side span:nth-child(1) { animation-delay: .52s; }
+    .one-side span:nth-child(2) { animation-delay: .7s; }
+
+    @keyframes bigOneReveal {
+      0% { opacity: 0; transform: translateY(28px) scale(.92); filter: blur(8px); }
+      68% { opacity: 1; transform: translateY(-3px) scale(1.02); filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes sideWordsReveal {
+      0% { opacity: 0; transform: translateX(-18px); filter: blur(6px); }
+      100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+    }
+
+    .hero p {
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.65;
+      max-width: 680px;
+      color: rgba(45, 36, 28, .82);
+      margin: 0 0 32px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(45,36,28,.16);
+      background: var(--ink);
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 16px 30px var(--shadow);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .btn.secondary {
+      background: rgba(255,248,234,.55);
+      color: var(--ink);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 540px;
+      border-radius: 42px;
+      padding: 34px;
+      background: rgba(255, 248, 234, .68);
+      border: 1px solid rgba(122,79,43,.22);
+      box-shadow: 0 30px 80px var(--shadow);
+      overflow: hidden;
+    }
+
+    .sun {
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(217,130,59,.28);
+    }
+
+    .grandma {
+      position: absolute;
+      left: 50%;
+      top: 53%;
+      transform: translate(-50%, -50%);
+      width: 290px;
+      height: 350px;
+    }
+
+    .face, .body, .pot, .fire, .steam span, .headscarf {
+      position: absolute;
+      border: 4px solid var(--ink);
+    }
+
+    .headscarf {
+      left: 82px;
+      top: 18px;
+      width: 112px;
+      height: 100px;
+      border-radius: 46% 54% 55% 45%;
+      background: #fff4dc;
+      transform: rotate(-8deg);
+    }
+
+    .face {
+      left: 103px;
+      top: 55px;
+      width: 78px;
+      height: 82px;
+      border-radius: 50%;
+      background: #f7caa4;
+      border-width: 3px;
+    }
+
+    .face::before, .face::after {
+      content: "";
+      position: absolute;
+      top: 32px;
+      width: 10px;
+      height: 5px;
+      border-bottom: 2px solid var(--ink);
+      border-radius: 50%;
+    }
+
+    .face::before { left: 18px; }
+    .face::after { right: 18px; }
+
+    .smile {
+      position: absolute;
+      left: 31px;
+      top: 50px;
+      width: 18px;
+      height: 8px;
+      border-bottom: 2px solid var(--red);
+      border-radius: 50%;
+    }
+
+    .body {
+      left: 82px;
+      top: 135px;
+      width: 120px;
+      height: 138px;
+      border-radius: 28px 28px 10px 10px;
+      background: #fff8ea;
+    }
+
+    .body::before {
+      content: "";
+      position: absolute;
+      left: 56px;
+      top: 0;
+      height: 134px;
+      border-left: 3px solid rgba(45,36,28,.55);
+    }
+
+    .arm {
+      position: absolute;
+      left: 174px;
+      top: 158px;
+      width: 105px;
+      height: 4px;
+      background: var(--ink);
+      transform: rotate(-16deg);
+      transform-origin: left;
+    }
+
+    .chopsticks {
+      position: absolute;
+      left: 184px;
+      top: 148px;
+      width: 108px;
+      height: 3px;
+      background: var(--ink);
+      transform: rotate(-12deg);
+    }
+
+    .chopsticks::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 108px;
+      height: 3px;
+      background: var(--ink);
+    }
+
+    .pot {
+      right: 8px;
+      bottom: 76px;
+      width: 86px;
+      height: 70px;
+      border-radius: 0 0 28px 28px;
+      background: #f5dec0;
+    }
+
+    .fire {
+      right: 25px;
+      bottom: 24px;
+      width: 54px;
+      height: 54px;
+      border-radius: 4px;
+      background: linear-gradient(var(--orange), var(--red));
+      border-width: 3px;
+      clip-path: polygon(50% 0%, 85% 52%, 65% 100%, 35% 100%, 15% 52%);
+      border-color: transparent;
+    }
+
+    .steam span {
+      width: 22px;
+      height: 34px;
+      border-color: transparent transparent transparent rgba(45,36,28,.55);
+      border-width: 3px;
+      border-radius: 50%;
+    }
+
+    .steam span:nth-child(1) { right: 56px; bottom: 160px; }
+    .steam span:nth-child(2) { right: 28px; bottom: 170px; }
+    .steam span:nth-child(3) { right: 75px; bottom: 183px; }
+
+    .quote {
+      position: absolute;
+      left: 32px;
+      bottom: 32px;
+      right: 32px;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(45,36,28,.88);
+      color: var(--cream);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    section { padding: 88px 6vw; }
+
+    .section-title {
+      font-size: clamp(34px, 4vw, 64px);
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin: 0 0 18px;
+    }
+
+    .section-lead {
+      max-width: 760px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: rgba(45,36,28,.75);
+      margin-bottom: 36px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(255,248,234,.62);
+      border: 1px solid rgba(122,79,43,.18);
+      box-shadow: 0 18px 44px rgba(61, 38, 20, .09);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -.035em;
+    }
+
+    .card p, .card li {
+      line-height: 1.65;
+      color: rgba(45,36,28,.76);
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(111,143,85,.16);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .loop {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .loop div {
+      min-height: 120px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 18px;
+      border-radius: 26px;
+      background: var(--ink);
+      color: var(--cream);
+      font-weight: 900;
+      box-shadow: 0 18px 38px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .motion-flow {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .motion-flow::before {
+      content: "";
+      position: absolute;
+      left: 5%;
+      right: 5%;
+      top: 50%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(122,79,43,.22), rgba(217,130,59,.42), rgba(122,79,43,.22), transparent);
+      transform: translateY(-50%);
+      z-index: -1;
+    }
+
+    .motion-flow::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 4%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,248,234,.96), rgba(217,130,59,.1));
+      box-shadow: 0 0 34px rgba(217,130,59,.42);
+      transform: translateY(-50%);
+      animation: flowOrb 8.5s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .flow-step {
+      position: relative;
+      overflow: hidden;
+      will-change: transform, box-shadow, opacity;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      grid-template-rows: auto auto auto;
+      gap: 8px;
+      z-index: 1;
+      transition: transform .16s cubic-bezier(.2,.9,.2,1), box-shadow .16s cubic-bezier(.2,.9,.2,1), border-color .12s ease-out, color .12s ease-out;
+      --cozy-a: rgba(217,130,59,.14);
+      --cozy-b: rgba(255,248,234,.08);
+      --cozy-glow: rgba(217,130,59,.24);
+    }
+
+    .flow-step::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 0%, var(--cozy-glow), transparent 58%), linear-gradient(135deg, var(--cozy-b), var(--cozy-a));
+      opacity: 0;
+      transition: opacity .12s ease-out;
+      z-index: -1;
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at center, rgba(255,248,234,.22), transparent 70%);
+      opacity: 0;
+      transition: opacity .12s ease-out;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .market { --cozy-a: rgba(217,130,59,.18); --cozy-b: rgba(255,248,234,.08); --cozy-glow: rgba(217,130,59,.32); }
+    .ingredient { --cozy-a: rgba(111,143,85,.18); --cozy-b: rgba(255,248,234,.08); --cozy-glow: rgba(111,143,85,.32); }
+    .cooking { --cozy-a: rgba(185,75,63,.16); --cozy-b: rgba(217,130,59,.12); --cozy-glow: rgba(217,130,59,.34); }
+    .complete { --cozy-a: rgba(246,234,210,.18); --cozy-b: rgba(255,248,234,.12); --cozy-glow: rgba(255,248,234,.32); }
+    .memory { --cozy-a: rgba(255,248,234,.16); --cozy-b: rgba(139,95,159,.08); --cozy-glow: rgba(255,248,234,.36); }
+    .reward { --cozy-a: rgba(139,95,159,.16); --cozy-b: rgba(255,248,234,.08); --cozy-glow: rgba(139,95,159,.28); }
+
+    .flow-step:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 18px 36px rgba(61,38,20,.18), 0 0 14px var(--cozy-glow);
+      border-color: rgba(255,248,234,.14);
+      color: var(--cream);
+    }
+
+    .flow-step:hover::before,
+    .flow-step:hover::after { opacity: 1; }
+
+    .step-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 2px;
+      border-radius: 18px;
+      background: rgba(255,248,234,.12);
+      font-size: 24px;
+      box-shadow: inset 0 0 0 1px rgba(255,248,234,.15);
+      transition: transform .16s cubic-bezier(.2,.9,.2,1), background .12s ease-out, box-shadow .12s ease-out, filter .12s ease-out;
+    }
+
+    .flow-step:hover .step-icon {
+      transform: scale(1.12) rotate(-3deg);
+      background: rgba(255,248,234,.18);
+      box-shadow: inset 0 0 0 1px rgba(255,248,234,.22), 0 10px 22px rgba(255,248,234,.08);
+      filter: brightness(1.06) saturate(1.06);
+    }
+
+    .step-title {
+      display: block;
+      font-size: 15.5px;
+      line-height: 1.22;
+      font-weight: 900;
+    }
+
+    .step-note {
+      display: block;
+      font-size: 9.5px;
+      line-height: 1.15;
+      font-weight: 600;
+      color: rgba(255,248,234,.52);
+      letter-spacing: .015em;
+      opacity: .82;
+    }
+
+    .flow-step:hover .step-title { color: #fff8ea; }
+    .flow-step:hover .step-note { color: rgba(255,248,234,.66); opacity: .9; }
+
+    @keyframes flowOrb {
+      0%, 7% { left: 4%; opacity: .2; }
+      13%, 20% { left: 18%; opacity: 1; }
+      27%, 34% { left: 34%; opacity: 1; }
+      41%, 48% { left: 50%; opacity: 1; }
+      55%, 62% { left: 66%; opacity: 1; }
+      69%, 76% { left: 82%; opacity: 1; }
+      86%, 100% { left: 94%; opacity: 0; }
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: .88fr 1.12fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .chapters {
+      display: grid;
+      gap: 14px;
+    }
+
+    .chapter {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,248,234,.6);
+      border: 1px solid rgba(122,79,43,.18);
+    }
+
+    .chapter strong { display: block; margin-bottom: 6px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 24px;
+      background: rgba(255,248,234,.62);
+      box-shadow: 0 18px 44px rgba(61, 38, 20, .09);
+    }
+
+    th, td {
+      padding: 18px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(122,79,43,.14);
+    }
+
+    th {
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .swatch {
+      min-height: 150px;
+      border-radius: 26px;
+      padding: 16px;
+      display: flex;
+      align-items: end;
+      color: #fff;
+      font-weight: 900;
+      box-shadow: 0 18px 38px var(--shadow);
+    }
+
+    .footer {
+      padding: 52px 6vw;
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+    }
+
+    /* Motion System */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes softFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    @keyframes warmPulse {
+      0%, 100% { opacity: .25; transform: scale(1); }
+      50% { opacity: .42; transform: scale(1.08); }
+    }
+
+    @keyframes steamRise {
+      0% { opacity: 0; transform: translateY(14px) scale(.82); }
+      35% { opacity: .75; }
+      100% { opacity: 0; transform: translateY(-38px) scale(1.15); }
+    }
+
+    @keyframes fireFlicker {
+      0%, 100% { transform: scaleY(1) rotate(-2deg); filter: brightness(1); }
+      50% { transform: scaleY(1.16) rotate(2deg); filter: brightness(1.16); }
+    }
+
+    @keyframes chopstickTap {
+      0%, 100% { transform: rotate(-12deg) translateX(0); }
+      50% { transform: rotate(-16deg) translateX(5px); }
+    }
+
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(34px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .hero .eyebrow,
+    .hero p,
+    .actions {
+      opacity: 0;
+      animation: fadeUp .9s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .hero p { animation-delay: 1.05s; }
+    .actions { animation-delay: 1.18s; }
+
+    .hero-card {
+      opacity: 0;
+      animation: cardReveal 1s cubic-bezier(.2,.8,.2,1) .28s forwards, softFloat 5.5s ease-in-out 1.4s infinite;
+    }
+
+    .sun { animation: warmPulse 4.5s ease-in-out infinite; }
+    .steam span { animation: steamRise 2.4s ease-in-out infinite; }
+    .steam span:nth-child(2) { animation-delay: .55s; }
+    .steam span:nth-child(3) { animation-delay: 1.05s; }
+    .fire { animation: fireFlicker .82s ease-in-out infinite; transform-origin: bottom center; }
+    .chopsticks { animation: chopstickTap 2.8s ease-in-out infinite; transform-origin: left center; }
+
+    .card,
+    .chapter,
+    table,
+    .swatch,
+    .loop div {
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .card:hover,
+    .chapter:hover,
+    .swatch:hover,
+    .loop div:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 26px 58px rgba(61, 38, 20, .15);
+      border-color: rgba(122,79,43,.32);
+    }
+
+    .motion-flow .flow-step:hover {
+      background: linear-gradient(180deg, rgba(45,36,28,.94), rgba(45,36,28,.88)), var(--ink);
+      border-color: rgba(255,248,234,.18);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .loop div:nth-child(1) { transition-delay: .02s; }
+    .loop div:nth-child(2) { transition-delay: .07s; }
+    .loop div:nth-child(3) { transition-delay: .12s; }
+    .loop div:nth-child(4) { transition-delay: .17s; }
+    .loop div:nth-child(5) { transition-delay: .22s; }
+    .loop div:nth-child(6) { transition-delay: .27s; }
+
+    @media (max-width: 980px) {
+      .hero, .story { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .loop { grid-template-columns: repeat(2, 1fr); }
+      .palette { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .motion-flow::before,
+      .motion-flow::after { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-title.one-layout { gap: 14px; }
+      .big-one { font-size: clamp(92px, 31vw, 150px); }
+      .one-side { font-size: clamp(18px, 6vw, 28px); gap: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    li {
+      margin-left: 30px;
+    }
+
+    /* ===== NAME SELECTION PAGE ===== */
+    .name-btn {
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .name-page {
+      display: none;
+      min-height: 100vh;
+      padding-top: 96px;
+    }
+
+    .name-page.active {
+      display: block;
+    }
+
+    .name-page-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .back-btn {
+      border: 1px solid rgba(122,79,43,.22);
+      background: rgba(255,248,234,.58);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(61,38,20,.08);
+      font-family: inherit;
+    }
+
+    .name-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .name-card {
+      position: relative;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255,248,234,.66);
+      border: 1px solid rgba(122,79,43,.18);
+      box-shadow: 0 20px 48px rgba(61,38,20,.1);
+      overflow: hidden;
+      color: var(--ink);
+      cursor: pointer;
+      transition:
+        transform .28s cubic-bezier(.2,.85,.2,1),
+        background .28s ease,
+        color .28s ease,
+        border-color .28s ease,
+        box-shadow .28s ease;
+    }
+
+    .name-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 25% 0%, rgba(217,130,59,.22), transparent 46%),
+        linear-gradient(135deg, rgba(45,36,28,.96), rgba(61,45,34,.92));
+      opacity: 0;
+      transition: opacity .28s ease;
+      pointer-events: none;
+    }
+
+    .name-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .name-card:hover {
+      transform: translateY(-8px);
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+      border-color: rgba(255,248,234,.2);
+      box-shadow:
+        0 30px 70px rgba(61,38,20,.22),
+        0 0 0 1px rgba(255,248,234,.08) inset;
+    }
+
+    .name-card:hover::before {
+      opacity: 1;
+    }
+
+    .name-card.active {
+      background: rgba(45,36,28,.92);
+      color: var(--cream);
+      border-color: rgba(255,248,234,.2);
+    }
+
+    .name-card.active::before {
+      opacity: 1;
+    }
+
+    .name-label {
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--orange);
+      margin-bottom: 18px;
+      transition: color .28s ease, transform .28s ease;
+    }
+
+    .name-card h3 {
+      margin: 0 0 14px;
+      font-size: clamp(42px, 4.5vw, 76px);
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      word-spacing: 0.02em;
+      transition:
+        color .28s ease,
+        transform .28s cubic-bezier(.2,.85,.2,1),
+        letter-spacing .28s ease;
+    }
+
+    .name-card:hover h3,
+    .name-card.active h3 {
+      color: #D9823B;
+      transform: translateY(-4px);
+      letter-spacing: 0.005em;
+    }
+
+    .name-sentence {
+      font-size: 17px;
+      line-height: 1.55;
+      color: rgba(45,36,28,.74);
+      margin-bottom: 24px;
+      transition: color .28s ease;
+    }
+
+    .name-analysis p {
+      line-height: 1.65;
+      color: rgba(45,36,28,.74);
+      margin: 0 0 14px;
+      transition: color .28s ease;
+    }
+
+    .name-card:hover p,
+    .name-card:hover .name-sentence,
+    .name-card:hover .name-analysis p,
+    .name-card.active p,
+    .name-card.active .name-sentence,
+    .name-card.active .name-analysis p {
+      color: rgba(255,248,234,.78);
+    }
+
+    /* Click indicator */
+    .name-card::after {
+      content: "Click để xem gameplay →";
+      position: absolute;
+      bottom: 18px;
+      right: 18px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--orange);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .name-card:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ===== GAMEPLAY PANEL OVERLAY ===== */
+    .gameplay-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(45, 36, 28, 0);
+      backdrop-filter: blur(0px);
+      opacity: 0;
+      visibility: hidden;
+      transition: 
+        opacity .4s cubic-bezier(.2,.8,.2,1),
+        background .4s ease,
+        backdrop-filter .4s ease,
+        visibility 0s .4s;
+    }
+
+    .gameplay-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      background: rgba(45, 36, 28, 0.75);
+      backdrop-filter: blur(12px);
+      transition: 
+        opacity .4s cubic-bezier(.2,.8,.2,1),
+        background .4s ease,
+        backdrop-filter .4s ease,
+        visibility 0s 0s;
+    }
+
+    .gameplay-panel {
+      position: relative;
+      width: 90%;
+      max-width: 880px;
+      max-height: 85vh;
+      padding: 42px;
+      border-radius: 36px;
+      background: rgba(255,248,234,.98);
+      border: 1px solid rgba(122,79,43,.22);
+      box-shadow: 
+        0 40px 100px rgba(61,38,20,.35),
+        0 0 0 1px rgba(255,248,234,.1) inset;
+      overflow-y: auto;
+      transform: translateY(60px) scale(.92);
+      opacity: 0;
+      transition: 
+        transform .5s cubic-bezier(.2,.9,.2,1),
+        opacity .4s ease;
+    }
+
+    .gameplay-overlay.active .gameplay-panel {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .gameplay-panel-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 24px var(--shadow);
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .gameplay-panel-close:hover {
+      transform: scale(1.08) rotate(90deg);
+      background: var(--orange);
+    }
+
+    .gameplay-panel-title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .gameplay-panel-title h3 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 56px);
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+
+    .gameplay-panel-title .panel-tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--orange);
+      color: var(--cream);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .gameplay-content {
+      display: none;
+    }
+
+    .gameplay-content.active {
+      display: block;
+      animation: panelContentIn .5s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    @keyframes panelContentIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gameplay-content p {
+      line-height: 1.7;
+      color: rgba(45,36,28,.82);
+      margin: 0 0 18px;
+    }
+
+    .gameplay-content strong {
+      color: var(--ink);
+    }
+
+    .gameplay-content ul {
+      margin: 0 0 18px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .gameplay-content li {
+      position: relative;
+      margin: 0 0 10px;
+      padding-left: 24px;
+      line-height: 1.6;
+      color: rgba(45,36,28,.78);
+    }
+
+    .gameplay-content li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .gameplay-section {
+      margin-bottom: 28px;
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(246,234,210,.6);
+      border: 1px solid rgba(122,79,43,.12);
+    }
+
+    .gameplay-section h4 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      color: var(--brown);
+    }
+
+    .gameplay-feeling {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--cream);
+      font-weight: 800;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .gameplay-conclusion {
+      margin-top: 32px;
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(217,130,59,.12), rgba(185,75,63,.08));
+      border: 1px solid rgba(217,130,59,.22);
+    }
+
+    .gameplay-conclusion p {
+      margin: 0;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    body.show-name-page .hero,
+    body.show-name-page #concept,
+    body.show-name-page #story,
+    body.show-name-page #research,
+    body.show-name-page #direction,
+    body.show-name-page .footer {
+      display: none;
+    }
+
+    body.show-name-page #name-page {
+      display: block;
+    }
+
+    body.panel-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 980px) {
+      .name-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .name-page-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .gameplay-panel {
+        width: 95%;
+        padding: 28px;
+        max-height: 90vh;
+      }
+    }
+    .hero-title.hero-lockup {
+  display: grid;
+  grid-template-columns: auto max-content;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: clamp(18px, 2.2vw, 34px);
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 34px;
+  overflow: visible;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.hero-lockup .big-one {
+  grid-row: 1 / 3;
+  display: block;
+  font-size: clamp(118px, 12.8vw, 198px);
+  line-height: .78;
+  font-weight: 950;
+  letter-spacing: -0.085em;
+  white-space: nowrap;
+  color: var(--ink);
+  transform: translateY(-1.5%);
+}
+
+.hero-lockup .right-text {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  gap: clamp(8px, 1vw, 14px);
+  min-width: max-content;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.hero-lockup .right-text span {
+  display: block;
+  font-size: clamp(52px, 6.1vw, 96px);
+  line-height: .86;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+/* ===== OLD SCHOOL ROSTER ARCHIVE ===== */
+
+.roster-overlay.active .roster-panel {
+  animation: rosterFolderOpen .72s cubic-bezier(.16,.9,.2,1) forwards;
+}
+
+.roster-panel {
+  position: relative;
+  max-width: 980px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(217,130,59,.16), transparent 32%),
+    linear-gradient(135deg, #fff3d6, #ead5ad 68%, #d8bb88);
+  border: 2px solid rgba(122,79,43,.38);
+  box-shadow:
+    0 42px 100px rgba(30,18,10,.45),
+    inset 0 0 0 1px rgba(255,248,234,.65),
+    inset 0 -18px 50px rgba(122,79,43,.12);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform-origin: top center;
+}
+
+.roster-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+.roster-panel::-webkit-scrollbar-thumb {
+  background: rgba(122,79,43,.45);
+  border-radius: 999px;
+}
+
+.roster-panel::-webkit-scrollbar-track {
+  background: rgba(255,248,234,.35);
+}
+
+.roster-panel .gameplay-panel-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  z-index: 10;
+}
+
+.roster-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .18;
+  background-image:
+    linear-gradient(rgba(45,36,28,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,36,28,.05) 1px, transparent 1px);
+  background-size: 100% 28px, 28px 100%;
+  mix-blend-mode: multiply;
+}
+
+.roster-panel::after {
+  content: "ARCHIVE / NGOẠI FILES";
+  position: absolute;
+  right: -54px;
+  top: 64px;
+  padding: 8px 58px;
+  background: rgba(45,36,28,.92);
+  color: var(--cream);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  transform: rotate(38deg);
+  box-shadow: 0 10px 24px rgba(61,38,20,.22);
+}
+
+.roster-tab {
+  position: absolute;
+  left: 42px;
+  top: -1px;
+  width: 220px;
+  height: 42px;
+  border-radius: 0 0 18px 18px;
+  background: var(--ink);
+  color: var(--cream);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 30px rgba(61,38,20,.18);
+  z-index: 2;
+}
+
+.roster-intro {
+  position: relative;
+  z-index: 1;
+  margin: 4px 0 24px;
+  max-width: 720px;
+  line-height: 1.7;
+  color: rgba(45,36,28,.78);
+}
+
+.roster-list {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.roster-item {
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255,248,234,.74), rgba(246,234,210,.56));
+  border: 1px solid rgba(122,79,43,.24);
+  box-shadow:
+    0 14px 34px rgba(61,38,20,.08),
+    inset 0 0 0 1px rgba(255,248,234,.36);
+  overflow: hidden;
+  transition:
+    transform .24s cubic-bezier(.2,.85,.2,1),
+    box-shadow .24s ease,
+    border-color .24s ease;
+}
+
+.roster-item:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 22px 50px rgba(61,38,20,.14),
+    inset 0 0 0 1px rgba(255,248,234,.44);
+  border-color: rgba(122,79,43,.38);
+}
+
+.roster-toggle {
+  width: 100%;
+  border: 0;
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.roster-number {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(45,36,28,.92);
+  color: var(--cream);
+  font-weight: 950;
+  letter-spacing: -.04em;
+  box-shadow: 0 10px 22px rgba(61,38,20,.16);
+}
+
+.roster-name {
+  display: block;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -.007em;
+}
+
+.roster-sub {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(122,79,43,.8);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.roster-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(122,79,43,.1);
+  color: var(--brown);
+  font-size: 20px;
+  font-weight: 950;
+  transition:
+    transform .28s cubic-bezier(.2,.85,.2,1),
+    background .22s ease,
+    color .22s ease;
+}
+
+.roster-item.active .roster-arrow {
+  transform: rotate(45deg);
+  background: var(--orange);
+  color: var(--cream);
+}
+
+.roster-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .42s cubic-bezier(.2,.85,.2,1);
+}
+
+.roster-item.active .roster-body {
+  grid-template-rows: 1fr;
+}
+
+.roster-body-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.roster-content {
+  padding: 4px 22px 24px 94px;
+  animation: rosterTextIn .36s ease both;
+}
+
+.roster-item.active .roster-content {
+  animation-delay: .08s;
+}
+
+.roster-content p {
+  margin: 0 0 12px;
+  line-height: 1.65;
+  color: rgba(45,36,28,.8);
+}
+
+.roster-content strong {
+  color: var(--ink);
+}
+
+.roster-content ul {
+  margin: 8px 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.roster-content li {
+  position: relative;
+  margin: 0 0 8px;
+  padding-left: 22px;
+  line-height: 1.55;
+  color: rgba(45,36,28,.78);
+}
+
+.roster-content li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+  font-size: 12px;
+  top: 3px;
+}
+
+.roster-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 18px;
+}
+
+.roster-badge {
+  display: inline-flex;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(45,36,28,.9);
+  color: var(--cream);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.roster-stamp {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 2px solid rgba(185,75,63,.7);
+  color: var(--red);
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  transform: rotate(-2deg);
+  border-radius: 8px;
+  background: rgba(255,248,234,.34);
+}
+
+@keyframes rosterFolderOpen {
+  0% {
+    opacity: 0;
+    transform: perspective(900px) rotateX(-18deg) translateY(46px) scale(.92);
+    filter: blur(8px);
+  }
+
+  58% {
+    opacity: 1;
+    transform: perspective(900px) rotateX(3deg) translateY(-4px) scale(1.01);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: perspective(900px) rotateX(0) translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes rosterTextIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .roster-toggle {
+    grid-template-columns: 46px 1fr auto;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .roster-number {
+    width: 40px;
+    height: 40px;
+  }
+
+  .roster-content {
+    padding: 0 18px 22px 18px;
+  }
+
+  .roster-panel::after {
+    display: none;
+  }
+
+  .roster-tab {
+    left: 24px;
+    width: 180px;
+  }
+}
+
+/* Scrollbar cho overlay + panel */
+.roster-overlay,
+.roster-panel {
+  scrollbar-width: thin;
+  scrollbar-color: #d9823b rgba(255,248,234,.35);
+}
+
+.roster-overlay::-webkit-scrollbar,
+.roster-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+.roster-overlay::-webkit-scrollbar-track,
+.roster-panel::-webkit-scrollbar-track {
+  background: rgba(255,248,234,.35);
+  border-radius: 999px;
+}
+
+.roster-overlay::-webkit-scrollbar-thumb,
+.roster-panel::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d9823b, #7a4f2b);
+  border-radius: 999px;
+}
+
+.roster-overlay::-webkit-scrollbar-button,
+.roster-panel::-webkit-scrollbar-button {
+  display: none;
+}
+
+.core-card {
+  cursor: pointer;
+}
+
+.core-card:hover {
+  transform: translateY(-8px);
+}
+
+
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand"><span class="brand-mark">N</span> Cooking with Ngoại</div>
+    <div class="nav-links">
+      <a href="#concept">Concept</a>
+      <a href="#story">Story</a>
+      <a href="#research">Research</a>
+      <a href="#direction">Creative Direction</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">#GrandmaKitchen · Gamification Marketing</div>
+
+<h1 class="hero-title hero-lockup" aria-label="Một lần nấu, một lần trở về">
+  <span class="big-one">MỘT</span>
+  <span class="right-text">
+    <span>lần nấu,</span>
+    <span>lần trở về</span>
+  </span>
+</h1>
+        <p><strong>Cooking with Ngoại</strong> không chỉ là một trò chơi ẩm thực Việt Nam, mà còn là hành trình trở về. Trở về căn bếp thân quen của Ngoại, nơi từng làn khói bếp mang theo ký ức, nơi từng món ăn là một câu chuyện được nấu bằng yêu thương. <br> Người chơi sẽ học cách nấu từng món Việt, từng bước chạm vào tinh hoa ẩm thực ba miền, mở khoá những vùng đất, những ký ức đã ngủ yên theo năm tháng. Mỗi công thức không chỉ là kỹ năng, mà là một mảnh ghép văn hóa, một sợi dây kết nối với gia đình, với cội nguồn. <br> Trên hành trình ấy, những trải nghiệm trong game dần hoá thành giá trị thật. Nơi người chơi có thể nhận về những phần quà đời thực, như một cách mang hương vị ký ức bước ra ngoài cuộc sống. Cooking with Ngoại: nơi bạn không chỉ chơi, mà còn Cảm, Nhớ và Mang một phần quê nhà theo mình.</p>
+        <div class="actions">
+          <a class="btn" href="#concept">Xem concept</a>
+          <a class="btn secondary" href="#research">Xem research framework</a>
+          <button class="btn name-btn" type="button" data-open-name-page>Chọn tên trò chơi</button>
+          <button class="btn secondary" id="openRosterBtn">
+  FULL ROSTER: 8 NGOẠI
+</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="sun"></div>
+        <div class="grandma">
+          <div class="headscarf"></div>
+          <div class="face"><div class="smile"></div></div>
+          <div class="body"></div>
+          <div class="arm"></div>
+          <div class="chopsticks"></div>
+          <div class="pot"></div>
+          <div class="fire"></div>
+          <div class="steam"><span></span><span></span><span></span></div>
+        </div>
+        <div class="quote">Bà Ngoại nuôi dưỡng niềm tin hơn 9 năm hơn đợi cháu về... "Troll only"</div>
+      </div>
+    </section>
+
+    <section id="concept" class="reveal">
+      <span class="tag">01 · Game Concept</span>
+      <h2 class="section-title">Không chỉ là game nấu ăn. Đây là game ký ức ẩm thực Việt</h2>
+      <p class="section-lead"> <strong>Cooking with Ngoại</strong> là một trò chơi ẩm thực mang lại nét đẹp văn hóa, cùng tính chất chữa lành. Nơi người chơi học nấu các món ăn Việt thông qua trải nghiệm trực tiếp cùng những người bà từ khắp các vùng miền.
+Không chỉ tái hiện công thức, trò chơi tập trung vào <strong>3C: Chế biến – Cội nguồn – Chuyện kể.</strong> Kết hợp giữa lối chơi dựa trên kỹ năng, cách dẫn chuyện đầy cảm xúc và hệ thống đổi thưởng gắn với đời sống thực.
+
+      <div class="grid">
+        <div class="card core-card" id="openCorePillars">
+          <h3>Core Pillar (Nền tảng trải nghiệm) </h3>
+          <p>Ẩm thực Việt, ký ức gia đình, khám phá vùng miền thông qua..., cảm giác ấm áp và phần thưởng thật.</p>
+        </div>
+        <div class="card">
+          <h3>Redemption (Hành trình phục hồi & chữa lành ký ức)</h3>
+          <p>Người chơi "nuôi lại" một căn bếp cũ, phục hồi công thức, mở khóa ký ức và chữa lành cảm xúc.</p>
+        </div>
+        <div class="card">
+          <h3>Award (Phần thưởng)</h3>
+          <p>Hoàn thành nhiệm vụ để tích điểm, đổi gift, voucher, nguyên liệu, postcard, sticker/sản phẩm thương mại.</p>
+        </div>
+      </div>
+
+      <div class="loop motion-flow">
+        <div class="flow-step market">
+          <span class="step-icon">🧺</span>
+          <span class="step-title">Đi chợ</span>
+          <span class="step-note">tìm hương vị</span>
+        </div>
+        <div class="flow-step ingredient">
+          <span class="step-icon">🥬</span>
+          <span class="step-title">Chọn nguyên liệu</span>
+          <span class="step-note">tìm lại hồi ức</span>
+        </div>
+        <div class="flow-step cooking">
+          <span class="step-icon">🍳</span>
+          <span class="step-title">Nấu ăn vs mini game</span>
+          <span class="step-note">canh đúng nhịp</span>
+        </div>
+        <div class="flow-step complete">
+          <span class="step-icon">🍲</span>
+          <span class="step-title">Hoàn thành món</span>
+          <span class="step-note">món ăn hiện ra</span>
+        </div>
+        <div class="flow-step memory">
+          <span class="step-icon">✨</span>
+          <span class="step-title">Mở ký ức</span>
+          <span class="step-note">ánh sáng trở về</span>
+        </div>
+        <div class="flow-step reward">
+          <span class="step-icon">🎁</span>
+          <span class="step-title">Đổi quà</span>
+          <span class="step-note">giá trị thật</span>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="story" class="reveal">
+      <span class="tag">02 · Story</span>
+      <h2 class="section-title">Mỗi món ăn là một lần được trở về</h2>
+      <p class="section-lead">Người chơi trở về căn bếp của Ngoại. Trong bếp còn lại công thức, mùi khói, tiếng dao thớt, chợ quê và những mảnh ký ức gia đình.</p>
+
+      <div class="story">
+        <div class="card">
+          <h3>Story Premise</h3>
+          <p>Căn bếp cũ không biến mất. Nó chỉ chờ một người quay về, nhóm lại lửa, nấu lại những món từng làm nên tuổi thơ. (Cùng Ngoại) </p>
+          <p><strong>Tagline:</strong> Một lần nấu, một lần trở về - Jamie da Hood</p>
+        </div>
+        <div class="chapters">
+          <div class="chapter"><strong>Chương 1 · Bếp lửa cũ</strong> Mở khóa cơm cháy, canh chua, cá kho, bánh ít.</div>
+          <div class="chapter"><strong>Chương 2 · Chợ quê buổi sớm</strong> Chọn nguyên liệu, trả giá, gặp nhân vật địa phương.</div>
+          <div class="chapter"><strong>Chương 3 · Hương vị ba miền</strong> Khám phá Hà Nội, Huế, Hội An, Tây Nguyên, Đà Lạt, Sài Gòn v...v</div>
+          <div class="chapter"><strong>Chương 4 · Mâm cơm đoàn viên</strong> Hoàn thành combo món để mở ký ức lớn.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="reveal">
+      <span class="tag">03 · Competitor & Game Product Research</span>
+      <h2 class="section-title">Tìm khe hở thị trường</h2>
+      <p class="section-lead">Mỗi game product cần được mổ xẻ theo: core loop, meta progression, reward system, retention, monetization và emotion/UX feel.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Game / Product</th>
+            <th>Cần học</th>
+            <th>Cơ hội cho Cooking with Ngoại</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Cooking Mama</strong></td>
+            <td>Thao tác nấu ăn đơn giản, vui, dễ hiểu.</td>
+            <td>Biến thao tác nấu thành mini game Việt: xắt rau, kho cá, nêm canh, cuốn bánh.</td>
+          </tr>
+          <tr>
+            <td><strong>Good Pizza, Great Pizza</strong></td>
+            <td>Story nhẹ, khách hàng có personality, loop phục vụ đơn hàng.</td>
+            <td>Thay khách hàng bằng hàng xóm, cô bán chợ, em nhỏ, du khách, người thân.</td>
+          </tr>
+          <tr>
+            <td><strong>Cooking Diary / Cooking Fever</strong></td>
+            <td>Progression, nâng cấp, retention, daily quest.</td>
+            <td>Giữ nhịp chơi vừa đủ, không quá stress, tập trung cozy reward.</td>
+          </tr>
+          <tr>
+            <td><strong>Loyalty App / Campaign đổi quà</strong></td>
+            <td>Điểm, streak, voucher, membership, gift redemption.</td>
+            <td>Điểm khác biệt lớn: game gắn với quà thật, sản phẩm thật, lớp học thật.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="direction" class="reveal">
+      <span class="tag">04 · Mood Board & Creative Direction</span>
+      <h2 class="section-title">Ấm áp, Việt Nam, thủ công, sạch sẽ và có khả năng thương mại</h2>
+      <p class="section-lead">Visual không nên quá nghèo khổ hay cũ kỹ. Nên là ký ức được nâng cấp: giấy dó &gt; bếp lửa &gt; màu lá chuối &gt; đất nung &gt; nét vẽ tay &gt; UI hiện đại.</p>
+
+      <div class="palette">
+        <div class="swatch" style="background:#f6ead2;color:#2d241c">Giấy dó</div>
+        <div class="swatch" style="background:#d9823b">Bếp lửa</div>
+        <div class="swatch" style="background:#6f8f55">Lá chuối</div>
+        <div class="swatch" style="background:#b94b3f">Gấc đỏ</div>
+        <div class="swatch" style="background:#7a4f2b">Đất nung</div>
+        <div class="swatch" style="background:#8b5f9f">Khoai môn</div>
+      </div>
+
+      <div class="grid" style="margin-top:18px">
+        <div class="card">
+          <h3>Art Style</h3>
+          <p>Hand-drawn cozy, texture giấy, nét mực mềm, nhân vật dễ thương nhưng không trẻ con quá mức.</p>
+        </div>
+        <div class="card">
+          <h3>UX Feel</h3>
+          <p>Chậm vừa đủ, ấm, ít áp lực. Mỗi click nên có phản hồi mềm: khói, ánh lửa, tiếng dao thớt, tiếng chợ.</p>
+        </div>
+        <div class="card">
+          <h3>Marketing Hook</h3>
+          <p>Daily mission, badge món Việt, region pass, voucher, gift box, sản phẩm collab và sự kiện theo mùa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NAME SELECTION PAGE ===== -->
+    <section id="name-page" class="name-page reveal" aria-hidden="true">
+      <div class="name-page-head">
+        <span class="tag">05 · Game Naming Direction</span>
+        <button class="back-btn" type="button" data-close-name-page>← Quay lại concept</button>
+      </div>
+
+      <h2 class="section-title">Chọn tên cho trò chơi</h2>
+<p class="section-lead">
+  Ba tên dưới đây đều đi theo tinh thần ẩm thực Việt, ký ức gia đình và cảm giác trở về.
+  Khác nhau nằm ở trọng tâm cảm xúc: <strong>thời gian</strong>, <strong>mái nhà</strong> hoặc <strong>nhân vật Ngoại</strong>.
+  Click vào từng tên để xem chi tiết về <strong>thiết kế gameplay và trải nghiệm người chơi</strong>.
+</p>
+
+
+      <div class="name-grid">
+        <article class="name-card" data-name="vixua">
+          <div class="name-label">Option 01</div>
+          <h3>Vị Xưa</h3>
+          <p class="name-sentence">Một cái tên ngắn, giàu chất thơ, gợi cảm giác nếm lại hương vị của ký ức.</p>
+          <div class="name-analysis">
+            <p><strong>Cảm xúc thương hiệu:</strong> trầm, đẹp, hoài niệm, có chiều sâu văn học. Hợp với art direction giấy dó, màu bếp lửa, texture thủ công.</p>
+            <p><strong>Điểm mạnh:</strong> "Vị" gắn trực tiếp với ẩm thực, "Xưa" mở ra chiều sâu ký ức, văn hóa và thời gian.</p>
+            <p><strong>Rủi ro:</strong> nghiêng về hoài niệm, có thể ít trực diện về nhân vật "Ngoại" nếu muốn xây mascot mạnh.</p>
+          </div>
+        </article>
+
+        <article class="name-card" data-name="tinha">
+          <div class="name-label">Option 02</div>
+          <h3>Vị Nhà</h3>
+          <p class="name-sentence">Một cái tên ấm áp, gần gũi, dễ hiểu, đánh thẳng vào cảm giác "món ăn của nhà".</p>
+          <div class="name-analysis">
+            <p><strong>Cảm xúc thương hiệu:</strong> ấm áp, đại chúng, thân thiện, dễ chạm tới nhiều nhóm người chơi, đặc biệt là người trẻ xa nhà.</p>
+            <p><strong>Điểm mạnh:</strong> rất dễ nhớ, dễ truyền thông và dễ mở rộng sang thương mại.</p>
+            <p><strong>Rủi ro:</strong> tên khá rộng, có thể giống một chương trình ẩm thực hơn là một game nếu không có visual identity đủ riêng.</p>
+          </div>
+        </article>
+
+        <article class="name-card" data-name="bepngoai">
+          <div class="name-label">Option 03</div>
+          <h3>Bếp Ngoại</h3>
+          <p class="name-sentence">Một cái tên trực diện, có nhân vật trung tâm, dễ kể chuyện và dễ xây thế giới game.</p>
+          <div class="name-analysis">
+            <p><strong>Cảm xúc thương hiệu:</strong> gần gũi, dễ thương, giàu tính nhân vật. Rất phù hợp với phong cách cozy game.</p>
+            <p><strong>Điểm mạnh:</strong> rõ concept ngay lập tức. Người chơi hiểu đây là căn bếp của Ngoại.</p>
+            <p><strong>Rủi ro:</strong> ít chất thơ hơn "Vị Xưa", có thể hơi cụ thể nếu sau này game muốn mở rộng.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+
+  <!--==== COREPILLARS ===== -->
+  <div class="gameplay-overlay" id="corePillarsOverlay">
+  <div class="gameplay-panel">
+    <button class="gameplay-panel-close" id="closeCorePillarsBtn">×</button>
+
+    <div class="gameplay-panel-title">
+      <h3>Core Pillars</h3>
+      <span class="panel-tag">Game Foundation</span>
+    </div>
+
+    <div class="gameplay-section">
+      <h4>1. Mỗi món ăn đều có một nơi để trở về</h4>
+      <p><strong>Ý tưởng:</strong> mỗi món nói lên Vùng đất, Con người, Lịch sử</p>
+      Vùng đất: 
+      <li>miền Bắc > mùa lạnh > món ăn cần giữ nhiệt lâu</li>
+      <li>miền Trung > mùa nóng > món ăn cần giải nhiệt, dễ ăn/đất khô > nguyên liệu khan hiếm > phải tối ưu</li>
+      <li>miền Nam > mùa mưa > món ăn cần chống ngán, dễ bảo quản/phong phú > combo nguyên liệu nhiều hướng</li>
+      Con người:
+      <li>miền Bắc > kỹ tính, cầu toàn, chắt chiu > phải đúng thời điểm </li>
+      <li>miền Trung > tiết kiệm, sáng tạo > không cho phép lãng phí nguyên liệu</li>
+      <li>miền Nam > linh hoạt, thoải mái, phóng khoáng, đa dạng > cần linh hoạt trong cách chế biến</li>
+      Lịch sử:
+      <li>miền Bắc > thời bao cấp > thiếu thốn nhưng ấm áp</li>
+      <li>miền Trung > thời chiến > khó khăn, cần gói ghém với nguyên liệu</li>
+      <li>miền Nam > thời hội nhập > phóng khoáng, đa dạng, dễ tiếp cận</li>
+      ---
+      <li>nấu đúng > mở ra ký ức thật</li>
+      <li>nấu sai > mở ra ký ức giả, tưởng tượng, méo mó</li>
+      <li>nấu theo cảm nhận > mở ra ký ức ẩn</li>
+    </div>
+
+    <div class="gameplay-section">
+      <h4>2. Nếp xưa truyền lại</h4>
+      <p><strong>Ý tưởng:</strong> không học hoàn toàn qua công thức, học qua cảm nhận, sai lầm và tích luỹ trải nghiệm</p>
+        Cách học:
+        <li>Học qua công thức: đúng nguyên liệu, đúng cách làm, đúng thời điểm.</li>
+        <li>Học qua cảm nhận: màu sắc, âm thanh, nhịp độ nấu, điều chỉnh, kết nối với ký ức.</li>
+        <li>Học qua sai lầm: nấu sai, nấu thiếu, nấu quá đà, nấu theo cảm nhận sai > mở ra ký ức méo mó, tưởng tượng, hài hước.</li>
+        <li>Học qua trải nghiệm: nấu theo cảm nhận đúng (kn thực tế) > mở ra ký ức ẩn, những câu chuyện chưa kể, những góc nhìn mới về món ăn và ký ức.</li> 
+    </div>
+
+    <div class="gameplay-section">
+      <h4>3. Nếp bếp xưa</h4>
+      Nấu để cúng:
+      <li>Ý nghĩa: thể hiện lòng thành kính, tưởng nhớ tổ tiên, cầu mong may mắn, thể hiện sự trang trọng.</li>
+      <li>Đặc trưng: món ăn thường có tính truyền thống, nghi lễ, cầu kỳ, có thể không phải là món ăn hàng ngày.</li>
+      Nấu để đãi khách:
+      <li>Ý nghĩa: thể hiện sự tiếp đón, tôn trọng, chia sẻ.</li>
+      <li>Đặc trưng: món ăn thường có tính hiện đại, đa dạng, dễ ăn.</li>
+      Nấu để ăn:
+      <li>Ý nghĩa: thể hiện sự chăm sóc, yêu thương, kết nối.</li>
+      <li>Đặc trưng: món ăn thường có tính gia đình, thân thuộc, mang lại cảm giác thân thương.</li>
+      Nấu để chữa lành:
+      <li>Ý nghĩa: thể hiện sự quan tâm, chăm sóc, chữa lành cảm xúc.</li>
+      <li>Đặc trưng: món ăn thường có tính đơn giản, dễ tiêu hoá, mang lại cảm giác ấm áp, an toàn.</li>
+      Nấu để kết nối:
+      <li>Ý nghĩa: thể hiện sự gắn kết, chia sẻ, tạo ra kỷ niệm chung.</li>
+      <li>Đặc trưng: món ăn thường có tính tương tác, có thể nấu cùng nhau, mang lại cảm giác vui vẻ, gắn kết.</li>
+      Nấu để sáng tạo:
+      <li>Ý nghĩa: thể hiện sự sáng tạo, cá nhân hoá, khám phá.</li>
+      <li>Đặc trưng: món ăn thường có tính linh hoạt, có thể thay đổi nguyên liệu, cách nấu, mang lại cảm giác tự do, sáng tạo.</li>
+      Nấu để cúng, nấu để đãi khách, nấu để ăn, nấu để chữa lành, nấu để kết nối, nấu để sáng tạo. Mỗi món ăn là một câu chuyện, một ký ức, một trải nghiệm văn hoá.
+      <p>Người chơi mở khóa Bắc Bộ, Huế, Hội An, Tây Nguyên, Đà Lạt, Sài Gòn, Miền Tây… thông qua từng Ngoại và từng món ăn.</p>
+      Tình tiết tổng hợp:
+      <p>Ăn > phục hồi/nhận buff</p>
+      <p>Cúng > mở ký ức/câu chuyện</p>
+      <p>Tặng > xây dựng mối quan hệ</p>
+    </div>
+
+    <div class="gameplay-section">
+      <h4>4. Dòng chảy văn hoá</h4>
+      <p>Nhịp chơi ấm, chậm vừa đủ, ít áp lực. Trải nghiệm tập trung vào cảm giác được chăm sóc, được học và được trở về.</p>
+    </div>
+
+    <div class="gameplay-section">
+      <h4>5. Reward thật</h4>
+      <p>Trải nghiệm trong game có thể chuyển hóa thành quà thật: voucher, sản phẩm, postcard, sticker, lớp học nấu ăn hoặc campaign thương mại.</p>
+    </div>
+  </div>
+</div>
+  <!-- =====  8 NGOẠI  ===== -->
+  <!-- ===== ROSTER PANEL OVERLAY ===== -->
+<!-- ===== 8 NGOẠI OLD SCHOOL ARCHIVE ===== -->
+<div class="gameplay-overlay roster-overlay" id="rosterOverlay">
+  <div class="gameplay-panel roster-panel">
+    <div class="roster-tab">Ngoại Files</div>
+
+    <button class="gameplay-panel-close" id="closeRosterBtn">×</button>
+
+    <div class="gameplay-panel-title">
+      <h3>8 Ngoại</h3>
+      <span class="panel-tag">Old School Archive</span>
+    </div>
+
+    <p class="roster-intro">
+      Mỗi Ngoại là một “hồ sơ hương vị” riêng: vùng miền, tính cách, nhịp nấu, cảm xúc và gameplay hook.
+      Chọn một hồ sơ bên dưới để mở trang công thức.
+    </p>
+
+    <div class="roster-list">
+      <article class="roster-item">
+        <button class="roster-toggle" type="button">
+          <span class="roster-number">01</span>
+          <span>
+            <span class="roster-name">Ngoại Cả - Bắc Bộ</span>
+            <span class="roster-sub">Chuẩn vị · Chắt chiu · Truyền thống</span>
+          </span>
+          <span class="roster-arrow">+</span>
+        </button>
+
+        <div class="roster-body">
+          <div class="roster-body-inner">
+            <div class="roster-content">
+              <div class="roster-badge-row">
+                <span class="roster-badge">Bắc Bộ</span>
+                <span class="roster-badge">Strategy</span>
+                <span class="roster-badge">Traditional</span>
+              </div>
+
+              <p><strong>Mẫu người:</strong> Chỉnh chu, tiết kiệm, nguyên tắc.</p>
+              <p><strong>Khái niệm về Ngoại:</strong> Nghiêm, tinh tế, chuẩn vị truyền thống. Cái gì cũng phải đúng và đủ. Dạy bạn đúng chuẩn.</p>
+              <p><strong>Phong cách nấu:</strong> Cẩn thận, tỉ mỉ, nêm nếm kỹ lưỡng.</p>
+              <p><strong>Đặc trưng món ăn:</strong> Đậm đà, cân bằng, có chiều sâu vị giác.</p>
+
+              <p><strong>Gameplay:</strong></p>
+              <ul>
+                <li>Nguyên liệu giới hạn.</li>
+                <li>Phải tối ưu từng bước.</li>
+                <li>Không được lãng phí.</li>
+                <li>Mang tính chiến thuật.</li>
+              </ul>
+
+              <p><strong>Món ăn đặc trưng:</strong> Bún chả, phở, nem rán.</p>
+              <p><strong>Câu chuyện:</strong> Thời bao cấp, thiếu thốn nhưng ấm áp. Chủ đề: giữ gìn, chắt chiu, kỷ niệm.</p>
+              <p><strong>Marketing hook:</strong> Combo “bữa cơm nhà”, sản phẩm tiết kiệm – tiện lợi.</p>
+              <p><strong>Cảm xúc đem lại:</strong> Trang trọng, truyền thống, đáng tin cậy.</p>
+              <p><strong>Rủi ro:</strong> Có thể quá nghiêm túc nếu không cân bằng với sự thân thiện.</p>
+              <p><strong>Ưu điểm:</strong> Phù hợp với người chơi thích trải nghiệm sâu sắc và có tính giáo dục.</p>
+
+              <span class="roster-stamp">Approved by Ngoại</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="roster-item">
+        <button class="roster-toggle" type="button">
+          <span class="roster-number">02</span>
+          <span>
+            <span class="roster-name">Ngoại Mệ/Mạ - Huế</span>
+            <span class="roster-sub">Cầu kỳ · Nghi lễ · Perfect chain</span>
+          </span>
+          <span class="roster-arrow">+</span>
+        </button>
+
+        <div class="roster-body">
+          <div class="roster-body-inner">
+            <div class="roster-content">
+              <div class="roster-badge-row">
+                <span class="roster-badge">Huế</span>
+                <span class="roster-badge">Precision</span>
+                <span class="roster-badge">Ritual</span>
+              </div>
+
+              <p><strong>Mẫu người:</strong> Tinh tế, cầu kỳ, có tâm; khắt khe nhưng chuẩn vị.</p>
+              <p><strong>Khái niệm về Ngoại:</strong> Coi nấu ăn như một nghệ thuật. Mỗi món là một tác phẩm được chăm chút kỹ lưỡng.</p>
+              <p><strong>Phong cách nấu:</strong> Tỉ mỉ, cầu kỳ, nêm nếm theo công thức truyền thống.</p>
+              <p><strong>Đặc trưng món ăn:</strong> Tinh tế, nhiều lớp vị, có chiều sâu hương vị.</p>
+
+              <p><strong>Gameplay:</strong></p>
+              <ul>
+                <li>Timing giới hạn.</li>
+                <li>Sai là đi một sải.</li>
+                <li>Có perfect chain combo.</li>
+                <li>Mang tính nghi lễ và nghệ thuật.</li>
+              </ul>
+
+              <p><strong>Món ăn đặc trưng:</strong> Bún bò Huế, bánh bèo, nem công chả phụng.</p>
+              <p><strong>Câu chuyện:</strong> Cung đình, nghệ thuật, sự tinh tế trong từng món ăn.</p>
+              <p><strong>Marketing hook:</strong> Combo “bữa cơm cung đình”, sản phẩm cao cấp, tinh tế.</p>
+              <p><strong>Cảm xúc đem lại:</strong> Sang trọng, tinh tế, có chiều sâu.</p>
+              <p><strong>Rủi ro:</strong> Có thể quá cầu kỳ nếu không cân bằng với sự thân thiện.</p>
+              <p><strong>Ưu điểm:</strong> Phù hợp với người chơi yêu thích trải nghiệm tinh tế và có tính nghệ thuật.</p>
+
+              <span class="roster-stamp">Perfect Chain</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="roster-item">
+        <button class="roster-toggle" type="button">
+          <span class="roster-number">03</span>
+          <span>
+            <span class="roster-name">Ngoại Hội An</span>
+            <span class="roster-sub">Kể chuyện · Giao thoa · Linh hoạt</span>
+          </span>
+          <span class="roster-arrow">+</span>
+        </button>
+
+        <div class="roster-body">
+          <div class="roster-body-inner">
+            <div class="roster-content">
+              <div class="roster-badge-row">
+                <span class="roster-badge">Hội An</span>
+                <span class="roster-badge">Storytelling</span>
+                <span class="roster-badge">Creative</span>
+              </div>
+
+              <p><strong>Mẫu người:</strong> Duyên dáng, tinh tế, phóng khoáng, linh hoạt.</p>
+              <p><strong>Khái niệm về Ngoại:</strong> Nấu ăn như kể chuyện, mỗi món là một câu chuyện bằng hương vị và hình ảnh.</p>
+              <p><strong>Phong cách nấu:</strong> Linh hoạt, sáng tạo, nêm nếm theo cảm giác và câu chuyện muốn kể.</p>
+              <p><strong>Đặc trưng món ăn:</strong> Duyên dáng, tinh tế, thường có câu chuyện đằng sau.</p>
+
+              <p><strong>Gameplay:</strong></p>
+              <ul>
+                <li>Không giới hạn thời gian.</li>
+                <li>Có nhiều cách nấu khác nhau.</li>
+                <li>Có storytelling combo.</li>
+                <li>Mang tính kể chuyện và sáng tạo.</li>
+              </ul>
+
+              <p><strong>Món ăn đặc trưng:</strong> Cao lầu, mì Quảng, bánh mì Hội An.</p>
+              <p><strong>Câu chuyện:</strong> Hội An là nơi giao thoa văn hóa, mỗi món đều có câu chuyện thú vị đằng sau.</p>
+              <p><strong>Marketing hook:</strong> Khám phá câu chuyện ẩm thực Hội An cùng Ngoại.</p>
+              <p><strong>Cảm xúc đem lại:</strong> Nhẹ nhàng, duyên dáng, sâu sắc.</p>
+
+              <span class="roster-stamp">Story Unlocked</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="roster-item">
+        <button class="roster-toggle" type="button">
+          <span class="roster-number">04</span>
+          <span>
+            <span class="roster-name">Ngoại Mười - Tây Nguyên</span>
+            <span class="roster-sub">Bản năng · Thiên nhiên · Mạnh mẽ</span>
+          </span>
+          <span class="roster-arrow">+</span>
+        </button>
+
+        <div class="roster-body">
+          <div class="roster-body-inner">
+            <div class="roster-content">
+              <div class="roster-badge-row">
+                <span class="roster-badge">Tây Nguyên</span>
+                <span class="roster-badge">Instinct</span>
+                <span class="roster-badge">Nature</span>
+              </div>
+
+              <p><strong>Mẫu người:</strong> Mạnh mẽ, tự nhiên, nấu bằng cảm giác hơn công thức.</p>
+              <p><strong>Khái niệm về Ngoại:</strong> Nấu ăn như một cách kết nối với thiên nhiên và bản năng.</p>
+              <p><strong>Phong cách nấu:</strong> Thô sơ, tự nhiên, nêm nếm bằng cảm giác.</p>
+              <p><strong>Đặc trưng món ăn:</strong> Đậm đà, mộc mạc, mạnh mẽ.</p>
+
+              <p><strong>Gameplay:</strong></p>
+              <ul>
+                <li>Không giới hạn thời gian.</li>
+                <li>Có nhiều cách nấu khác nhau.</li>
+                <li>Có instinct combo.</li>
+                <li>Mang tính kết nối thiên nhiên và bản năng.</li>
+              </ul>
+
+              <p><strong>Món ăn đặc trưng:</strong> Cơm lam, gà nướng, canh lá giang.</p>
+              <p><strong>Câu chuyện:</strong> Tây Nguyên hoang dã, thiên nhiên hùng vĩ, món ăn phản ánh sự nguyên sơ của vùng đất.</p>
+              <p><strong>Cảm xúc đem lại:</strong> Mạnh mẽ, tự nhiên, có chiều sâu.</p>
+
+              <span class="roster-stamp">Instinct Combo</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="roster-item">
+        <button class="roster-toggle" type="button">
+          <span class="roster-number">05</span>
+          <span>
+            <span class="roster-name">Ngoại Chín - Đà Lạt</span>
+            <span class="roster-sub">Dịu dàng · Nuôi dưỡng · Thanh khiết</span>
+          </span>
+          <span class="roster-arrow">+</span>
+        </button>
+
+        <div class="roster-body">
+          <div class="roster-body-inner">
+            <div class="roster-content">
+              <div class="roster-badge-row">
+                <span class="roster-badge">Đà Lạt</span>
+                <span class="roster-badge">Nurturing</span>
+                <span class="roster-badge">Gentle</span>
+              </div>
+
+              <p><strong>Mẫu người:</strong> Dịu dàng, tinh khiết, nấu ăn như một cách chăm sóc và nuôi dưỡng.</p>
+              <p><strong>Khái niệm về Ngoại:</strong> Mỗi món ăn là một cách để chăm sóc người thân.</p>
+              <p><strong>Phong cách nấu:</strong> Nhẹ nhàng, thanh khiết, nêm nếm bằng sự chăm sóc.</p>
+              <p><strong>Đặc trưng món ăn:</strong> Hương vị nhẹ nhàng, trong trẻo, thanh.</p>
+
+              <p><strong>Gameplay:</strong></p>
+              <ul>
+                <li>Không giới hạn thời gian.</li>
+                <li>Có nurturing combo.</li>
+                <li>Mood của người thân ảnh hưởng điểm thưởng.</li>
+                <li>Mang tính chăm sóc và chữa lành.</li>
+              </ul>
+
+              <p><strong>Món ăn đặc trưng:</strong> Canh atiso, bánh căn, sữa đậu nành.</p>
+              <p><strong>Câu chuyện:</strong> Đà Lạt dịu dàng và tinh khiết, mỗi món đều gắn với sự chăm sóc.</p>
+              <p><strong>Cảm xúc đem lại:</strong> Dịu dàng, tinh khiết, an yên.</p>
+
+              <span class="roster-stamp">Nurturing Combo</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="roster-item">
+        <button class="roster-toggle" type="button">
+          <span class="roster-number">06</span>
+          <span>
+            <span class="roster-name">Ngoại Ba - Sài Gòn</span>
+            <span class="roster-sub">Phóng khoáng · Biến tấu · Nhanh nhạy</span>
+          </span>
+          <span class="roster-arrow">+</span>
+        </button>
+
+        <div class="roster-body">
+          <div class="roster-body-inner">
+            <div class="roster-content">
+              <div class="roster-badge-row">
+                <span class="roster-badge">Sài Gòn</span>
+                <span class="roster-badge">Creative</span>
+                <span class="roster-badge">Fast Combo</span>
+              </div>
+
+              <p><strong>Mẫu người:</strong> Phóng khoáng, linh hoạt, biến tấu theo cảm hứng và nguyên liệu có sẵn.</p>
+              <p><strong>Khái niệm về Ngoại:</strong> Có gì nấu đó, nhưng vẫn ra chất riêng.</p>
+              <p><strong>Phong cách nấu:</strong> Linh hoạt, nhiều topping, dễ biến tấu.</p>
+              <p><strong>Đặc trưng món ăn:</strong> Đậm đà, ngọt hơn, đa dạng, sáng tạo.</p>
+
+              <p><strong>Gameplay:</strong></p>
+              <ul>
+                <li>Cho phép thay nguyên liệu.</li>
+                <li>Có creative combo hoặc combo nhanh.</li>
+                <li>Nhiều cách hoàn thành món.</li>
+                <li>Phù hợp với Brand collab và voucher F&B.</li>
+              </ul>
+
+              <p><strong>Món ăn đặc trưng:</strong> Bánh xèo, bánh mì, hủ tiếu.</p>
+              <p><strong>Câu chuyện:</strong> Sài Gòn nhanh đổi mới, dễ thích nghi, món ăn phản ánh sự linh hoạt.</p>
+              <p><strong>Cảm xúc đem lại:</strong> Phóng khoáng, vui, linh hoạt.</p>
+
+              <span class="roster-stamp">Creative Combo</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="roster-item">
+        <button class="roster-toggle" type="button">
+          <span class="roster-number">07</span>
+          <span>
+            <span class="roster-name">Ngoại Tư Miền Tây</span>
+            <span class="roster-sub">Hào sảng · Ngọt ngào · Luôn dư phần</span>
+          </span>
+          <span class="roster-arrow">+</span>
+        </button>
+
+        <div class="roster-body">
+          <div class="roster-body-inner">
+            <div class="roster-content">
+              <div class="roster-badge-row">
+                <span class="roster-badge">Miền Tây</span>
+                <span class="roster-badge">Generous</span>
+                <span class="roster-badge">Sharing</span>
+              </div>
+
+              <p><strong>Mẫu người:</strong> Hào sảng, ngọt ngào, luôn nấu nhiều hơn cần.</p>
+              <p><strong>Khái niệm về Ngoại:</strong> Nấu ăn như một cách thể hiện sự rộng rãi và thương người.</p>
+              <p><strong>Phong cách nấu:</strong> Hào sảng, nhiều phần, đậm vị, ngọt ngào.</p>
+              <p><strong>Đặc trưng món ăn:</strong> Món ăn nhiều, giàu vị, dễ chia sẻ.</p>
+
+              <p><strong>Gameplay:</strong></p>
+              <ul>
+                <li>Có generous combo.</li>
+                <li>Nấu dư phần để tặng hàng xóm/NPC.</li>
+                <li>Điểm thưởng tăng khi chia sẻ món ăn.</li>
+                <li>Mang tính hào sảng và cộng đồng.</li>
+              </ul>
+
+              <p><strong>Món ăn đặc trưng:</strong> Lẩu mắm, bún nước lèo, cá kho tộ.</p>
+              <p><strong>Câu chuyện:</strong> Văn hóa miền Tây qua sự ngọt ngào, hào sảng và tình làng nghĩa xóm.</p>
+              <p><strong>Cảm xúc đem lại:</strong> Vui vẻ, ấm áp, rộng rãi.</p>
+
+              <span class="roster-stamp">Generous Combo</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="roster-item">
+        <button class="roster-toggle" type="button">
+          <span class="roster-number">08</span>
+          <span>
+            <span class="roster-name">Ngoại Xa Nhà</span>
+            <span class="roster-sub">Hoài niệm · Nhớ nhà · Ký ức gia đình</span>
+          </span>
+          <span class="roster-arrow">+</span>
+        </button>
+
+        <div class="roster-body">
+          <div class="roster-body-inner">
+            <div class="roster-content">
+              <div class="roster-badge-row">
+                <span class="roster-badge">Memory</span>
+                <span class="roster-badge">Nostalgia</span>
+                <span class="roster-badge">Personalized</span>
+              </div>
+
+              <p><strong>Mẫu người:</strong> Nhớ nhà, hoài niệm, gắn với ký ức gia đình.</p>
+              <p><strong>Khái niệm về Ngoại:</strong> Biểu tượng cảm xúc — ký ức không còn ở bên nhưng luôn hiện diện.</p>
+              <p><strong>Phong cách nấu:</strong> Nấu lại món ăn gắn với ký ức riêng của người chơi.</p>
+              <p><strong>Đặc trưng món ăn:</strong> Có thể cá nhân hóa theo câu chuyện gia đình.</p>
+
+              <p><strong>Gameplay:</strong></p>
+              <ul>
+                <li>Có nostalgia combo.</li>
+                <li>Cho người chơi chọn món ký ức khi bắt đầu game.</li>
+                <li>Mở khóa câu chuyện cá nhân.</li>
+                <li>Tập trung vào cảm giác nhớ nhà và kết nối gia đình.</li>
+              </ul>
+
+              <p><strong>Món ăn đặc trưng:</strong> Món ăn gắn với ký ức gia đình của người chơi.</p>
+              <p><strong>Câu chuyện:</strong> Sự nhớ nhà, hoài niệm và gắn kết gia đình khi xa quê.</p>
+              <p><strong>Cảm xúc đem lại:</strong> Nhớ nhà, sâu lắng, có chiều sâu cảm xúc.</p>
+
+              <span class="roster-stamp">Memory Saved</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+  <!-- ===== GAMEPLAY PANEL OVERLAY ===== -->
+  <div class="gameplay-overlay" id="gameplayOverlay">
+    <div class="gameplay-panel">
+      <button class="gameplay-panel-close" id="closePanelBtn">×</button>
+      <!-- VỊ XƯA Content -->
+      <div class="gameplay-content" data-content="vixua">
+        <div class="gameplay-panel-title">
+          <h3>Vị Xưa</h3>
+          <span class="panel-tag">Thiết kế Gameplay</span>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>🎮 Gameplay thiên về ký ức và khám phá thời gian</h4>
+          <p><strong>Ảnh hưởng gameplay:</strong> Mỗi món ăn cùng Ngoại, một ký ức được mở khóa.</p>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>✨ Có thể có</h4>
+          <ul>
+            <li>Hệ thống timeline món xưa, món thất truyền</li>
+            <li>Storytelling mạnh, xây dựng qua từng chapter</li>
+            <li>Mở khoá ký ức theo thời gian thực (ngày, tháng, mùa)</li>
+          </ul>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>🕹️ Gameplay thiên về</h4>
+          <ul>
+            <li>Khám phá</li>
+            <li>Đọc, cảm, nhớ</li>
+            <li>Chậm rãi tận hưởng</li>
+          </ul>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>💭 Cảm giác đem lại</h4>
+          <span class="gameplay-feeling">Hoài niệm · Chầm chậm · Sâu lắng</span>
+        </div>
+
+        <div class="gameplay-conclusion">
+          <p><strong>Kết:</strong> Game sẽ giống một hành trình ký ức hơn là game nấu ăn thuần. Phù hợp nếu muốn nhấn mạnh yếu tố văn hóa và cảm xúc redemption.</p>
+        </div>
+      </div>
+
+      <!-- VỊ NHÀ Content -->
+      <div class="gameplay-content" data-content="tinha">
+        <div class="gameplay-panel-title">
+          <h3>Vị Nhà</h3>
+          <span class="panel-tag">Thiết kế Gameplay</span>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>🎮 Gameplay thiên về cảm xúc và cá nhân hoá</h4>
+          <p><strong>Ảnh hưởng gameplay:</strong> Xây dựng và duy trì cảm giác "nhà" trong hiện tại, gameplay dựa trên trạng thái cảm xúc của ngôi nhà.</p>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>✨ Có thể có</h4>
+          <ul>
+            <li>Hệ thống nhà (trang trí → ảnh hưởng mood)</li>
+            <li>Người trong nhà (sở thích, tương tác)</li>
+            <li>Nhịp sống ngày thường (sáng/tối, ngày lễ...)</li>
+            <li>Nấu đúng người, đúng thời điểm</li>
+          </ul>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>🕹️ Gameplay thiên về</h4>
+          <ul>
+            <li>Xây dựng</li>
+            <li>Chăm sóc</li>
+            <li>Kết nối cảm xúc</li>
+            <li>Nhịp sống chậm</li>
+          </ul>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>💭 Cảm giác đem lại</h4>
+          <span class="gameplay-feeling">Ấm áp · Gần gũi · Đồng điệu</span>
+        </div>
+
+        <div class="gameplay-conclusion">
+          <p><strong>Kết:</strong> Game sẽ khiến người chơi cảm thấy đây là câu chuyện của mình thông qua Ngoại. Phù hợp với gamification marketing và chiến dịch thương mại.</p>
+        </div>
+      </div>
+
+      <!-- BẾP NGOẠI Content -->
+      <div class="gameplay-content" data-content="bepngoai">
+        <div class="gameplay-panel-title">
+          <h3>Bếp Ngoại</h3>
+          <span class="panel-tag">Thiết kế Gameplay</span>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>🎮 Gameplay thiên về nhân vật và storytelling làm trung tâm</h4>
+          <p><strong>Ảnh hưởng gameplay:</strong> Xoay quanh việc học > làm > sửa lỗi. Không chỉ nấu đúng công thức mà còn hiểu cách Ngoại nấu (skill based kèm dẫn dắt cảm xúc).</p>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>✨ Có thể có</h4>
+          <ul>
+            <li>Đa dạng hội thoại với Ngoại</li>
+            <li>Tính cách từng Ngoại (Ngoại miền Bắc, Ngoại miền Trung v...v)</li>
+            <li>Hệ thống Ngoại - mỗi vùng miền một Ngoại</li>
+            <li>Học nấu ăn kiểu truyền miệng</li>
+            <li>Mở khoá kinh nghiệm (biết lúc nào lửa vừa, khi nào đủ mặn v...v)</li>
+            <li>Đối thoại cùng ký ức nhỏ (vừa nấu vừa nghe Ngoại kể chuyện)</li>
+          </ul>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>🕹️ Gameplay thiên về</h4>
+          <ul>
+            <li>Học, Làm, Cảm và Gắn kết</li>
+            <li>Mở khoá vùng miền thông qua Ngoại</li>
+            <li>Xây dựng mối quan hệ với nhân vật</li>
+          </ul>
+        </div>
+
+        <div class="gameplay-section">
+          <h4>💭 Cảm giác đem lại</h4>
+          <span class="gameplay-feeling">Chân thực · Thân thuộc · Biết ơn</span>
+        </div>
+
+        <div class="gameplay-conclusion">
+          <p><strong>Kết:</strong> Game tạo cảm giác đã từng có một người kiên nhẫn dạy mình từng điều nhỏ nhất. Nhắm vào yếu tố văn hoá cùng với chữa lành tâm hồn, cảm xúc.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <h2>Cooking with Ngoại</h2>
+    <p>A Vietnamese culinary memory game - redemption, culture, reward and commerce.</p>
+  </footer>
+
+  <script>
+    (() => {
+      const revealItems = document.querySelectorAll('.reveal');
+      const openNamePageButton = document.querySelector('[data-open-name-page]');
+      const closeNamePageButton = document.querySelector('[data-close-name-page]');
+      const namePage = document.querySelector('#name-page');
+      const nameCards = document.querySelectorAll('.name-card[data-name]');
+      const gameplayOverlay = document.getElementById('gameplayOverlay');
+      const closePanelBtn = document.getElementById('closePanelBtn');
+      const gameplayContents = document.querySelectorAll('.gameplay-content');
+
+      // Open name page
+      openNamePageButton?.addEventListener('click', () => {
+        document.body.classList.add('show-name-page');
+        namePage?.classList.add('active');
+        namePage?.setAttribute('aria-hidden', 'false');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Close name page
+      closeNamePageButton?.addEventListener('click', () => {
+        document.body.classList.remove('show-name-page');
+        namePage?.classList.remove('active');
+        namePage?.setAttribute('aria-hidden', 'true');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Open gameplay panel
+      nameCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const targetName = card.dataset.name;
+          
+          // Remove active from all cards and contents
+          nameCards.forEach(c => c.classList.remove('active'));
+          gameplayContents.forEach(c => c.classList.remove('active'));
+          
+          // Add active to clicked card
+          card.classList.add('active');
+          
+          // Show corresponding content
+          const targetContent = document.querySelector(`.gameplay-content[data-content="${targetName}"]`);
+          if (targetContent) {
+            targetContent.classList.add('active');
+          }
+          
+          // Show overlay
+          gameplayOverlay.classList.add('active');
+          document.body.classList.add('panel-open');
+        });
+      });
+
+      // Close gameplay panel
+      function closePanel() {
+        gameplayOverlay.classList.remove('active');
+        document.body.classList.remove('panel-open');
+        nameCards.forEach(c => c.classList.remove('active'));
+      }
+
+      closePanelBtn?.addEventListener('click', closePanel);
+      
+      // Close on overlay click (outside panel)
+      gameplayOverlay?.addEventListener('click', (e) => {
+        if (e.target === gameplayOverlay) {
+          closePanel();
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && gameplayOverlay.classList.contains('active')) {
+          closePanel();
+        }
+      });
+
+      // Reveal on scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.16 });
+
+      revealItems.forEach((item) => observer.observe(item));
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          event.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    })();
+
+// 8 NGOẠI OLD SCHOOL ARCHIVE
+const rosterOverlay = document.getElementById('rosterOverlay');
+const openRosterBtn = document.getElementById('openRosterBtn');
+const closeRosterBtn = document.getElementById('closeRosterBtn');
+const rosterItems = document.querySelectorAll('.roster-item');
+
+openRosterBtn?.addEventListener('click', () => {
+  rosterOverlay.classList.add('active');
+  document.body.classList.add('panel-open');
+
+  rosterItems.forEach(item => item.classList.remove('active'));
+});
+
+function closeRoster() {
+  rosterOverlay.classList.remove('active');
+  document.body.classList.remove('panel-open');
+  rosterItems.forEach(item => item.classList.remove('active'));
+}
+
+closeRosterBtn?.addEventListener('click', closeRoster);
+
+rosterOverlay?.addEventListener('click', (e) => {
+  if (e.target === rosterOverlay) closeRoster();
+});
+
+rosterItems.forEach(item => {
+  const toggle = item.querySelector('.roster-toggle');
+
+  toggle?.addEventListener('click', () => {
+    const isActive = item.classList.contains('active');
+
+    rosterItems.forEach(otherItem => {
+      otherItem.classList.remove('active');
+    });
+
+    if (!isActive) {
+      item.classList.add('active');
+
+      setTimeout(() => {
+        item.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        });
+      }, 180);
+    }
+  });
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && rosterOverlay.classList.contains('active')) {
+    closeRoster();
+  }
+});
+
+// Core Pillars Overlay
+const corePillarsOverlay = document.getElementById('corePillarsOverlay');
+const openCorePillars = document.getElementById('openCorePillars');
+const closeCorePillarsBtn = document.getElementById('closeCorePillarsBtn');
+
+openCorePillars?.addEventListener('click', () => {
+  corePillarsOverlay?.classList.add('active');
+  document.body.classList.add('panel-open');
+});
+
+function closeCorePillars() {
+  corePillarsOverlay?.classList.remove('active');
+  document.body.classList.remove('panel-open');
+}
+
+closeCorePillarsBtn?.addEventListener('click', closeCorePillars);
+
+corePillarsOverlay?.addEventListener('click', (e) => {
+  if (e.target === corePillarsOverlay) closeCorePillars();
+});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Instrument+Serif:ital@1&display=swap');
+
+  .pal-root {
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 0;
+    background: transparent;
+  }
+
+  .pal-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pal-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--color-border-tertiary);
+  }
+
+  .pal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .pal-card {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-primary);
+  }
+
+  .pal-swatch {
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pal-swatch svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pal-body {
+    padding: 12px 14px 14px;
+  }
+
+  .pal-name {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 2px;
+    letter-spacing: -.01em;
+  }
+
+  .pal-hex {
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .pal-desc {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .pal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 9px;
+  }
+
+  .pal-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: 3px 8px;
+    border-radius: 99px;
+    border: 0.5px solid;
+  }
+</style>
+
+<div class="pal-root">
+  <div class="pal-label">Material Palette — Art Direction</div>
+  <div class="pal-grid">
+
+    <!-- 1. Giấy dó -->
+    <div class="pal-card">
+      <div class="pal-swatch">
+        <svg viewBox="0 0 240 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="120" fill="#f6ead2"/>
+          <!-- paper fiber texture via thin random lines -->
+          <g stroke="#c8aa7a" stroke-width="0.5" opacity="0.35">
+            <line x1="0" y1="18" x2="240" y2="22"/>
+            <line x1="0" y1="34" x2="240" y2="31"/>
+            <line x1="0" y1="52" x2="240" y2="56"/>
+            <line x1="0" y1="70" x2="240" y2="67"/>
+            <line x1="0" y1="88" x2="240" y2="91"/>
+            <line x1="0" y1="105" x2="240" y2="102"/>
+          </g>
+          <g stroke="#b8946a" stroke-width="0.3" opacity="0.2">
+            <line x1="30" y1="0" x2="26" y2="120"/>
+            <line x1="80" y1="0" x2="84" y2="120"/>
+            <line x1="140" y1="0" x2="137" y2="120"/>
+            <line x1="195" y1="0" x2="199" y2="120"/>
+          </g>
+          <!-- subtle pressed-ink mark -->
+          <ellipse cx="190" cy="88" rx="22" ry="9" fill="#c8a06a" opacity="0.12"/>
+          <text x="14" y="40" font-family="'Instrument Serif', serif" font-style="italic" font-size="28" fill="#7a4f2b" opacity="0.18">紙</text>
+        </svg>
+      </div>
+      <div class="pal-body">
+        <p class="pal-name" style="color:#5c3d1e;">Giấy dó</p>
+        <span class="pal-hex">#f6ead2</span>
+        <p class="pal-desc">Giấy thủ công Việt làm từ vỏ cây dó. Sợi thô, ấm, hút mực tốt.</p>
+        <div class="pal-tags">
+          <span class="pal-tag" style="background:#f0dfc0;color:#7a4f2b;border-color:#c8a06a;">Nền chủ đạo</span>
+          <span class="pal-tag" style="background:#f0dfc0;color:#7a4f2b;border-color:#c8a06a;">Texture base</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Bếp lửa -->
+    <div class="pal-card">
+      <div class="pal-swatch">
+        <svg viewBox="0 0 240 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="120" fill="#2a1508"/>
+          <!-- ember glow -->
+          <radialGradient id="eg" cx="50%" cy="80%" r="60%">
+            <stop offset="0%" stop-color="#f5a030" stop-opacity="0.95"/>
+            <stop offset="45%" stop-color="#d9823b" stop-opacity="0.65"/>
+            <stop offset="100%" stop-color="#2a1508" stop-opacity="0"/>
+          </radialGradient>
+          <rect width="240" height="120" fill="url(#eg)"/>
+          <!-- flame shapes -->
+          <path d="M108 100 Q112 72 120 58 Q128 72 132 100Z" fill="#f5c060" opacity="0.9"/>
+          <path d="M115 100 Q117 78 122 65 Q127 78 130 100Z" fill="#fff0b0" opacity="0.7"/>
+          <path d="M96 100 Q100 82 108 70 Q115 82 118 100Z" fill="#e86020" opacity="0.65"/>
+          <path d="M126 100 Q130 84 138 74 Q144 86 146 100Z" fill="#e06020" opacity="0.6"/>
+          <!-- spark dots -->
+          <circle cx="118" cy="46" r="1.5" fill="#ffe080" opacity="0.9"/>
+          <circle cx="125" cy="38" r="1" fill="#ffe080" opacity="0.7"/>
+          <circle cx="112" cy="42" r="1" fill="#ffd060" opacity="0.6"/>
+          <circle cx="134" cy="50" r="1.2" fill="#ffcc60" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="pal-body">
+        <p class="pal-name" style="color:#d9823b;">Bếp lửa</p>
+        <span class="pal-hex">#d9823b</span>
+        <p class="pal-desc">Than hồng và hơi ấm bếp củi. Màu hành động, năng lượng, kết nối.</p>
+        <div class="pal-tags">
+          <span class="pal-tag" style="background:#fde8cc;color:#a0450d;border-color:#e8823b;">Màu nhấn chính</span>
+          <span class="pal-tag" style="background:#fde8cc;color:#a0450d;border-color:#e8823b;">CTA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Lá chuối -->
+    <div class="pal-card">
+      <div class="pal-swatch">
+        <svg viewBox="0 0 240 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="120" fill="#1e3014"/>
+          <!-- leaf layers -->
+          <path d="M-10 110 Q60 20 160 30 Q200 35 250 60L250 120Z" fill="#4a7a35" opacity="0.8"/>
+          <path d="M-10 120 Q70 40 180 50 Q210 55 250 80L250 120Z" fill="#3d6b2a" opacity="0.6"/>
+          <path d="M-10 90 Q30 50 100 45 Q140 42 180 60L180 120L-10 120Z" fill="#5a8f40" opacity="0.7"/>
+          <!-- midrib -->
+          <path d="M-10 90 Q80 60 200 65" stroke="#a0d070" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <!-- vein lines -->
+          <g stroke="#80c050" stroke-width="0.6" opacity="0.3">
+            <line x1="40" y1="78" x2="20" y2="95"/>
+            <line x1="70" y1="70" x2="55" y2="90"/>
+            <line x1="100" y1="66" x2="90" y2="88"/>
+            <line x1="130" y1="65" x2="125" y2="88"/>
+            <line x1="160" y1="65" x2="158" y2="88"/>
+          </g>
+          <!-- light catch -->
+          <ellipse cx="90" cy="58" rx="40" ry="12" fill="#90c060" opacity="0.18" transform="rotate(-8 90 58)"/>
+        </svg>
+      </div>
+      <div class="pal-body">
+        <p class="pal-name" style="color:#4e7a34;">Lá chuối</p>
+        <span class="pal-hex">#6f8f55</span>
+        <p class="pal-desc">Lá gói, lá đựng. Màu tự nhiên, tươi mát, văn hóa ẩm thực Việt.</p>
+        <div class="pal-tags">
+          <span class="pal-tag" style="background:#e2f0cf;color:#3a6020;border-color:#7aaa50;">Thiên nhiên</span>
+          <span class="pal-tag" style="background:#e2f0cf;color:#3a6020;border-color:#7aaa50;">Secondary</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Gấc đỏ -->
+    <div class="pal-card">
+      <div class="pal-swatch">
+        <svg viewBox="0 0 240 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="120" fill="#b94b3f"/>
+          <!-- gac fruit cross-section -->
+          <circle cx="120" cy="60" r="48" fill="#a03530"/>
+          <circle cx="120" cy="60" r="40" fill="#cc5545"/>
+          <!-- aril pockets -->
+          <circle cx="105" cy="50" r="10" fill="#d96050" opacity="0.7"/>
+          <circle cx="130" cy="45" r="8" fill="#d96050" opacity="0.6"/>
+          <circle cx="115" cy="70" r="9" fill="#c84040" opacity="0.7"/>
+          <circle cx="135" cy="68" r="7" fill="#c84040" opacity="0.6"/>
+          <circle cx="98" cy="68" r="7" fill="#c84040" opacity="0.5"/>
+          <!-- seeds -->
+          <ellipse cx="108" cy="52" rx="5" ry="7" fill="#5a1a10" opacity="0.7" transform="rotate(-20 108 52)"/>
+          <ellipse cx="130" cy="48" rx="4" ry="6" fill="#5a1a10" opacity="0.6" transform="rotate(10 130 48)"/>
+          <ellipse cx="118" cy="70" rx="4" ry="6" fill="#5a1a10" opacity="0.65"/>
+          <!-- highlight -->
+          <ellipse cx="100" cy="40" rx="16" ry="8" fill="#e87060" opacity="0.3" transform="rotate(-20 100 40)"/>
+        </svg>
+      </div>
+      <div class="pal-body">
+        <p class="pal-name" style="color:#8a2a20;">Gấc đỏ</p>
+        <span class="pal-hex">#b94b3f</span>
+        <p class="pal-desc">Sắc đỏ từ ruột quả gấc, nhuộm xôi ngày Tết. Màu lễ hội, ký ức.</p>
+        <div class="pal-tags">
+          <span class="pal-tag" style="background:#fde0dc;color:#8a2a20;border-color:#c05545;">Lễ hội</span>
+          <span class="pal-tag" style="background:#fde0dc;color:#8a2a20;border-color:#c05545;">Accent</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Đất nung -->
+    <div class="pal-card">
+      <div class="pal-swatch">
+        <svg viewBox="0 0 240 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="120" fill="#5c3518"/>
+          <!-- ceramic vessel silhouette -->
+          <path d="M80 110 Q74 90 76 68 Q78 50 95 42 Q110 36 130 36 Q148 36 162 44 Q178 54 180 70 Q182 90 176 110Z" fill="#7a4f2b" opacity="0.9"/>
+          <!-- glaze highlight -->
+          <path d="M95 45 Q112 38 132 40 Q150 44 160 56" stroke="#c08050" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <!-- texture marks — wheel throwing lines -->
+          <g stroke="#4a2810" stroke-width="0.8" opacity="0.4">
+            <ellipse cx="128" cy="72" rx="38" ry="6"/>
+            <ellipse cx="128" cy="82" rx="42" ry="7"/>
+            <ellipse cx="128" cy="93" rx="44" ry="7"/>
+            <ellipse cx="128" cy="104" rx="44" ry="5"/>
+          </g>
+          <!-- soil / gravel base suggestion -->
+          <rect x="0" y="106" width="240" height="14" fill="#3a2010" opacity="0.7"/>
+          <circle cx="30" cy="112" r="3" fill="#604030" opacity="0.5"/>
+          <circle cx="60" cy="114" r="2" fill="#604030" opacity="0.4"/>
+          <circle cx="190" cy="113" r="2.5" fill="#604030" opacity="0.4"/>
+          <circle cx="215" cy="111" r="3" fill="#604030" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="pal-body">
+        <p class="pal-name" style="color:#5a3018;">Đất nung</p>
+        <span class="pal-hex">#7a4f2b</span>
+        <p class="pal-desc">Gốm nồi đất làng Bát Tràng. Cốt, nền, sự bền vững của văn hóa.</p>
+        <div class="pal-tags">
+          <span class="pal-tag" style="background:#f0dcc8;color:#5a3018;border-color:#a06030;">Nền phụ</span>
+          <span class="pal-tag" style="background:#f0dcc8;color:#5a3018;border-color:#a06030;">Grounding</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Khoai môn -->
+    <div class="pal-card">
+      <div class="pal-swatch">
+        <svg viewBox="0 0 240 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="120" fill="#5a3870"/>
+          <!-- dessert swirl — chè khoai môn -->
+          <path d="M60 110 Q80 70 120 60 Q160 50 180 70 Q200 90 200 110Z" fill="#7a5090" opacity="0.7"/>
+          <path d="M40 110 Q70 75 115 68 Q155 62 175 82 Q195 100 200 110Z" fill="#9a68b0" opacity="0.55"/>
+          <!-- taro cross-section dots/veins -->
+          <circle cx="95" cy="78" r="18" fill="#8a5898" opacity="0.5"/>
+          <circle cx="95" cy="78" r="12" fill="#c09ec8" opacity="0.4"/>
+          <g stroke="#c090c8" stroke-width="0.7" opacity="0.35">
+            <line x1="95" y1="60" x2="90" y2="96"/>
+            <line x1="80" y1="68" x2="110" y2="88"/>
+            <line x1="78" y1="80" x2="112" y2="76"/>
+          </g>
+          <!-- coconut milk swirl -->
+          <path d="M130 90 Q150 75 175 80 Q185 84 180 95 Q170 108 150 105 Q135 102 130 90Z" fill="#e8d8f0" opacity="0.3"/>
+          <!-- light -->
+          <ellipse cx="72" cy="48" rx="24" ry="10" fill="#c8a0d8" opacity="0.2" transform="rotate(-15 72 48)"/>
+        </svg>
+      </div>
+      <div class="pal-body">
+        <p class="pal-name" style="color:#5a3880;">Khoai môn</p>
+        <span class="pal-hex">#8b5f9f</span>
+        <p class="pal-desc">Tông tím chè khoai môn, nhẹ nhàng và khác biệt. Màu phần thưởng, kỳ diệu.</p>
+        <div class="pal-tags">
+          <span class="pal-tag" style="background:#ecdff8;color:#5a3880;border-color:#9870b0;">Reward / Magic</span>
+          <span class="pal-tag" style="background:#ecdff8;color:#5a3880;border-color:#9870b0;">Accent 2</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

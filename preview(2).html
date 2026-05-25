@@ -1064,10 +1064,15 @@
     .mb-img-card:hover { transform: scale(1.01) rotate(.3deg); border-color: rgba(255,248,234,.4); }
     .mb-img-card.span-row { grid-row: 1 / 3; }
 
-    .mb-img-card img {
-      width: 100%; height: 100%; object-fit: cover;
-      display: none; position: absolute; inset: 0; opacity: .9;
-    }
+.mb-img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  inset: 0;
+  opacity: .9;
+}
 
     /* Pin & tape */
     .mb-pin {
@@ -1263,7 +1268,15 @@
 
     .mb-ref-card-img { height: 150px; position: relative; overflow: hidden; }
 
-    .mb-ref-card-img img { width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; inset: 0; opacity: .88; }
+    .mb-ref-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  inset: 0;
+  opacity: .88;
+}
 
     .mb-ref-card-body { padding: 12px; }
     .mb-ref-card-title { font-size: 13px; font-weight: 700; color: rgba(255,248,234,.92); margin-bottom: 4px; font-family: 'Space Grotesk', sans-serif; }
@@ -2834,8 +2847,8 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
           </div>
           <div class="mb-section-label">Art Style Reference — tải ảnh tham khảo</div>
           <div class="mb-ref-grid">
-            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v1" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v1" data-ph="ph-v1" class="mb-img-input-ref"></div><img id="img-v1" style="position:absolute;inset:0;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">VISUAL WORLD/ART STYLE</div><div class="mb-ref-card-desc">Pixel art trau chuốt, giàu cảm xúc, bảng màu ấm, hình ảnh sạch và dễ tiếp cận</div></div></div>
-            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v2" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v2" data-ph="ph-v2" class="mb-img-input-ref"></div><img id="img-v2" style="position:absolute;inset:0;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">FOOD & MATERIAL REFERENCE</div><div class="mb-ref-card-desc">Tham khảo món ăn, chất liệu, kết cấu, hơi nóng và cảm giác xúc giác của ẩm thực</div></div></div>
+            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v1" style="height:150px;background:rgba(45,36,28,.4);display:none;"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v1" data-ph="ph-v1" class="mb-img-input-ref"></div><img id="img-v1" src="./IMG MOODBOARD/STORY/Kitchen.png" style="position:absolute;inset:0;display:block;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">VISUAL WORLD/ART STYLE</div><div class="mb-ref-card-desc">Pixel art trau chuốt, giàu cảm xúc, bảng màu ấm, hình ảnh sạch và dễ tiếp cận</div></div></div>
+            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v2" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v2" data-ph="ph-v2" class="mb-img-input-ref"></div><img id="img-v2" src="./IMG MOODBOARD/STORY/Market.png" style="position:absolute;inset:0;display:block;"><div class="mb-ref-card-title">FOOD & MATERIAL REFERENCE</div><div class="mb-ref-card-desc">Tham khảo món ăn, chất liệu, kết cấu, hơi nóng và cảm giác xúc giác của ẩm thực</div></div></div>
             <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v3" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v3" data-ph="ph-v3" class="mb-img-input-ref"></div><img id="img-v3" style="position:absolute;inset:0;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">CHARACTER EMOTION</div><div class="mb-ref-card-desc">Tham khảo biểu cảm, dáng điệu, sự gần gũi và cảm xúc của nhân vật</div></div></div>
             <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v4" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v4" data-ph="ph-v4" class="mb-img-input-ref"></div><img id="img-v4" style="position:absolute;inset:0;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">ENVIRONMENT REFERENCE</div><div class="mb-ref-card-desc">Tham khảo căn bếp, chợ, bàn ăn và chất liệu đời sống Việt</div></div></div>          
             <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v5" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Game Ref</span><input type="file" accept="image/*" data-img="img-v5" data-ph="ph-v5" class="mb-img-input-ref"></div><img id="img-v5" style="position:absolute;inset:0;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">UI/INTERACTION</div><div class="mb-ref-card-desc">Tham khảo cảm giác chạm, phản hồi, nhịp chuyển động và trải nghiệm tương tác giao diện</div></div></div>

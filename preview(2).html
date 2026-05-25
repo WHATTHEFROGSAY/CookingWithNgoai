@@ -1322,7 +1322,7 @@
 
     .mb-free-slot:hover { border-color: rgba(255,248,234,.45); }
 
-    .mb-free-slot img { width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; inset: 0; }
+    .mb-free-slot img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0; }
 
     .mb-free-slot input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
 
@@ -2202,6 +2202,42 @@
   }
 }
 
+.hero-image-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  padding: 8px;
+}
+
+.hero-image-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: static;
+  display: block;
+  border-radius: 6px;
+}
+
+.hero-image-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 8px;
+    z-index: 2;
+}
+
+.hero-image-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
   </style>
 </head>
 <body>
@@ -2760,14 +2796,23 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
           <div class="mb-hero-zone">
             <!-- Card 1 hero -->
             <div class="mb-img-card span-row">
-              <div class="mb-pin red"></div>
-              <div class="mb-img-ph" id="ph-e1">
-                <div class="mb-upload-icon">+</div>
-                <span>Thêm ảnh chủ đạo</span>
-                <span style="font-size:10px;opacity:.5;">Bếp lửa · Ngoại · Ký ức</span>
-                <input type="file" accept="image/*" multiple data-img="img-e1" data-ph="ph-e1" data-cap="cap-e1" class="mb-img-input">
-              </div>
-              <img id="img-e1">
+    <div class="mb-pin red"></div>
+
+    <div class="hero-image-grid">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_0_LQ.jpg">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_5_LQ.jpg">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_6_LQ.jpg">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_7_LQ.jpg">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_8_LQ.jpg">
+        <img src="./IMG MOODBOARD/EMO & MEMORY MOODBOARD/LQ/With_Ngoai_MB_9_LQ.jpg">
+    </div>
+
+    <div class="mb-img-ph" id="ph-e1" style="display:none;"></div>
+</div>
               <div class="mb-img-caption" id="cap-e1"><div class="mb-tag-pill">Hero Image</div><br>Cảm xúc trung tâm</div>
             </div>
             <!-- Card 2 -->
@@ -2778,7 +2823,7 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
                 <span>Mâm cơm Việt</span>
                 <input type="file" accept="image/*" data-img="img-e2" data-ph="ph-e2" data-cap="cap-e2" class="mb-img-input">
               </div>
-              <img id="img-e2">
+              <img id="img-e2" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg" style="position:absolute;inset:0;display:block;">
               <div class="mb-img-caption" id="cap-e2"><div class="mb-tag-pill">Ẩm thực</div><br>Hương sắc món nhà</div>
             </div>
             <!-- Card 3 -->
@@ -2789,7 +2834,7 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
                 <span>Ký ức gia đình</span>
                 <input type="file" accept="image/*" data-img="img-e3" data-ph="ph-e3" data-cap="cap-e3" class="mb-img-input">
               </div>
-              <img id="img-e3">
+              <img id="img-e3" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg" style="position:absolute;inset:0;display:block;">
               <div class="mb-img-caption" id="cap-e3"><div class="mb-tag-pill">Nhân vật</div><br>Con người &amp; Cảm xúc</div>
             </div>
             <!-- Card 4 -->
@@ -2800,7 +2845,7 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
                 <span>Thiên nhiên / Vật liệu</span>
                 <input type="file" accept="image/*" data-img="img-e4" data-ph="ph-e4" data-cap="cap-e4" class="mb-img-input">
               </div>
-              <img id="img-e4">
+              <img id="img-e4" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg" style="position:absolute;inset:0;display:block;">
               <div class="mb-img-caption" id="cap-e4"><div class="mb-tag-pill">Texture</div><br>Vật liệu &amp; Nền</div>
             </div>
             <!-- Card 5 -->
@@ -2811,7 +2856,7 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
                 <span>Góc nấu / Bếp</span>
                 <input type="file" accept="image/*" data-img="img-e5" data-ph="ph-e5" data-cap="cap-e5" class="mb-img-input">
               </div>
-              <img id="img-e5">
+              <img id="img-e5" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg" style="position:absolute;inset:0;display:block;">
               <div class="mb-img-caption" id="cap-e5"><div class="mb-tag-pill">Environment</div><br>Không gian bếp</div>
             </div>
           </div>
@@ -2847,12 +2892,95 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
           </div>
           <div class="mb-section-label">Art Style Reference — tải ảnh tham khảo</div>
           <div class="mb-ref-grid">
-            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v1" style="height:150px;background:rgba(45,36,28,.4);display:none;"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v1" data-ph="ph-v1" class="mb-img-input-ref"></div><img id="img-v1" src="./IMG MOODBOARD/STORY/Kitchen.png" style="position:absolute;inset:0;display:block;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">VISUAL WORLD/ART STYLE</div><div class="mb-ref-card-desc">Pixel art trau chuốt, giàu cảm xúc, bảng màu ấm, hình ảnh sạch và dễ tiếp cận</div></div></div>
-            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v2" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v2" data-ph="ph-v2" class="mb-img-input-ref"></div><img id="img-v2" src="./IMG MOODBOARD/STORY/Market.png" style="position:absolute;inset:0;display:block;"><div class="mb-ref-card-title">FOOD & MATERIAL REFERENCE</div><div class="mb-ref-card-desc">Tham khảo món ăn, chất liệu, kết cấu, hơi nóng và cảm giác xúc giác của ẩm thực</div></div></div>
-            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v3" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v3" data-ph="ph-v3" class="mb-img-input-ref"></div><img id="img-v3" style="position:absolute;inset:0;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">CHARACTER EMOTION</div><div class="mb-ref-card-desc">Tham khảo biểu cảm, dáng điệu, sự gần gũi và cảm xúc của nhân vật</div></div></div>
-            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v4" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span><input type="file" accept="image/*" data-img="img-v4" data-ph="ph-v4" class="mb-img-input-ref"></div><img id="img-v4" style="position:absolute;inset:0;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">ENVIRONMENT REFERENCE</div><div class="mb-ref-card-desc">Tham khảo căn bếp, chợ, bàn ăn và chất liệu đời sống Việt</div></div></div>          
-            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v5" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Game Ref</span><input type="file" accept="image/*" data-img="img-v5" data-ph="ph-v5" class="mb-img-input-ref"></div><img id="img-v5" style="position:absolute;inset:0;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">UI/INTERACTION</div><div class="mb-ref-card-desc">Tham khảo cảm giác chạm, phản hồi, nhịp chuyển động và trải nghiệm tương tác giao diện</div></div></div>
-            <div class="mb-ref-card"><div class="mb-ref-card-img"><div class="mb-img-ph" id="ph-v6" style="height:150px;background:rgba(45,36,28,.4);"><div class="mb-upload-icon">+</div><span style="font-size:11px;color:rgba(255,248,234,.38);">Branding Ref</span><input type="file" accept="image/*" data-img="img-v6" data-ph="ph-v6" class="mb-img-input-ref"></div><img id="img-v6" style="position:absolute;inset:0;"></div><div class="mb-ref-card-body"><div class="mb-ref-card-title">GAME EXPERIENCE REFERENCE</div><div class="mb-ref-card-desc">Tham khảo nhịp độ trải nghiệm (pacing), vòng lặp game play (gameplay loop), tiến trình phát triển và cảm giác trải nghiệm tổng thể</div></div></div>
+            <div class="mb-ref-card">
+              <div class="mb-ref-card-img">
+                <div class="mb-img-ph" id="ph-v1" style="height:150px;background:rgba(45,36,28,.4);display:none;">
+                  <div class="mb-upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v1" data-ph="ph-v1" class="mb-img-input-ref">
+                </div>
+                <img id="img-v1" src="./IMG%20MOODBOARD/VISUAL%20DIREC%20%26%20ART%20REF/VISUAL%20WORLD_ART%20STYLE/EASTWARD_1.jpg" style="position:absolute;inset:0;display:block;">
+              </div>
+              <div class="mb-ref-card-body">
+                <div class="mb-ref-card-title">VISUAL WORLD/ART STYLE</div>
+                <div class="mb-ref-card-desc">Pixel art trau chuốt, giàu cảm xúc, bảng màu ấm, hình ảnh sạch và dễ tiếp cận</div>
+              </div>
+            </div>
+
+            <div class="mb-ref-card">
+              <div class="mb-ref-card-img">
+                <div class="mb-img-ph" id="ph-v2" style="height:150px;background:rgba(45,36,28,.4);display:none;">
+                  <div class="mb-upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,.38);">Food Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v2" data-ph="ph-v2" class="mb-img-input-ref">
+                </div>
+                <img id="img-v2" src="./IMG%20MOODBOARD/STORY/Canh.png" style="position:absolute;inset:0;display:block;">
+              </div>
+              <div class="mb-ref-card-body">
+                <div class="mb-ref-card-title">FOOD &amp; MATERIAL REFERENCE</div>
+                <div class="mb-ref-card-desc">Tham khảo món ăn, chất liệu, kết cấu, hơi nóng và cảm giác xúc giác của ẩm thực</div>
+              </div>
+            </div>
+
+            <div class="mb-ref-card">
+              <div class="mb-ref-card-img">
+                <div class="mb-img-ph" id="ph-v3" style="height:150px;background:rgba(45,36,28,.4);display:none;">
+                  <div class="mb-upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,.38);">Character Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v3" data-ph="ph-v3" class="mb-img-input-ref">
+                </div>
+                <img id="img-v3" src="./IMG%20MOODBOARD/VISUAL%20DIREC%20%26%20ART%20REF/CHARACTER%20EMOTION/SPIRITFARER_1.jpg" style="position:absolute;inset:0;display:block;">
+              </div>
+              <div class="mb-ref-card-body">
+                <div class="mb-ref-card-title">CHARACTER EMOTION</div>
+                <div class="mb-ref-card-desc">Tham khảo biểu cảm, dáng điệu, sự gần gũi và cảm xúc của nhân vật</div>
+              </div>
+            </div>
+
+            <div class="mb-ref-card">
+              <div class="mb-ref-card-img">
+                <div class="mb-img-ph" id="ph-v4" style="height:150px;background:rgba(45,36,28,.4);display:none;">
+                  <div class="mb-upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,.38);">Environment Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v4" data-ph="ph-v4" class="mb-img-input-ref">
+                </div>
+                <img id="img-v4" src="./IMG%20MOODBOARD/STORY/Kitchen.png" style="position:absolute;inset:0;display:block;">
+              </div>
+              <div class="mb-ref-card-body">
+                <div class="mb-ref-card-title">ENVIRONMENT REFERENCE</div>
+                <div class="mb-ref-card-desc">Tham khảo căn bếp, chợ, bàn ăn và chất liệu đời sống Việt</div>
+              </div>
+            </div>
+
+            <div class="mb-ref-card">
+              <div class="mb-ref-card-img">
+                <div class="mb-img-ph" id="ph-v5" style="height:150px;background:rgba(45,36,28,.4);display:none;">
+                  <div class="mb-upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,.38);">Game Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v5" data-ph="ph-v5" class="mb-img-input-ref">
+                </div>
+                <img id="img-v5" src="./IMG%20MOODBOARD/VISUAL%20DIREC%20%26%20ART%20REF/VISUAL%20WORLD_ART%20STYLE/FIELDOFMISTRIA_1.webp" style="position:absolute;inset:0;display:block;">
+              </div>
+              <div class="mb-ref-card-body">
+                <div class="mb-ref-card-title">UI/INTERACTION</div>
+                <div class="mb-ref-card-desc">Tham khảo cảm giác chạm, phản hồi, nhịp chuyển động và trải nghiệm tương tác giao diện</div>
+              </div>
+            </div>
+
+            <div class="mb-ref-card">
+              <div class="mb-ref-card-img">
+                <div class="mb-img-ph" id="ph-v6" style="height:150px;background:rgba(45,36,28,.4);display:none;">
+                  <div class="mb-upload-icon">+</div>
+                  <span style="font-size:11px;color:rgba(255,248,234,.38);">Game Ref</span>
+                  <input type="file" accept="image/*" data-img="img-v6" data-ph="ph-v6" class="mb-img-input-ref">
+                </div>
+                <img id="img-v6" src="./IMG%20MOODBOARD/VISUAL%20DIREC%20%26%20ART%20REF/VISUAL%20WORLD_ART%20STYLE/MOONLIGHTER_1.jpg" style="position:absolute;inset:0;display:block;">
+              </div>
+              <div class="mb-ref-card-body">
+                <div class="mb-ref-card-title">GAME EXPERIENCE REFERENCE</div>
+                <div class="mb-ref-card-desc">Tham khảo nhịp độ trải nghiệm (pacing), vòng lặp game play (gameplay loop), tiến trình phát triển và cảm giác trải nghiệm tổng thể</div>
+              </div>
+            </div>
           </div>
           <div class="mb-section-label">Ghi chú Art Direction</div>
           <div class="mb-caption-row">
@@ -2887,17 +3015,17 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
             <div class="mb-free-slot" style="right:20px;top:16px;width:200px;height:200px;">
               <div class="mb-pin red" style="top:-8px;left:50%;transform:translateX(-50%);"></div>
               <div class="mb-img-ph" id="ph-f1" style="height:100%;width:100%;background:transparent;"><div class="mb-upload-icon">+</div><span class="mb-slot-label">Ảnh cảm hứng 1</span><input type="file" accept="image/*" multiple data-img="img-f1" data-ph="ph-f1" class="mb-img-input-slot"></div>
-              <img id="img-f1" style="position:absolute;inset:0;">
+              <img id="img-f1" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_5__LQ.jpg" style="position:absolute;inset:0;display:block;">
             </div>
             <div class="mb-free-slot" style="right:238px;top:230px;width:148px;height:148px;">
               <div class="mb-tape"></div>
               <div class="mb-img-ph" id="ph-f2" style="height:100%;width:100%;background:transparent;"><div class="mb-upload-icon">+</div><span class="mb-slot-label">Ảnh ref 2</span><input type="file" accept="image/*" multiple data-img="img-f2" data-ph="ph-f2" class="mb-img-input-slot"></div>
-              <img id="img-f2" style="position:absolute;inset:0;">
+              <img id="img-f2" src="./IMG%20MOODBOARD/STORY/Canh.png" style="position:absolute;inset:0;display:block;">
             </div>
             <div class="mb-free-slot" style="right:20px;top:240px;width:200px;height:148px;">
               <div class="mb-pin yellow" style="top:-8px;left:50%;transform:translateX(-50%);"></div>
               <div class="mb-img-ph" id="ph-f3" style="height:100%;width:100%;background:transparent;"><div class="mb-upload-icon">+</div><span class="mb-slot-label">Ảnh ref 3</span><input type="file" accept="image/*" multiple data-img="img-f3" data-ph="ph-f3" class="mb-img-input-slot"></div>
-              <img id="img-f3" style="position:absolute;inset:0;">
+              <img id="img-f3" src="./IMG%20MOODBOARD/STORY/Kitchen.png" style="position:absolute;inset:0;display:block;">
             </div>
 
             <!-- SVG connectors -->
@@ -3360,8 +3488,41 @@ document.querySelectorAll('.mb-img-input, .mb-img-input-ref, .mb-img-input-slot'
     saveImageToSlot(this);
   });
 
-  renderSlotImage(input, 0);
+  // Nếu ô ảnh đã có src cố định trong HTML thì giữ ảnh public đó.
+  // Chỉ load localStorage cho những ô chưa có ảnh mặc định.
+  const targetImg = document.getElementById(input.dataset.img);
+  if (!targetImg || !targetImg.getAttribute('src')) {
+    renderSlotImage(input, 0);
+  }
 });
+
+/* ===== DEFAULT MOODBOARD IMAGES FOR GITHUB PAGES =====
+   Nếu chưa có ảnh trong localStorage, các ảnh src mặc định vẫn hiện.
+   Nếu người dùng upload ảnh mới, hệ thống localStorage vẫn hoạt động như cũ. */
+function initDefaultMoodboardImages() {
+  document.querySelectorAll('img[id^="img-"]').forEach(img => {
+    const src = img.getAttribute('src');
+    if (!src || !src.trim()) return;
+
+    img.style.display = 'block';
+    img.dataset.defaultSrc = src;
+
+    img.onerror = function() {
+      console.warn('Không tải được ảnh:', this.getAttribute('src'));
+    };
+
+    const input = document.querySelector(`[data-img="${img.id}"]`);
+    if (!input) return;
+
+    const ph = input.dataset.ph ? document.getElementById(input.dataset.ph) : null;
+    const cap = input.dataset.cap ? document.getElementById(input.dataset.cap) : null;
+
+    if (ph) ph.style.display = 'none';
+    if (cap) cap.style.display = 'block';
+  });
+}
+
+initDefaultMoodboardImages();
 
 /* ===== SAVE MOODBOARD NOTES ===== */
 const MB_NOTES_KEY = 'cookingNgoaiMoodboardNotes';

@@ -1339,6 +1339,69 @@
 
     .mb-connector-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
+
+/* Fixed public hero gallery for GitHub Pages */
+.hero-gallery-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-gallery-img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 1 !important;
+}
+
+.hero-gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(45,36,28,.82);
+  color: var(--cream);
+  font-size: 22px;
+  font-weight: 900;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+
+.hero-gallery-prev { left: 10px; }
+.hero-gallery-next { right: 10px; }
+
+.hero-gallery-btn:hover {
+  background: var(--orange);
+}
+
+.hero-gallery-count {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 30;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(45,36,28,.78);
+  color: var(--cream);
+  font-size: 11px;
+  font-weight: 800;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.hero-gallery-caption {
+  display: block !important;
+  z-index: 20 !important;
+}
+
     /* RESPONSIVE */
     @media (max-width: 980px) {
       .hero, .story { grid-template-columns: 1fr; }
@@ -2202,23 +2265,6 @@
   }
 }
 
-.hero-image-grid {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
-  padding: 8px;
-}
-
-.hero-image-grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: static;
-  display: block;
-  border-radius: 6px;
-}
 
 .hero-image-grid img {
     width: 100% !important;
@@ -2811,72 +2857,48 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
             <span style="font-size:11px;color:rgba(255,248,234,.48);font-family:'Space Grotesk',sans-serif;">Nhấp vào ô ảnh để tải ảnh · Chỉnh sửa ghi chú bên dưới</span>
           </div>
           <div class="mb-hero-zone">
-            <!-- Card 1 hero -->
-            <div class="mb-img-card span-row">
-    <div class="mb-pin red"></div>
-
-<div class="mb-img-card span-row">
-    <div class="mb-pin red"></div>
-
-    <div class="hero-image-grid">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_0_LQ.jpg">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_5_LQ.jpg">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_6_LQ.jpg">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_7_LQ.jpg">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_8_LQ.jpg">
-        <img src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_9.jpg">
-    </div>
-
-    <div class="mb-img-ph" id="ph-e1" style="display:none;"></div>
-</div>
-              <div class="mb-img-caption" id="cap-e1"><div class="mb-tag-pill">Hero Image</div><br>Cảm xúc trung tâm</div>
+            <!-- Card 1 hero: public fixed gallery -->
+            <div class="mb-img-card span-row hero-gallery-card">
+              <div class="mb-pin red"></div>
+              <img id="img-e1" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_0_LQ.jpg" alt="Hero moodboard image" class="hero-gallery-img">
+              <button type="button" class="hero-gallery-btn hero-gallery-prev" aria-label="Ảnh trước">‹</button>
+              <button type="button" class="hero-gallery-btn hero-gallery-next" aria-label="Ảnh tiếp theo">›</button>
+              <div class="hero-gallery-count" id="heroGalleryCount">1 / 10</div>
+              <div class="mb-img-caption hero-gallery-caption" id="cap-e1">
+                <div class="mb-tag-pill">Hero Image</div><br>Cảm xúc trung tâm
+              </div>
+              <div class="mb-img-ph" id="ph-e1" style="display:none;"></div>
             </div>
+
             <!-- Card 2 -->
             <div class="mb-img-card">
               <div class="mb-tape left"></div>
-              <div class="mb-img-ph" id="ph-e2">
-                <div class="mb-upload-icon">+</div>
-                <span>Mâm cơm Việt</span>
-                <input type="file" accept="image/*" data-img="img-e2" data-ph="ph-e2" data-cap="cap-e2" class="mb-img-input">
-              </div>
-              <img id="img-e2" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg" style="position:absolute;inset:0;display:block;">
+              <div class="mb-img-ph" id="ph-e2" style="display:none;"></div>
+              <img id="img-e2" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;">
               <div class="mb-img-caption" id="cap-e2"><div class="mb-tag-pill">Ẩm thực</div><br>Hương sắc món nhà</div>
             </div>
+
             <!-- Card 3 -->
             <div class="mb-img-card">
               <div class="mb-tape right"></div>
-              <div class="mb-img-ph" id="ph-e3">
-                <div class="mb-upload-icon">+</div>
-                <span>Ký ức gia đình</span>
-                <input type="file" accept="image/*" data-img="img-e3" data-ph="ph-e3" data-cap="cap-e3" class="mb-img-input">
-              </div>
-              <img id="img-e3" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg" style="position:absolute;inset:0;display:block;">
+              <div class="mb-img-ph" id="ph-e3" style="display:none;"></div>
+              <img id="img-e3" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;">
               <div class="mb-img-caption" id="cap-e3"><div class="mb-tag-pill">Nhân vật</div><br>Con người &amp; Cảm xúc</div>
             </div>
+
             <!-- Card 4 -->
             <div class="mb-img-card">
               <div class="mb-pin yellow"></div>
-              <div class="mb-img-ph" id="ph-e4">
-                <div class="mb-upload-icon">+</div>
-                <span>Thiên nhiên / Vật liệu</span>
-                <input type="file" accept="image/*" data-img="img-e4" data-ph="ph-e4" data-cap="cap-e4" class="mb-img-input">
-              </div>
-              <img id="img-e4" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg" style="position:absolute;inset:0;display:block;">
+              <div class="mb-img-ph" id="ph-e4" style="display:none;"></div>
+              <img id="img-e4" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;">
               <div class="mb-img-caption" id="cap-e4"><div class="mb-tag-pill">Texture</div><br>Vật liệu &amp; Nền</div>
             </div>
+
             <!-- Card 5 -->
             <div class="mb-img-card">
               <div class="mb-pin blue"></div>
-              <div class="mb-img-ph" id="ph-e5">
-                <div class="mb-upload-icon">+</div>
-                <span>Góc nấu / Bếp</span>
-                <input type="file" accept="image/*" data-img="img-e5" data-ph="ph-e5" data-cap="cap-e5" class="mb-img-input">
-              </div>
-              <img id="img-e5" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg" style="position:absolute;inset:0;display:block;">
+              <div class="mb-img-ph" id="ph-e5" style="display:none;"></div>
+              <img id="img-e5" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;">
               <div class="mb-img-caption" id="cap-e5"><div class="mb-tag-pill">Environment</div><br>Không gian bếp</div>
             </div>
           </div>
@@ -3975,6 +3997,41 @@ enterSiteBtn?.addEventListener('click', () => {
 });
 
   </script>
+
+
+<script>
+(function() {
+  const heroImages = ['./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_0_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_5_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_6_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_7_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_8_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_9.jpg'];
+  let heroIndex = 0;
+
+  const img = document.getElementById('img-e1');
+  const count = document.getElementById('heroGalleryCount');
+  const prev = document.querySelector('.hero-gallery-prev');
+  const next = document.querySelector('.hero-gallery-next');
+
+  function renderHeroImage() {
+    if (!img) return;
+    img.src = heroImages[heroIndex];
+    if (count) count.textContent = (heroIndex + 1) + ' / ' + heroImages.length;
+  }
+
+  prev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    heroIndex = (heroIndex - 1 + heroImages.length) % heroImages.length;
+    renderHeroImage();
+  });
+
+  next?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    heroIndex = (heroIndex + 1) % heroImages.length;
+    renderHeroImage();
+  });
+
+  renderHeroImage();
+})();
+</script>
 
 </body>
 </html>

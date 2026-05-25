@@ -2869,12 +2869,15 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
               <div class="mb-img-ph" id="ph-e1" style="display:none;"></div>
             </div>
 
-            <!-- Card 2 -->
-            <div class="mb-img-card">
+            <!-- Card 2: Food / Hương sắc món nhà gallery -->
+            <div class="mb-img-card hero-gallery-card">
               <div class="mb-tape left"></div>
               <div class="mb-img-ph" id="ph-e2" style="display:none;"></div>
-              <img id="img-e2" src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_1.jpeg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
-              <div class="mb-img-caption" id="cap-e2"><div class="mb-tag-pill">Ẩm thực</div><br>Hương sắc món nhà</div>
+              <img id="img-e2" src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_1.jpeg" alt="Hương sắc món nhà" class="hero-gallery-img">
+              <button type="button" class="hero-gallery-btn food-gallery-prev" aria-label="Ảnh ẩm thực trước" style="left:10px;">‹</button>
+              <button type="button" class="hero-gallery-btn food-gallery-next" aria-label="Ảnh ẩm thực tiếp theo" style="right:10px;">›</button>
+              <div class="hero-gallery-count" id="foodGalleryCount">1 / 10</div>
+              <div class="mb-img-caption hero-gallery-caption" id="cap-e2"><div class="mb-tag-pill">Ẩm thực</div><br>Hương sắc món nhà</div>
             </div>
 
             <!-- Card 3 -->
@@ -4029,6 +4032,52 @@ enterSiteBtn?.addEventListener('click', () => {
   });
 
   renderHeroImage();
+})();
+</script>
+
+<script>
+(function() {
+  const foodImages = [
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_1.jpeg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_2.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_3.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_4.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_5.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_6.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_7.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_8.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_9.png',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_10.png'
+  ];
+
+  let foodIndex = 0;
+
+  const foodImg = document.getElementById('img-e2');
+  const foodCount = document.getElementById('foodGalleryCount');
+  const foodPrev = document.querySelector('.food-gallery-prev');
+  const foodNext = document.querySelector('.food-gallery-next');
+
+  function renderFoodImage() {
+    if (!foodImg) return;
+    foodImg.src = foodImages[foodIndex];
+    if (foodCount) foodCount.textContent = (foodIndex + 1) + ' / ' + foodImages.length;
+  }
+
+  foodPrev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    foodIndex = (foodIndex - 1 + foodImages.length) % foodImages.length;
+    renderFoodImage();
+  });
+
+  foodNext?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    foodIndex = (foodIndex + 1) % foodImages.length;
+    renderFoodImage();
+  });
+
+  renderFoodImage();
 })();
 </script>
 

@@ -1376,8 +1376,19 @@
   box-shadow: 0 8px 18px rgba(0,0,0,.25);
 }
 
-.hero-gallery-prev { left: 10px; }
-.hero-gallery-next { right: 10px; }
+.hero-gallery-prev,
+.food-gallery-prev,
+.character-gallery-prev,
+.texture-gallery-prev,
+.environment-gallery-prev,
+.visual-world-gallery-prev { left: 10px; }
+
+.hero-gallery-next,
+.food-gallery-next,
+.character-gallery-next,
+.texture-gallery-next,
+.environment-gallery-next,
+.visual-world-gallery-next { right: 10px; }
 
 .hero-gallery-btn:hover {
   background: var(--orange);
@@ -1400,6 +1411,20 @@
 .hero-gallery-caption {
   display: block !important;
   z-index: 20 !important;
+}
+
+
+/* Clickable fixed moodboard galleries */
+.hero-gallery-card .hero-gallery-img {
+  cursor: zoom-in !important;
+}
+
+.hero-gallery-card.is-lightbox-ready {
+  cursor: zoom-in;
+}
+
+.img-delete-btn.fixed-gallery-hidden {
+  display: none !important;
 }
 
     /* RESPONSIVE */
@@ -2456,8 +2481,7 @@
   <!-- RIGHT MEMORY BOARD -->
  <div class="story-memory-board">
 <div class="memory-photo photo-main">
-  <img src="./IMG MOODBOARD/STORY/Kitchen.png">
-    <span>Nhà Ngoại, một buổi chiều xưa</span>
+  <img src="./IMG_MOODBOARD/STORY/Kitchen.png">
   </div>
 
   <div class="memory-note note-recipe">    
@@ -2466,7 +2490,7 @@
   </div>
 
   <div class="memory-photo photo-polaroid">
-    <img src="./IMG MOODBOARD/STORY/Market.png">
+    <img src="./IMG_MOODBOARD/STORY/Market.png">
   </div>
 
   <div class="memory-postcard">
@@ -2860,7 +2884,7 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
             <!-- Card 1 hero: public fixed gallery -->
             <div class="mb-img-card span-row hero-gallery-card">
               <div class="mb-pin red"></div>
-              <img id="img-e1" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_0_LQ.jpg" alt="Hero moodboard image" class="hero-gallery-img">
+              <img id="img-e1" src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_0_LQ.jpg" alt="Hero moodboard image" class="hero-gallery-img">
               <button type="button" class="hero-gallery-btn hero-gallery-prev" aria-label="Ảnh trước">‹</button>
               <button type="button" class="hero-gallery-btn hero-gallery-next" aria-label="Ảnh tiếp theo">›</button>
               <div class="hero-gallery-count" id="heroGalleryCount">1 / 10</div>
@@ -2870,36 +2894,86 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
               <div class="mb-img-ph" id="ph-e1" style="display:none;"></div>
             </div>
 
-            <!-- Card 2 -->
-            <div class="mb-img-card">
+            <!-- Card 2: Food / Hương sắc món nhà gallery -->
+            <div class="mb-img-card hero-gallery-card">
               <div class="mb-tape left"></div>
               <div class="mb-img-ph" id="ph-e2" style="display:none;"></div>
-              <img id="img-e2" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;">
-              <div class="mb-img-caption" id="cap-e2"><div class="mb-tag-pill">Ẩm thực</div><br>Hương sắc món nhà</div>
+              <img id="img-e2" src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_1.jpeg" alt="Hương sắc món nhà" class="hero-gallery-img">
+              <button type="button" class="hero-gallery-btn food-gallery-prev" aria-label="Ảnh ẩm thực trước" style="left:10px;">‹</button>
+              <button type="button" class="hero-gallery-btn food-gallery-next" aria-label="Ảnh ẩm thực tiếp theo" style="right:10px;">›</button>
+              <div class="hero-gallery-count" id="foodGalleryCount">1 / 10</div>
+              <div class="mb-img-caption hero-gallery-caption" id="cap-e2"><div class="mb-tag-pill">Ẩm thực</div><br>Hương sắc món nhà</div>
             </div>
 
             <!-- Card 3 -->
-            <div class="mb-img-card">
-              <div class="mb-tape right"></div>
-              <div class="mb-img-ph" id="ph-e3" style="display:none;"></div>
-              <img id="img-e3" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;">
-              <div class="mb-img-caption" id="cap-e3"><div class="mb-tag-pill">Nhân vật</div><br>Con người &amp; Cảm xúc</div>
-            </div>
+            <!-- Card 3: Character gallery -->
+<div class="mb-img-card hero-gallery-card">
+  <div class="mb-tape right"></div>
 
-            <!-- Card 4 -->
-            <div class="mb-img-card">
+  <div class="mb-img-ph" id="ph-e3" style="display:none;"></div>
+
+  <img
+    id="img-e3"
+    src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_1.jpg"
+    alt="Nhân vật và cảm xúc"
+    class="hero-gallery-img"
+  >
+
+  <button type="button" class="hero-gallery-btn character-gallery-prev" aria-label="Ảnh trước">‹</button>
+  <button type="button" class="hero-gallery-btn character-gallery-next" aria-label="Ảnh tiếp theo">›</button>
+
+  <div class="hero-gallery-count" id="characterGalleryCount">1 / 10</div>
+
+  <div class="mb-img-caption hero-gallery-caption" id="cap-e3">
+    <div class="mb-tag-pill">Nhân vật</div><br>
+    Con người &amp; Cảm xúc
+  </div>
+</div>
+
+            <!-- Card 4: Texture / Vật liệu & Nền gallery -->
+            <div class="mb-img-card hero-gallery-card" id="textureGalleryCard">
               <div class="mb-pin yellow"></div>
               <div class="mb-img-ph" id="ph-e4" style="display:none;"></div>
-              <img id="img-e4" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;">
-              <div class="mb-img-caption" id="cap-e4"><div class="mb-tag-pill">Texture</div><br>Vật liệu &amp; Nền</div>
+
+              <img
+                id="img-e4"
+                src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_1.jpg"
+                alt="Texture vật liệu và nền"
+                class="hero-gallery-img"
+              >
+
+              <button type="button" class="hero-gallery-btn texture-gallery-prev" aria-label="Ảnh vật liệu trước">‹</button>
+              <button type="button" class="hero-gallery-btn texture-gallery-next" aria-label="Ảnh vật liệu tiếp theo">›</button>
+
+              <div class="hero-gallery-count" id="textureGalleryCount">1 / 9</div>
+
+              <div class="mb-img-caption hero-gallery-caption" id="cap-e4">
+                <div class="mb-tag-pill">Texture</div><br>
+                Vật liệu &amp; Nền
+              </div>
             </div>
 
-            <!-- Card 5 -->
-            <div class="mb-img-card">
+            <!-- Card 5: Environment / Không gian bếp gallery -->
+            <div class="mb-img-card hero-gallery-card" id="environmentGalleryCard">
               <div class="mb-pin blue"></div>
               <div class="mb-img-ph" id="ph-e5" style="display:none;"></div>
-              <img id="img-e5" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:1;">
-              <div class="mb-img-caption" id="cap-e5"><div class="mb-tag-pill">Environment</div><br>Không gian bếp</div>
+
+              <img
+                id="img-e5"
+                src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_1.jpg"
+                alt="Environment không gian bếp"
+                class="hero-gallery-img"
+              >
+
+              <button type="button" class="hero-gallery-btn environment-gallery-prev" aria-label="Ảnh environment trước">‹</button>
+              <button type="button" class="hero-gallery-btn environment-gallery-next" aria-label="Ảnh environment tiếp theo">›</button>
+
+              <div class="hero-gallery-count" id="environmentGalleryCount">1 / 10</div>
+
+              <div class="mb-img-caption hero-gallery-caption" id="cap-e5">
+                <div class="mb-tag-pill">Environment</div><br>
+                Không gian bếp
+              </div>
             </div>
           </div>
 
@@ -2934,29 +3008,46 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
           </div>
           <div class="mb-section-label">Art Style Reference — tải ảnh tham khảo</div>
           <div class="mb-ref-grid">
-            <div class="mb-ref-card">
+            <div class="mb-ref-card hero-gallery-card">
               <div class="mb-ref-card-img">
                 <div class="mb-img-ph" id="ph-v1" style="height:150px;background:rgba(45,36,28,.4);display:none;">
                   <div class="mb-upload-icon">+</div>
                   <span style="font-size:11px;color:rgba(255,248,234,.38);">Art Style Ref</span>
                   <input type="file" accept="image/*" data-img="img-v1" data-ph="ph-v1" class="mb-img-input-ref">
                 </div>
-                <img id="img-v1" src="./IMG%20MOODBOARD/VISUAL%20DIREC%20%26%20ART%20REF/VISUAL%20WORLD_ART%20STYLE/EASTWARD_1.jpg" style="position:absolute;inset:0;display:block;">
+
+                <img
+                  id="img-v1"
+                  src="./IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/EASTWARD_1.jpg"
+                  alt="Visual World / Art Style"
+                  class="hero-gallery-img"
+                >
+
+                <button type="button" class="hero-gallery-btn visual-world-gallery-prev" aria-label="Ảnh trước">‹</button>
+                <button type="button" class="hero-gallery-btn visual-world-gallery-next" aria-label="Ảnh tiếp theo">›</button>
+
+                <div class="hero-gallery-count" id="visualWorldGalleryCount">1 / 10</div>
               </div>
+
               <div class="mb-ref-card-body">
                 <div class="mb-ref-card-title">VISUAL WORLD/ART STYLE</div>
                 <div class="mb-ref-card-desc">Pixel art trau chuốt, giàu cảm xúc, bảng màu ấm, hình ảnh sạch và dễ tiếp cận</div>
               </div>
             </div>
 
-            <div class="mb-ref-card">
+            <div class="mb-ref-card hero-gallery-card">
               <div class="mb-ref-card-img">
                 <div class="mb-img-ph" id="ph-v2" style="height:150px;background:rgba(45,36,28,.4);display:none;">
                   <div class="mb-upload-icon">+</div>
                   <span style="font-size:11px;color:rgba(255,248,234,.38);">Food Ref</span>
                   <input type="file" accept="image/*" data-img="img-v2" data-ph="ph-v2" class="mb-img-input-ref">
                 </div>
-                <img id="img-v2" src="./IMG%20MOODBOARD/STORY/Canh.png" style="position:absolute;inset:0;display:block;">
+                <img id="img-v2" src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_1.jpeg" alt="Food &amp; Material Reference" class="hero-gallery-img">
+
+                <button type="button" class="hero-gallery-btn visual-food-gallery-prev" aria-label="Ảnh Food &amp; Material trước">‹</button>
+                <button type="button" class="hero-gallery-btn visual-food-gallery-next" aria-label="Ảnh Food &amp; Material tiếp theo">›</button>
+
+                <div class="hero-gallery-count" id="visualFoodGalleryCount">1 / 10</div>
               </div>
               <div class="mb-ref-card-body">
                 <div class="mb-ref-card-title">FOOD &amp; MATERIAL REFERENCE</div>
@@ -2964,14 +3055,19 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
               </div>
             </div>
 
-            <div class="mb-ref-card">
+            <div class="mb-ref-card hero-gallery-card">
               <div class="mb-ref-card-img">
                 <div class="mb-img-ph" id="ph-v3" style="height:150px;background:rgba(45,36,28,.4);display:none;">
                   <div class="mb-upload-icon">+</div>
                   <span style="font-size:11px;color:rgba(255,248,234,.38);">Character Ref</span>
                   <input type="file" accept="image/*" data-img="img-v3" data-ph="ph-v3" class="mb-img-input-ref">
                 </div>
-                <img id="img-v3" src="./IMG%20MOODBOARD/VISUAL%20DIREC%20%26%20ART%20REF/CHARACTER%20EMOTION/SPIRITFARER_1.jpg" style="position:absolute;inset:0;display:block;">
+                <img id="img-v3" src="./IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/SPIRITFARER_1.jpg" alt="Character Emotion" class="hero-gallery-img">
+
+                <button type="button" class="hero-gallery-btn visual-character-gallery-prev" aria-label="Ảnh Character Emotion trước">‹</button>
+                <button type="button" class="hero-gallery-btn visual-character-gallery-next" aria-label="Ảnh Character Emotion tiếp theo">›</button>
+
+                <div class="hero-gallery-count" id="visualCharacterGalleryCount">1 / 10</div>
               </div>
               <div class="mb-ref-card-body">
                 <div class="mb-ref-card-title">CHARACTER EMOTION</div>
@@ -2986,7 +3082,7 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
                   <span style="font-size:11px;color:rgba(255,248,234,.38);">Environment Ref</span>
                   <input type="file" accept="image/*" data-img="img-v4" data-ph="ph-v4" class="mb-img-input-ref">
                 </div>
-                <img id="img-v4" src="./IMG%20MOODBOARD/STORY/Kitchen.png" style="position:absolute;inset:0;display:block;">
+                <img id="img-v4" src="./IMG_MOODBOARD/STORY/Kitchen.png" style="position:absolute;inset:0;display:block;">
               </div>
               <div class="mb-ref-card-body">
                 <div class="mb-ref-card-title">ENVIRONMENT REFERENCE</div>
@@ -3001,7 +3097,7 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
                   <span style="font-size:11px;color:rgba(255,248,234,.38);">Game Ref</span>
                   <input type="file" accept="image/*" data-img="img-v5" data-ph="ph-v5" class="mb-img-input-ref">
                 </div>
-                <img id="img-v5" src="./IMG%20MOODBOARD/VISUAL%20DIREC%20%26%20ART%20REF/VISUAL%20WORLD_ART%20STYLE/FIELDOFMISTRIA_1.webp" style="position:absolute;inset:0;display:block;">
+                <img id="img-v5" src="./IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_1.webp" style="position:absolute;inset:0;display:block;">
               </div>
               <div class="mb-ref-card-body">
                 <div class="mb-ref-card-title">UI/INTERACTION</div>
@@ -3016,7 +3112,7 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
                   <span style="font-size:11px;color:rgba(255,248,234,.38);">Game Ref</span>
                   <input type="file" accept="image/*" data-img="img-v6" data-ph="ph-v6" class="mb-img-input-ref">
                 </div>
-                <img id="img-v6" src="./IMG%20MOODBOARD/VISUAL%20DIREC%20%26%20ART%20REF/VISUAL%20WORLD_ART%20STYLE/MOONLIGHTER_1.jpg" style="position:absolute;inset:0;display:block;">
+                <img id="img-v6" src="./IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/MOONLIGHTER_1.jpg" style="position:absolute;inset:0;display:block;">
               </div>
               <div class="mb-ref-card-body">
                 <div class="mb-ref-card-title">GAME EXPERIENCE REFERENCE</div>
@@ -3057,17 +3153,17 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
             <div class="mb-free-slot" style="right:20px;top:16px;width:200px;height:200px;">
               <div class="mb-pin red" style="top:-8px;left:50%;transform:translateX(-50%);"></div>
               <div class="mb-img-ph" id="ph-f1" style="height:100%;width:100%;background:transparent;"><div class="mb-upload-icon">+</div><span class="mb-slot-label">Ảnh cảm hứng 1</span><input type="file" accept="image/*" multiple data-img="img-f1" data-ph="ph-f1" class="mb-img-input-slot"></div>
-              <img id="img-f1" src="./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_5__LQ.jpg" style="position:absolute;inset:0;display:block;">
+              <img id="img-f1" src="./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_LQ.jpg" style="position:absolute;inset:0;display:block;">
             </div>
             <div class="mb-free-slot" style="right:238px;top:230px;width:148px;height:148px;">
               <div class="mb-tape"></div>
               <div class="mb-img-ph" id="ph-f2" style="height:100%;width:100%;background:transparent;"><div class="mb-upload-icon">+</div><span class="mb-slot-label">Ảnh ref 2</span><input type="file" accept="image/*" multiple data-img="img-f2" data-ph="ph-f2" class="mb-img-input-slot"></div>
-              <img id="img-f2" src="./IMG%20MOODBOARD/STORY/Canh.png" style="position:absolute;inset:0;display:block;">
+              <img id="img-f2" src="./IMG_MOODBOARD/STORY/Canh.png" style="position:absolute;inset:0;display:block;">
             </div>
             <div class="mb-free-slot" style="right:20px;top:240px;width:200px;height:148px;">
               <div class="mb-pin yellow" style="top:-8px;left:50%;transform:translateX(-50%);"></div>
               <div class="mb-img-ph" id="ph-f3" style="height:100%;width:100%;background:transparent;"><div class="mb-upload-icon">+</div><span class="mb-slot-label">Ảnh ref 3</span><input type="file" accept="image/*" multiple data-img="img-f3" data-ph="ph-f3" class="mb-img-input-slot"></div>
-              <img id="img-f3" src="./IMG%20MOODBOARD/STORY/Kitchen.png" style="position:absolute;inset:0;display:block;">
+              <img id="img-f3" src="./IMG_MOODBOARD/STORY/Kitchen.png" style="position:absolute;inset:0;display:block;">
             </div>
 
             <!-- SVG connectors -->
@@ -4001,7 +4097,7 @@ enterSiteBtn?.addEventListener('click', () => {
 
 <script>
 (function() {
-  const heroImages = ['./IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_0_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_5_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_6_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_7_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_8_LQ.jpg', './IMG%20MOODBOARD/EMO%20%26%20MEMORY%20MOODBOARD/LQ/With_Ngoai_MB_9.jpg'];
+  const heroImages = ['./IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_0_LQ.jpg', './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg', './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg', './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg', './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg', './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_LQ.jpg', './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_6_LQ.jpg', './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_7_LQ.jpg', './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_8_LQ.jpg', './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_9.jpg'];
   let heroIndex = 0;
 
   const img = document.getElementById('img-e1');
@@ -4030,6 +4126,729 @@ enterSiteBtn?.addEventListener('click', () => {
   });
 
   renderHeroImage();
+})();
+</script>
+
+<script>
+(function() {
+  const foodImages = [
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_1.jpeg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_2.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_3.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_4.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_5.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_6.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_7.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_8.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_9.png',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_10.png'
+  ];
+
+  let foodIndex = 0;
+
+  const foodImg = document.getElementById('img-e2');
+  const foodCount = document.getElementById('foodGalleryCount');
+  const foodPrev = document.querySelector('.food-gallery-prev');
+  const foodNext = document.querySelector('.food-gallery-next');
+
+  function renderFoodImage() {
+    if (!foodImg) return;
+    foodImg.src = foodImages[foodIndex];
+    if (foodCount) foodCount.textContent = (foodIndex + 1) + ' / ' + foodImages.length;
+  }
+
+  foodPrev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    foodIndex = (foodIndex - 1 + foodImages.length) % foodImages.length;
+    renderFoodImage();
+  });
+
+  foodNext?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    foodIndex = (foodIndex + 1) % foodImages.length;
+    renderFoodImage();
+  });
+
+  renderFoodImage();
+})();
+
+
+</script>
+<script>
+(function() {
+  const characterImages = [
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_1.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_2.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_3.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_4.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_5.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_6.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_7.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_8.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_9.jpg',
+  './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_10.jpg'
+];
+  let characterIndex = 0;
+
+  const characterImg = document.getElementById('img-e3');
+  const characterCount = document.getElementById('characterGalleryCount');
+  const characterPrev = document.querySelector('.character-gallery-prev');
+  const characterNext = document.querySelector('.character-gallery-next');
+
+  function renderCharacterImage() {
+    if (!characterImg) return;
+
+    characterImg.src = characterImages[characterIndex];
+
+    if (characterCount) {
+      characterCount.textContent = (characterIndex + 1) + ' / ' + characterImages.length;
+    }
+  }
+
+  characterPrev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    characterIndex = (characterIndex - 1 + characterImages.length) % characterImages.length;
+    renderCharacterImage();
+  });
+
+  characterNext?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    characterIndex = (characterIndex + 1) % characterImages.length;
+    renderCharacterImage();
+  });
+
+  renderCharacterImage();
+})();
+</script>
+
+<script>
+(function() {
+  const textureImages = [
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_1.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_2.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_3.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_4.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_5.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_6.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_7.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_8.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_9.jpg'
+  ];
+
+  let textureIndex = 0;
+
+  const textureImg = document.getElementById('img-e4');
+  const textureCount = document.getElementById('textureGalleryCount');
+  const texturePrev = document.querySelector('.texture-gallery-prev');
+  const textureNext = document.querySelector('.texture-gallery-next');
+
+  function renderTextureImage() {
+    if (!textureImg) return;
+
+    textureImg.src = textureImages[textureIndex];
+
+    if (textureCount) {
+      textureCount.textContent = (textureIndex + 1) + ' / ' + textureImages.length;
+    }
+  }
+
+  texturePrev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    textureIndex = (textureIndex - 1 + textureImages.length) % textureImages.length;
+    renderTextureImage();
+  });
+
+  textureNext?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    textureIndex = (textureIndex + 1) % textureImages.length;
+    renderTextureImage();
+  });
+
+  renderTextureImage();
+})();
+</script>
+
+<script>
+(function() {
+  const environmentImages = [
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_1.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_2.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_3.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_4.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_5.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_6.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_7.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_8.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_9.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_10.jpg'
+  ];
+
+  let environmentIndex = 0;
+
+  const environmentImg = document.getElementById('img-e5');
+  const environmentCount = document.getElementById('environmentGalleryCount');
+  const environmentPrev = document.querySelector('.environment-gallery-prev');
+  const environmentNext = document.querySelector('.environment-gallery-next');
+
+  function renderEnvironmentImage() {
+    if (!environmentImg) return;
+
+    environmentImg.src = environmentImages[environmentIndex];
+
+    if (environmentCount) {
+      environmentCount.textContent = (environmentIndex + 1) + ' / ' + environmentImages.length;
+    }
+  }
+
+  environmentPrev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    environmentIndex = (environmentIndex - 1 + environmentImages.length) % environmentImages.length;
+    renderEnvironmentImage();
+  });
+
+  environmentNext?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    environmentIndex = (environmentIndex + 1) % environmentImages.length;
+    renderEnvironmentImage();
+  });
+
+  renderEnvironmentImage();
+})();
+</script>
+
+
+
+<script>
+(function() {
+  const visualWorldImages = [
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/EASTWARD_1.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/EASTWARD_2.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/EASTWARD_4.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/EASTWARD_5.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_1.webp',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_2.webp',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_3.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_4.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_5.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/MOONLIGHTER_1.jpg'
+  ];
+
+  let visualWorldIndex = 0;
+
+  const visualWorldImg = document.getElementById('img-v1');
+  const visualWorldCount = document.getElementById('visualWorldGalleryCount');
+  const visualWorldPrev = document.querySelector('.visual-world-gallery-prev');
+  const visualWorldNext = document.querySelector('.visual-world-gallery-next');
+
+  function renderVisualWorldImage() {
+    if (!visualWorldImg) return;
+
+    visualWorldImg.src = visualWorldImages[visualWorldIndex];
+
+    if (visualWorldCount) {
+      visualWorldCount.textContent = (visualWorldIndex + 1) + ' / ' + visualWorldImages.length;
+    }
+  }
+
+  visualWorldPrev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    visualWorldIndex = (visualWorldIndex - 1 + visualWorldImages.length) % visualWorldImages.length;
+    renderVisualWorldImage();
+  });
+
+  visualWorldNext?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    visualWorldIndex = (visualWorldIndex + 1) % visualWorldImages.length;
+    renderVisualWorldImage();
+  });
+
+  renderVisualWorldImage();
+})();
+</script>
+
+<script>
+(function() {
+  const visualFoodImages = [
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_1.jpeg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_2.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_3.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_4.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_5.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_6.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_7.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_8.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_9.png',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_10.png'
+  ];
+
+  let visualFoodIndex = 0;
+
+  const visualFoodImg = document.getElementById('img-v2');
+  const visualFoodCount = document.getElementById('visualFoodGalleryCount');
+  const visualFoodPrev = document.querySelector('.visual-food-gallery-prev');
+  const visualFoodNext = document.querySelector('.visual-food-gallery-next');
+
+  function renderVisualFoodImage() {
+    if (!visualFoodImg) return;
+
+    visualFoodImg.src = visualFoodImages[visualFoodIndex];
+
+    if (visualFoodCount) {
+      visualFoodCount.textContent = (visualFoodIndex + 1) + ' / ' + visualFoodImages.length;
+    }
+  }
+
+  visualFoodPrev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    visualFoodIndex = (visualFoodIndex - 1 + visualFoodImages.length) % visualFoodImages.length;
+    renderVisualFoodImage();
+  });
+
+  visualFoodNext?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    visualFoodIndex = (visualFoodIndex + 1) % visualFoodImages.length;
+    renderVisualFoodImage();
+  });
+
+  renderVisualFoodImage();
+})();
+</script>
+
+<script>
+(function() {
+  const visualCharacterImages = [
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/SPIRITFARER_1.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/SPIRITFARER_2.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/SPIRITFARER_3.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/VENBA_1.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/VENBA_2.jpg',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/VENBA_2PNG.png',
+    './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/VENBA_3.webp',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_1.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_2.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_3.jpg'
+  ];
+
+  let visualCharacterIndex = 0;
+
+  const visualCharacterImg = document.getElementById('img-v3');
+  const visualCharacterCount = document.getElementById('visualCharacterGalleryCount');
+  const visualCharacterPrev = document.querySelector('.visual-character-gallery-prev');
+  const visualCharacterNext = document.querySelector('.visual-character-gallery-next');
+
+  function renderVisualCharacterImage() {
+    if (!visualCharacterImg) return;
+
+    visualCharacterImg.src = visualCharacterImages[visualCharacterIndex];
+
+    if (visualCharacterCount) {
+      visualCharacterCount.textContent = (visualCharacterIndex + 1) + ' / ' + visualCharacterImages.length;
+    }
+  }
+
+  visualCharacterPrev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    visualCharacterIndex = (visualCharacterIndex - 1 + visualCharacterImages.length) % visualCharacterImages.length;
+    renderVisualCharacterImage();
+  });
+
+  visualCharacterNext?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    visualCharacterIndex = (visualCharacterIndex + 1) % visualCharacterImages.length;
+    renderVisualCharacterImage();
+  });
+
+  renderVisualCharacterImage();
+})();
+</script>
+
+<script>
+/* Public fixed gallery lightbox: click image/card to view large + attach source link */
+(function() {
+  const fixedMoodboardGalleries = {
+    hero: {
+      imgId: 'img-e1',
+      countId: 'heroGalleryCount',
+      caption: 'Hero Image · Cảm xúc trung tâm',
+      images: [
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_0_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_1_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_6_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_7_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_8_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_9.jpg'
+      ]
+    },
+    food: {
+      imgId: 'img-e2',
+      countId: 'foodGalleryCount',
+      caption: 'Ẩm thực · Hương sắc món nhà',
+      images: [
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_1.jpeg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_2.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_3.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_4.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_5.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_6.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_7.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_8.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_9.png',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_10.png'
+      ]
+    },
+    character: {
+      imgId: 'img-e3',
+      countId: 'characterGalleryCount',
+      caption: 'Nhân vật · Con người & Cảm xúc',
+      images: [
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_1.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_2.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_3.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_4.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_5.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_6.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_7.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_8.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_9.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_10.jpg'
+      ]
+    },
+    texture: {
+      imgId: 'img-e4',
+      countId: 'textureGalleryCount',
+      caption: 'Texture · Vật liệu & Nền',
+      images: [
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_1.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_2.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_3.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_4.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_5.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_6.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_7.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_8.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Thien_nhien_vat_lieu/TNVL_9.jpg'
+      ]
+    },
+    environment: {
+      imgId: 'img-e5',
+      countId: 'environmentGalleryCount',
+      caption: 'Environment · Không gian bếp',
+      images: [
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_1.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_2.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_3.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_4.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_5.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_6.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_7.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_8.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_9.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Goc_bep/GB_10.jpg'
+      ]
+    }
+,
+    visualWorld: {
+      imgId: 'img-v1',
+      countId: 'visualWorldGalleryCount',
+      caption: 'Visual World/Art Style · Visual Direction',
+      images: [
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/EASTWARD_1.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/EASTWARD_2.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/EASTWARD_4.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/EASTWARD_5.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_1.webp',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_2.webp',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_3.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_4.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/FIELDOFMISTRIA_5.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/VISUAL_WORLD_ART_STYLE/MOONLIGHTER_1.jpg'
+      ]
+    },
+    visualFoodMaterial: {
+      imgId: 'img-v2',
+      countId: 'visualFoodGalleryCount',
+      caption: 'Food & Material Reference · Visual Direction',
+      images: [
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_1.jpeg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_2.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_3.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_4.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_5.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_6.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_7.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_8.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_9.png',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Huong_sac_mon_nha/HSMN_10.png'
+      ]
+    },
+    visualCharacterEmotion: {
+      imgId: 'img-v3',
+      countId: 'visualCharacterGalleryCount',
+      caption: 'Character Emotion · Visual Direction',
+      images: [
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/SPIRITFARER_1.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/SPIRITFARER_2.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/SPIRITFARER_3.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/VENBA_1.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/VENBA_2.jpg',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/VENBA_2PNG.png',
+        './IMG_MOODBOARD/VISUAL_DIREC_ART_REF/CHARACTER_EMOTION/VENBA_3.webp',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_1.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_2.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/Nhan_vat_cam_xuc/CNCX_3.jpg'
+      ]
+    }
+  };
+
+  window.fixedMoodboardGalleries = fixedMoodboardGalleries;
+
+  function findCurrentIndex(key) {
+    const item = fixedMoodboardGalleries[key];
+    if (!item) return 0;
+
+    const countEl = document.getElementById(item.countId);
+    const match = countEl?.textContent?.match(/(\d+)\s*\//);
+    if (match) return Math.max(0, Number(match[1]) - 1);
+
+    const img = document.getElementById(item.imgId);
+    const currentSrc = img?.getAttribute('src') || '';
+    const srcIndex = item.images.findIndex(src => currentSrc.endsWith(src.replace('./', '')) || currentSrc === src);
+    return srcIndex >= 0 ? srcIndex : 0;
+  }
+
+  function setFixedLightboxImage(key, index) {
+    const item = fixedMoodboardGalleries[key];
+    if (!item || !item.images.length) return;
+
+    currentGalleryKey = `fixed_${key}`;
+    currentGalleryIndex = (index + item.images.length) % item.images.length;
+
+    const caption = item.caption || 'Moodboard Image';
+    imgLightboxCaption.dataset.base = caption;
+    imgLightboxCaption.textContent = `${caption} · ${currentGalleryIndex + 1}/${item.images.length}`;
+    imgLightboxImg.src = item.images[currentGalleryIndex];
+
+    if (deleteLightboxImg) {
+      deleteLightboxImg.classList.add('fixed-gallery-hidden');
+    }
+
+    imgLightbox.classList.add('active');
+    updateYoutubeUI();
+  }
+
+  window.openFixedMoodboardLightbox = function(key, index) {
+    setFixedLightboxImage(key, index);
+  };
+
+  // Override old lightbox switching so it works for both uploaded galleries and fixed public galleries.
+  window.switchLightboxImage = switchLightboxImage = function(direction) {
+    if (typeof currentGalleryKey === 'string' && currentGalleryKey.startsWith('fixed_')) {
+      const key = currentGalleryKey.replace('fixed_', '');
+      const item = fixedMoodboardGalleries[key];
+      if (!item || item.images.length <= 1) return;
+
+      currentGalleryIndex = (currentGalleryIndex + direction + item.images.length) % item.images.length;
+      imgLightboxImg.src = item.images[currentGalleryIndex];
+      imgLightboxCaption.textContent = `${imgLightboxCaption.dataset.base || item.caption || 'Moodboard Image'} · ${currentGalleryIndex + 1}/${item.images.length}`;
+      updateYoutubeUI();
+      return;
+    }
+
+    const data = getSavedImages();
+    const gallery = data[currentGalleryKey] || [];
+    if (gallery.length <= 1) return;
+
+    currentGalleryIndex = (currentGalleryIndex + direction + gallery.length) % gallery.length;
+    imgLightboxImg.src = gallery[currentGalleryIndex];
+    imgLightboxCaption.textContent = `${imgLightboxCaption.dataset.base || 'Moodboard Image'} · ${currentGalleryIndex + 1}/${gallery.length}`;
+    updateYoutubeUI();
+  };
+
+  Object.keys(fixedMoodboardGalleries).forEach(key => {
+    const item = fixedMoodboardGalleries[key];
+    const img = document.getElementById(item.imgId);
+    const card = img?.closest('.hero-gallery-card');
+    if (!img || !card) return;
+
+    card.classList.add('is-lightbox-ready');
+
+    const openFromCard = function(e) {
+      if (e.target.closest('button')) return;
+      e.preventDefault();
+      e.stopPropagation();
+      setFixedLightboxImage(key, findCurrentIndex(key));
+    };
+
+    img.addEventListener('click', openFromCard);
+    card.addEventListener('click', openFromCard);
+  });
+
+  closeImgLightbox?.addEventListener('click', function() {
+    deleteLightboxImg?.classList.remove('fixed-gallery-hidden');
+  });
+
+  imgLightbox?.addEventListener('click', function(e) {
+    if (e.target === imgLightbox) {
+      deleteLightboxImg?.classList.remove('fixed-gallery-hidden');
+    }
+  });
+})();
+</script>
+
+<script>
+/* Final robust lightbox navigation fix: force arrows to work for fixed public galleries */
+(function() {
+  function forceLightboxStep(direction) {
+    if (typeof currentGalleryKey !== 'string') return;
+
+    if (currentGalleryKey.startsWith('fixed_')) {
+      const fixed = window.fixedMoodboardGalleries || {};
+      const key = currentGalleryKey.replace('fixed_', '');
+      const item = fixed[key];
+      if (!item || !Array.isArray(item.images) || item.images.length <= 1) return;
+
+      currentGalleryIndex = (currentGalleryIndex + direction + item.images.length) % item.images.length;
+      imgLightboxImg.src = item.images[currentGalleryIndex];
+      imgLightboxCaption.textContent = `${imgLightboxCaption.dataset.base || item.caption || 'Moodboard Image'} · ${currentGalleryIndex + 1}/${item.images.length}`;
+      updateYoutubeUI();
+      return;
+    }
+
+    const data = getSavedImages();
+    const gallery = Array.isArray(data[currentGalleryKey]) ? data[currentGalleryKey] : [];
+    if (gallery.length <= 1) return;
+
+    currentGalleryIndex = (currentGalleryIndex + direction + gallery.length) % gallery.length;
+    imgLightboxImg.src = gallery[currentGalleryIndex];
+    imgLightboxCaption.textContent = `${imgLightboxCaption.dataset.base || 'Moodboard Image'} · ${currentGalleryIndex + 1}/${gallery.length}`;
+    updateYoutubeUI();
+  }
+
+  const prev = document.getElementById('prevImg');
+  const next = document.getElementById('nextImg');
+
+  prev?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    forceLightboxStep(-1);
+  }, true);
+
+  next?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    forceLightboxStep(1);
+  }, true);
+
+  document.addEventListener('keydown', function(e) {
+    const box = document.getElementById('imgLightbox');
+    if (!box?.classList.contains('active')) return;
+
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      forceLightboxStep(-1);
+    }
+
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      forceLightboxStep(1);
+    }
+  }, true);
+})();
+</script>
+
+
+<script>
+/* Defensive image fallback: prevents broken image icon inside fixed moodboard lightbox */
+(function() {
+  const fallbackMap = {
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_5_LQ.jpg': './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_LQ.jpg',
+    './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_5__LQ.jpg': './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_LQ.jpg'
+  };
+
+  function normalizePath(src) {
+    try {
+      const url = new URL(src, window.location.href);
+      const root = window.location.origin + '/CookingWithNgoai/';
+      if (url.href.startsWith(root)) return './' + url.href.slice(root.length);
+    } catch (err) {}
+    return src || '';
+  }
+
+  function applyFallback(img) {
+    if (!img) return false;
+
+    const current = normalizePath(img.getAttribute('src') || img.src || '');
+    const fallback = fallbackMap[current];
+
+    if (fallback && current !== fallback) {
+      img.dataset.triedFallback = '1';
+      img.src = fallback;
+      return true;
+    }
+
+    return false;
+  }
+
+  function skipBrokenFixedImage(direction) {
+    if (typeof currentGalleryKey !== 'string' || !currentGalleryKey.startsWith('fixed_')) return;
+
+    const galleries = window.fixedMoodboardGalleries || {};
+    const key = currentGalleryKey.replace('fixed_', '');
+    const item = galleries[key];
+
+    if (!item || !Array.isArray(item.images) || item.images.length <= 1) return;
+
+    currentGalleryIndex = (currentGalleryIndex + direction + item.images.length) % item.images.length;
+    imgLightboxImg.src = item.images[currentGalleryIndex];
+    imgLightboxCaption.textContent = `${item.caption || 'Moodboard Image'} · ${currentGalleryIndex + 1}/${item.images.length}`;
+    if (typeof updateYoutubeUI === 'function') updateYoutubeUI();
+  }
+
+  const mainLightboxImg = document.getElementById('imgLightboxImg');
+  if (mainLightboxImg) {
+    mainLightboxImg.addEventListener('error', function() {
+      if (applyFallback(mainLightboxImg)) return;
+      skipBrokenFixedImage(1);
+    });
+  }
+
+  ['img-e1', 'img-e2', 'img-e3', 'img-e4', 'img-e5', 'img-v1'].forEach(function(id) {
+    const img = document.getElementById(id);
+    if (!img) return;
+    img.addEventListener('error', function() {
+      applyFallback(img);
+    });
+  });
 })();
 </script>
 

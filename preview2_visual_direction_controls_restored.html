@@ -2572,17 +2572,20 @@
   color: var(--brown);
 }
 
-.color-card.clay span { background:#7a4f2b; }
-.color-card.paper span { background:#f6ead2; border:1px solid rgba(122,79,43,.14); }
-.color-card.leaf span { background:#6f8f55; }
-.color-card.gac span { background:#b94b3f; }
-.color-card.taro span { background:#8b5f9f; }
+.color-card.clay .color-swatch { background:#7a4f2b; }
+.color-card.paper .color-swatch { background:#f6ead2; border:1px solid rgba(122,79,43,.14); }
+.color-card.leaf .color-swatch { background:#6f8f55; }
+.color-card.gac .color-swatch { background:#b94b3f; }
+.color-card.taro .color-swatch { background:#8b5f9f; }
 
 .avoid-block {
   padding: 24px;
   border-radius: 26px;
   background: rgba(45,36,28,.92);
   color: var(--cream);
+  width: 100%;
+  grid-column: 1 / -1;
+  margin-top: 24px;
 }
 
 .avoid-list {
@@ -2608,6 +2611,40 @@
   .color-palette-grid {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.benchmark-flag-img{
+  width:49px;
+  height:49px;
+
+  padding:6px;
+  border-radius:10px;
+
+  background:#7A4F2B;
+  border:1px solid rgba(122,79,43,.08);
+
+  backdrop-filter:blur(6px);
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+
+  object-fit:cover;
+  display:block;
+}
+
+.research-game-name{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.research-flag-img{
+  width:43px;
+  height:43px;
+  padding:6px;
+  border-radius:10px;
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(122,79,43,.08);
+  object-fit:cover;
+  flex-shrink:0;
 }
 
   </style>
@@ -2653,7 +2690,7 @@
           <a class="btn secondary" href="#research">Xem research framework</a>
           <button class="btn name-btn" type="button" data-open-name-page>Core Loop & Meta progression</button>
           <button class="btn secondary" id="openRosterBtn">Danh sách đầy đủ: X Ngoại</button>
-          <button class="btn secondary" id="openColorLanguageBtn">Visual Color Language</button>
+          <button class="btn secondary" id="openColorLanguageBtn">Quy tắc sử dụng màu sắc</button>
         </div>
       </div>
       <div class="hero-card">
@@ -2804,12 +2841,42 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><strong>Cooking Mama</strong></td><td>Tương tác nấu ăn trực quan, tactile, phản hồi nhanh và dễ tiếp cận với mọi người chơi.</td><td>Tương tác nấu ăn cần trực quan, mang và tạo cảm giác thao tác chân thật</td></tr>
-          <tr><td><strong>Good Pizza, Great Pizza</strong></td><td>Khách hàng có cá tính riêng, những câu chuyện nhỏ xoay quanh khách hàng và nhịp độ vòng lặp phục vụ cuốn hút.</td><td>Điều khiến vòng lặp gameplay hấp dẫn không chỉ là cơ chế, mà là con người, cá tính và những câu chuyện nhỏ xoay quanh nó. Thay vì liên tục chỉ lặp lại nhiệm vụ một cách tuyến tính.</td></tr>
-          <tr><td><strong>Cooking Diary / Cooking Fever</strong></td><td>Tiến trình phát triển rõ ràng và cảm giác tiến bộ dễ hiểu cho người chơi phổ thông.</td><td>Tiến trình cần rõ ràng, tạo cảm giác phát triển nhưng không gây áp lực cày cuốc.</td></tr>
-          <tr><td><strong>Venba</strong></td><td>Ẩm thực như phương tiện kể chuyện văn hóa, ký ức và bản sắc gia đình.</td><td>Món ăn không chỉ là gameplay, mà là công cụ kể chuyện và truyền tải ký ức về văn hóa.</td></tr>
-          <tr><td><strong>Spiritfarer</strong></td><td>Trải nghiệm chăm sóc và kết nối cảm xúc qua nhịp chơi thư thả, nơi cảm xúc có không gian để lắng lại. (thay vì bị thúc ép bởi áp lực hệ thống)</td><td>Nhịp chơi nên ưu tiên cảm xúc, sự chăm sóc và cảm giác thuộc về hơn áp lực tốc độ.</td></tr>
-          <tr><td><strong>Loyalty App / Campaign đổi quà</strong></td><td>Phần thưởng hữu hình như động lực đưa người chơi quay lại và kéo trải nghiệm ra thực tế</td><td>Phần thưởng nên xoá đi khoảng cách giữa thế giới ảo và thực tại, kết nối lối chơi với trải nghiệm thực tế.</td></tr>
+          <tr><td>
+  <div class="research-game-name">
+    <img class="research-flag-img" src="IMG_MOODBOARD/FLAGS/japan.png" alt="Japan">
+    <strong>Cooking Mama</strong>
+  </div>
+</td><td>Tương tác nấu ăn trực quan, tactile, phản hồi nhanh và dễ tiếp cận với mọi người chơi.</td><td>Tương tác nấu ăn cần trực quan, mang và tạo cảm giác thao tác chân thật</td></tr>
+          <tr><td>
+  <div class="research-game-name">
+    <img class="research-flag-img" src="IMG_MOODBOARD/FLAGS/usa.png" alt="USA">
+    <strong>Good Pizza, Great Pizza</strong>
+  </div>
+</td><td>Khách hàng có cá tính riêng, những câu chuyện nhỏ xoay quanh khách hàng và nhịp độ vòng lặp phục vụ cuốn hút.</td><td>Điều khiến vòng lặp gameplay hấp dẫn không chỉ là cơ chế, mà là con người, cá tính và những câu chuyện nhỏ xoay quanh nó. Thay vì liên tục chỉ lặp lại nhiệm vụ một cách tuyến tính.</td></tr>
+          <tr><td>
+  <div class="research-game-name">
+    <img class="research-flag-img" src="IMG_MOODBOARD/FLAGS/lithuania.png" alt="Lithuania">
+    <strong>Cooking Diary / Cooking Fever</strong>
+  </div>
+</td><td>Tiến trình phát triển rõ ràng và cảm giác tiến bộ dễ hiểu cho người chơi phổ thông.</td><td>Tiến trình cần rõ ràng, tạo cảm giác phát triển nhưng không gây áp lực cày cuốc.</td></tr>
+          <tr><td>
+  <div class="research-game-name">
+    <img class="research-flag-img" src="IMG_MOODBOARD/FLAGS/canada.png" alt="Canada">
+    <strong>Venba</strong>
+  </div>
+</td><td>Ẩm thực như phương tiện kể chuyện văn hóa, ký ức và bản sắc gia đình.</td><td>Món ăn không chỉ là gameplay, mà là công cụ kể chuyện và truyền tải ký ức về văn hóa.</td></tr>
+          <tr><td>
+  <div class="research-game-name">
+    <img class="research-flag-img" src="IMG_MOODBOARD/FLAGS/canada.png" alt="Canada">
+    <strong>Spiritfarer</strong>
+  </div>
+</td><td>Trải nghiệm chăm sóc và kết nối cảm xúc qua nhịp chơi thư thả, nơi cảm xúc có không gian để lắng lại. (thay vì bị thúc ép bởi áp lực hệ thống)</td><td>Nhịp chơi nên ưu tiên cảm xúc, sự chăm sóc và cảm giác thuộc về hơn áp lực tốc độ.</td></tr>
+          <tr><td>
+  <div class="research-game-name">
+    <img class="research-flag-img" src="IMG_MOODBOARD/FLAGS/money.png" alt="Money">
+    <strong>Loyalty App / Campaign đổi quà</strong>
+  </div>
+</td><td>Phần thưởng hữu hình như động lực đưa người chơi quay lại và kéo trải nghiệm ra thực tế</td><td>Phần thưởng nên xoá đi khoảng cách giữa thế giới ảo và thực tại, kết nối lối chơi với trải nghiệm thực tế.</td></tr>
         </tbody>
       </table>
 
@@ -2828,7 +2895,7 @@
         <div class="deep-benchmark-grid">
           <details class="benchmark-profile">
             <summary>
-              <span class="benchmark-flag">🇯🇵</span>
+              <img class="benchmark-flag-img" src="IMG_MOODBOARD/FLAGS/japan.png" alt="Japan">
               <span class="benchmark-title"><strong>Cooking Mama</strong><span>Tactile cooking</span></span>
               <span class="benchmark-plus">+</span>
             </summary>
@@ -2850,7 +2917,7 @@
 
           <details class="benchmark-profile">
             <summary>
-              <span class="benchmark-flag">🇺🇸</span>
+              <img class="benchmark-flag-img" src="IMG_MOODBOARD/FLAGS/usa.png" alt="USA">
               <span class="benchmark-title"><strong>Good Pizza, Great Pizza</strong><span>Character loop</span></span>
               <span class="benchmark-plus">+</span>
             </summary>
@@ -2868,7 +2935,7 @@
 
           <details class="benchmark-profile">
             <summary>
-              <span class="benchmark-flag">🇱🇹</span>
+              <img class="benchmark-flag-img" src="IMG_MOODBOARD/FLAGS/lithuania.png" alt="Lithuania">
               <span class="benchmark-title"><strong>Cooking Fever/Diary</strong><span>Progression</span></span>
               <span class="benchmark-plus">+</span>
             </summary>
@@ -2895,7 +2962,7 @@
 
           <details class="benchmark-profile">
             <summary>
-              <span class="benchmark-flag">🇨🇦</span>
+              <img class="benchmark-flag-img" src="IMG_MOODBOARD/FLAGS/canada.png" alt="Canada">
               <span class="benchmark-title"><strong>Venba</strong><span>Cultural memory</span></span>
               <span class="benchmark-plus">+</span>
             </summary>
@@ -2923,7 +2990,7 @@
 
           <details class="benchmark-profile">
             <summary>
-              <span class="benchmark-flag">🇨🇦</span>
+              <img class="benchmark-flag-img" src="IMG_MOODBOARD/FLAGS/canada.png" alt="Canada">
               <span class="benchmark-title"><strong>Spiritfarer</strong><span>Care pacing</span></span>
               <span class="benchmark-plus">+</span>
             </summary>
@@ -2966,7 +3033,7 @@
 
           <details class="benchmark-profile">
             <summary>
-              <span class="benchmark-flag">🎁</span>
+              <img class="benchmark-flag-img" src="IMG_MOODBOARD/FLAGS/money.png" alt="MONEY">
               <span class="benchmark-title"><strong>Real World Bridge</strong><span>Real-world bridge</span></span>
               <span class="benchmark-plus">+</span>
             </summary>
@@ -3045,7 +3112,7 @@
       <span class="tag">04 · Mood Board & Creative Direction</span>
       <h2 class="section-title">Ký ức ẩm thực được tái hiện qua thiết kế hiện đại </h2>
       <p class="section-lead">
-  Vật liệu truyền thống gặp thiết kế hiện đại — đủ cảm xúc để chạm tới người chơi, đủ rõ ràng để thương mại hóa.
+        
 </p>
       <p class="section-lead">Không khai thác hoài niệm theo hướng cũ, bi lụy. Đây là ký ức được nâng cấp, nơi vật liệu truyền thống gặp thiết kế hiện đại.</p>
 
@@ -5275,6 +5342,57 @@ enterSiteBtn?.addEventListener('click', () => {
   font-weight: 800 !important;
   font-family: 'Space Grotesk', sans-serif !important;
 }
+
+/*COLOR HEX*/ 
+.color-hex {
+  margin: 2px 0 8px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  color: rgba(122,79,43,.72);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.color-swatch{
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border-radius: 22px;
+  margin-bottom: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.color-code{
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(4px);
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+
+  color: rgba(255,255,255,.92);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.color-card.paper .color-code{
+  color:#7A4F2B;
+  background:rgba(122,79,43,.10);
+}
+
+.color-philosophy-image{
+  display:block;
+  margin:24px auto;
+  max-width:100%;
+  width:333px;
+
+  border-radius:24px;
+}
+
 </style>
 
 <script>
@@ -5832,17 +5950,25 @@ document.addEventListener('click', e => {
     </div>
 
     <div class="color-section">
-      <h4>Color Philosophy</h4>
+      <h4></h4>
+      <img src="IMG_MOODBOARD/VCOLOR_LANG/CWN COLOR.png" 
+       alt="Cooking with Ngoại Color Language"
+       class="color-philosophy-image">
+       <p>
+        - Các tông màu sẽ xoay quanh phạm vi vùng này để tạo cảm giác retro, hoài niệm và bạc bạc. 
+        Không quá chói/ tươi. Cũng không quá đen/ tối.
       <p>
-        Trò chơi tránh các gam màu neon, độ bão hòa cao/ tương phản kỹ thuật số mạnh
+        - Tránh các gam màu neon, độ bão hòa cao/ tương phản kỹ thuật số mạnh
         nhằm giữ trải nghiệm gần gũi và có chiều sâu về mặt cảm xúc.
       </p>
     </div>
 
     <div class="color-palette-grid">
-      <div class="color-card clay">
-        <span></span>
-        <h4>Đất nung</h4>
+    <div class="color-card clay">
+        <div class="color-swatch">
+        <div class="color-code">#7A4F2B</div>
+        </div>
+         <h4>Đất nung</h4>
         <small>Màu chủ đạo, linh hồn của trò chơi</small>
         <p>Sắc màu của bếp lửa hồng, của nồi đất nung, của nước màu cá kho kẹo lại và những thớ gỗ cũ sờn theo năm tháng.
           Dùng cho UI chính và các khoảnh khắc mang cảm giác quê nhà.
@@ -5851,7 +5977,9 @@ document.addEventListener('click', e => {
       </div>
 
       <div class="color-card paper">
-        <span></span>
+        <div class="color-swatch">
+        <div class="color-code">#F5E0C3</div>
+        </div>
         <h4>Giấy dó</h4>
         <small>Không gian để cảm xúc thở</small>
         <p>Tông nền kem ấm lấy cảm hứng từ chất liệu giấy dó truyền thống, mang lại ánh sáng dịu nhẹ và hoài cổ cho mái nhà Việt.</p>
@@ -5859,7 +5987,9 @@ document.addEventListener('click', e => {
       </div>
 
       <div class="color-card leaf">
-        <span></span>
+        <div class="color-swatch">
+        <div class="color-code">#A8C5A2</div>
+        </div>
         <h4>Lá chuối</h4>
         <small>Nhịp sống đời thường</small>
         <p>Sắc xanh mộc mạc của rau thơm vườn nhà, của lá gói bánh, gợi nhắc không khí thân thương của những phiên chợ sớm quê nhà.</p>
@@ -5867,7 +5997,9 @@ document.addEventListener('click', e => {
       </div>
 
       <div class="color-card gac">
-        <span></span>
+        <div class="color-swatch">
+        <div class="color-code">#E63946</div>
+        </div>
         <h4>Gấc đỏ</h4>
         <small>Điểm chạm cảm xúc</small>
         <p>Sắc đỏ nồng hậu dành riêng cho những mâm cơm ngày lễ Tết, tạo điểm nhấn thị giác đặc biệt và mang thông điệp của sự sum vầy.</p>
@@ -5875,30 +6007,31 @@ document.addEventListener('click', e => {
         <b>Celebration · Energy · Tết Memory</b>
       </div>
 
-      <div class="color-card taro">
-        <span></span>
+            <div class="color-card taro">
+        <div class="color-swatch">
+          <div class="color-code">#9D4EDD</div>
+        </div>
         <h4>Khoai môn</h4>
         <small>Màu của ký ức</small>
         <p>Tông tím mộng mơ dành cho cho những khoảng lặng hồi tưởng, những ký ức phiêu lãng và các góc khuất nội tâm sâu lắng.</p>
         <b>Memory · Reflection · Depth</b>
       </div>
+
     </div>
 
     <div class="avoid-block">
       <h4>Những điều cần tránh</h4>
       <div class="avoid-list">
-        <span>Neon saturation cao</span>
+        <span>Neon độ tương phảncao</span>
         <span>Trắng tinh kỹ thuật số</span>
         <span>Tương phản gắt kiểu arcade</span>
         <span>Candy pastel quá ngọt</span>
         <span>Gradient cyber/artificial</span>
       </div>
       <p>
-        Vì chúng làm mất cảm giác mộc, gần gũi và chiều sâu cảm xúc của thế giới Cooking with Ngoại.
+        Vì chúng làm mất cảm giác mộc mạc, gần gũi và chiều sâu cảm xúc của thế giới Cooking with Ngoại.
       </p>
     </div>
-  </div>
-</div>
 
 </body>
 </html>

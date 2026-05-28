@@ -2335,6 +2335,281 @@
     z-index: 999 !important;
 }
 
+.spirit-expand-btn {
+  margin-top: 10px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(122,79,43,.18);
+  background: rgba(255,248,234,.75);
+  color: var(--brown);
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.spirit-hidden-popup {
+  display: none;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,248,234,.75);
+  border: 1px solid rgba(122,79,43,.14);
+  line-height: 1.6;
+}
+
+.spirit-hidden-popup.active {
+  display: block;
+}
+
+.benchmark-modal-btn {
+  margin-top: 10px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(122,79,43,.18);
+  background: rgba(255,248,234,.82);
+  color: var(--brown);
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.benchmark-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(30,20,12,.72);
+  backdrop-filter: blur(12px);
+}
+
+.benchmark-modal.active {
+  display: flex;
+}
+
+.benchmark-modal-panel {
+  position: relative;
+  width: min(1100px, 94vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 38px;
+  border-radius: 34px;
+  background: linear-gradient(135deg, #fff8ea, #f2dfbd);
+  border: 1px solid rgba(122,79,43,.18);
+  box-shadow: 0 40px 120px rgba(0,0,0,.35);
+}
+
+.benchmark-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.benchmark-modal-kicker {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(122,79,43,.12);
+  color: var(--brown);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.benchmark-modal-panel h3 {
+  margin: 0 0 10px;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: .95;
+  letter-spacing: -.04em;
+}
+
+.benchmark-modal-lead {
+  max-width: 760px;
+  margin: 0 0 28px;
+  font-size: 19px;
+  line-height: 1.6;
+  color: rgba(45,36,28,.72);
+}
+
+.benchmark-modal-grid {
+  display: grid;
+  grid-template-columns: .9fr 1.35fr;
+  gap: 18px;
+}
+
+.benchmark-modal-card {
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255,248,234,.72);
+  border: 1px solid rgba(122,79,43,.14);
+}
+
+.benchmark-modal-card.warm {
+  background: rgba(217,130,59,.09);
+}
+
+.benchmark-modal-card h4 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--brown);
+}
+
+.benchmark-modal-card p {
+  margin: 0;
+  line-height: 1.7;
+  color: rgba(45,36,28,.76);
+}
+
+.benchmark-modal-point {
+  padding: 16px 0;
+  border-top: 1px solid rgba(122,79,43,.14);
+}
+
+.benchmark-modal-point:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.benchmark-modal-point strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .benchmark-modal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* VISUAL COLOR LANGUAGE */
+.color-language-panel {
+  max-width: 1080px;
+}
+
+.color-language-hero h3 {
+  margin: 16px 0 14px;
+  font-size: clamp(34px, 4vw, 56px);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+
+.color-language-hero p,
+.color-section p,
+.avoid-block p {
+  max-width: 760px;
+  line-height: 1.75;
+  color: rgba(45,36,28,.74);
+}
+
+.color-section {
+  margin: 28px 0;
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(246,234,210,.65);
+  border: 1px solid rgba(122,79,43,.12);
+}
+
+.color-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.color-card {
+  min-height: 260px;
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255,248,234,.72);
+  border: 1px solid rgba(122,79,43,.14);
+  box-shadow: 0 18px 40px rgba(61,38,20,.08);
+}
+
+.color-card span {
+  display: block;
+  width: 100%;
+  height: 72px;
+  border-radius: 18px;
+  margin-bottom: 16px;
+}
+
+.color-card h4 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.color-card small {
+  display: block;
+  margin-bottom: 12px;
+  color: rgba(122,79,43,.72);
+  font-weight: 800;
+}
+
+.color-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(45,36,28,.72);
+}
+
+.color-card b {
+  display: block;
+  margin-top: 14px;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--brown);
+}
+
+.color-card.clay span { background:#7a4f2b; }
+.color-card.paper span { background:#f6ead2; border:1px solid rgba(122,79,43,.14); }
+.color-card.leaf span { background:#6f8f55; }
+.color-card.gac span { background:#b94b3f; }
+.color-card.taro span { background:#8b5f9f; }
+
+.avoid-block {
+  padding: 24px;
+  border-radius: 26px;
+  background: rgba(45,36,28,.92);
+  color: var(--cream);
+}
+
+.avoid-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.avoid-list span {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,248,234,.1);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.avoid-block p {
+  color: rgba(255,248,234,.72);
+}
+
+@media(max-width: 900px) {
+  .color-palette-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -2378,6 +2653,7 @@
           <a class="btn secondary" href="#research">Xem research framework</a>
           <button class="btn name-btn" type="button" data-open-name-page>Core Loop & Meta progression</button>
           <button class="btn secondary" id="openRosterBtn">FULL ROSTER: X NGOẠI</button>
+          <button class="btn secondary" id="openColorLanguageBtn">Visual Color Language</button>
         </div>
       </div>
       <div class="hero-card">
@@ -2562,7 +2838,11 @@
                 <div class="benchmark-mini"><b>CẢM XÚC NGƯỜI CHƠI</b><span>Thỏa mãn ngay lập tức từ những tương tác vật lý vui nhộn và sinh động.</span></div>
                 <div class="benchmark-mini"><b>ĐỘNG LỰC GIỮ CHÂN</b><span>Lối chơi dễ tiếp cận, dễ nắm bắt, liên tục tạo ra các cột mốc phần thưởng ngắn để duy trì niềm vui.</span></div>
                 <div class="benchmark-mini"><b>CƠ CHẾ VẬN HÀNH</b><span>Gameplay được cấu trúc thành chuỗi tương tác ngắn, mỗi bước đều tạo phản hồi tức thì để duy trì cảm giác cuốn hút.</span></div>
-                <div class="benchmark-mini watchout"><b>ỨNG DỤNG CHO CONCEPT</b><span>Mini game nấu ăn nên trực quan, mang lại cảm giác tương tác và dễ nắm bắt. Thổi vào đó chất liệu mộc mạc của bếp Việt và những mảnh ký ức gia đình.</span></div>
+                <div class="benchmark-mini watchout"><b>ỨNG DỤNG CHO CONCEPT</b><span>Mini game nấu ăn nên trực quan, mang lại cảm giác tương tác và dễ nắm bắt. Thổi vào đó chất liệu mộc mạc của bếp Việt và những mảnh ký ức gia đình.</span>
+                <button class="benchmark-modal-btn" type="button" data-open-benchmark-modal="cookingmama-narrative-loop">
+                ＋ Mở rộng
+                </button>
+                </div>
                 <div class="benchmark-mini watchout"><b>ĐIỀU CẦN TRÁNH</b><span>Tránh biến Cooking with Ngoại thành một tựa game máy móc, vui tay nhưng rỗng tuếch và thiếu đi linh hồn văn hóa Việt.</span></div>
               </div>
             </div>
@@ -2603,7 +2883,11 @@
                   <span>
                   <p>Giữ mạch tiến triển rõ rệt để người chơi luôn thấy hành trình của mình có ý nghĩa và giá trị.</p>
                   <p class="indent-paragraph">
-                  <p>Sự tiến bộ được đo bằng chiều sâu của ký ức được mở ra và sự ấm cúng tăng dần trong căn bếp của Ngoại.</p></span></div>
+                  <p>Sự tiến bộ được đo bằng chiều sâu của ký ức được mở ra và sự ấm cúng tăng dần trong căn bếp của Ngoại.</p></span>
+                  <button class="benchmark-modal-btn" type="button" data-open-benchmark-modal="cookingfever-progression">
+                  ＋ Mở rộng
+                  </button>
+                </div>
                 <div class="benchmark-mini watchout"><b>ĐIỀU CẦN TRÁNH</b><span>Tránh cuốn người chơi vào vòng xoáy áp lực thời gian, biến một không gian vốn để thư giãn, vỗ về tâm hồn trở thành một cỗ máy vắt kiệt năng lượng và gây căng thẳng.</span></div>
               </div>
             </div>
@@ -2620,7 +2904,11 @@
                 <div class="benchmark-mini"><b>DNA</b><span>Ẩm thực không đơn thuần là kỹ năng, mà là ngôn ngữ thiêng liêng để kể câu chuyện về tình thân, nguồn cội và sự tiếp nối giữa các thế hệ.</span></div>
                 <div class="benchmark-mini"><b>CẢM XÚC NGƯỜI CHƠI</b><span>Hoài niệm, tự hào về bản sắc văn hóa và tìm thấy sự đồng điệu trong tình cảm gia đình.</span></div>
                 <div class="benchmark-mini"><b>ĐỘNG LỰC GIỮ CHÂN</b><span>Tạo cảm giác thôi thúc được đồng hành cùng nhân vật qua từng chương cuộc đời, mở từng trang về những mảnh ký ức ngủ quên và thấu hiểu những tâm tư chưa bao giờ được nói thành lời.</span></div>
-                <div class="benchmark-mini"><b>CƠ CHẾ VẬN HÀNH</b><span>Khôi phục lại những công thức bị nhạt nhòa theo thời gian > Chữa lành những rạn nứt của các thế hệ > Lưu giữ và tiếp nối dòng chảy ký ức.</span></div>
+                <div class="benchmark-mini"><b>CƠ CHẾ VẬN HÀNH</b><span>Khôi phục lại những công thức bị nhạt nhòa theo thời gian > Chữa lành những rạn nứt của các thế hệ > Lưu giữ và tiếp nối dòng chảy ký ức.</span>
+                <button class="benchmark-modal-btn" type="button" data-open-benchmark-modal="venba-memory-puzzle">
+                  ＋ Mở rộng
+                </button>
+                </div>
                 <div class="benchmark-mini watchout">
                   <b>ỨNG DỤNG CHO CONCEPT</b>
                   <span>
@@ -2644,7 +2932,26 @@
                 <div class="benchmark-mini"><b>DNA</b><span>Tình yêu thương và sự chăm sóc được hữu hình hóa qua những cử chỉ đời thường, biến mỗi tương tác nhỏ thành một điểm chạm gắn kết sâu sắc.</span></div>
                 <div class="benchmark-mini"><b>CẢM XÚC NGƯỜI CHƠI</b><span>Ấm áp, lắng đọng, tìm thấy sự bình yên và những khoảng lặng để tự soi rọi lòng mình.</span></div>
                 <div class="benchmark-mini"><b>ĐỘNG LỰC GIỮ CHÂN</b><span>Sợi dây tình cảm vô hình nhưng bền chặt của nhân vật tạo nên thôi thúc muốn được chở che, đồng hành và tạo nên những kỷ niệm trọn vẹn bên những người thân yêu.</span></div>
-                <div class="benchmark-mini"><b>CƠ CHẾ VẬN HÀNH</b><span>Nhịp điệu trải nghiệm chậm rãi > Đan xen những khoảng lặng > Chuyển hóa những hành động chăm sóc lặp đi lặp lại thành thói quen thân thuộc.</span></div>
+                <div class="benchmark-mini">
+                <b>CƠ CHẾ VẬN HÀNH</b>
+                <span>Nhịp điệu trải nghiệm chậm rãi > Đan xen những khoảng lặng > Chuyển hóa những hành động chăm sóc lặp đi lặp lại thành thói quen thân thuộc.</span>
+
+                <button class="benchmark-modal-btn" type="button" data-open-benchmark-modal="spiritfarer-pacing">
+                ＋ Mở rộng
+                </button>
+                <div class="spirit-hidden-popup">
+                  <strong>Mạch chăm sóc tạo gắn kết</strong>
+                  <p>
+                    Spiritfarer giữ người chơi bằng nhịp chăm sóc chậm rãi, nơi những hành động lặp lại dần trở thành thói quen cảm xúc.
+                  </p>
+                  <p>
+                    Gặp nhân vật → Chăm sóc → Trò chuyện → Ký ức mở ra → Gắn bó hơn
+                  </p>
+                  <p>
+                    Với Cooking with Ngoại: Nấu món → Ngoại phản ứng → câu chuyện nhỏ mở ra → quan hệ tiến triển → ký ức được đánh thức.
+                  </p>
+                </div>
+              </div>
                 <div class="benchmark-mini watchout">
                   <b>ỨNG DỤNG CHO CONCEPT</b>
                   <span>
@@ -2777,11 +3084,11 @@
     <!-- NAME PAGE -->
     <section id="name-page" class="name-page reveal" aria-hidden="true">
       <div class="name-page-head">
-        <span class="tag">05 · Game Naming Direction</span>
+        <span class="tag">05 - PLAYER EXPERIENCE FRAMEWORK</span>
         <button class="back-btn" type="button" data-close-name-page>← Quay lại concept</button>
       </div>
-      <h2 class="section-title">Chọn tên cho trò chơi</h2>
-      <p class="section-lead">Ba tên dưới đây đều đi theo tinh thần ẩm thực Việt, ký ức gia đình và cảm giác trở về. Khác nhau nằm ở trọng tâm cảm xúc: <strong>thời gian</strong>, <strong>mái nhà</strong> hoặc <strong>nhân vật Ngoại</strong>. Click vào từng tên để xem chi tiết về <strong>thiết kế lối chơi và trải nghiệm người chơi</strong>.</p>
+      <h2 class="section-title">Thiết kế hành trình cảm xúc của người chơi</h2>
+      <p class="section-lead">Từ cách nấu ăn, mở khóa ký ức cho đến những khoảng nghỉ nhỏ giữa các món ăn, mọi hệ thống đều được thiết kế để khiến người chơi không chỉ hoàn thành nhiệm vụ mà còn cảm thấy mình đang sống trong một mối quan hệ của tình bà cháu.</p>
       <div class="name-grid">
         <article class="name-card" data-name="vixua">
           <div class="name-label">01</div>
@@ -5203,7 +5510,395 @@ enterSiteBtn?.addEventListener('click', () => {
     decorateVisualGallery(key, visualDirectionGalleries[key]);
   });
 })();
+
+document.querySelectorAll('.spirit-expand-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const popup = btn.nextElementSibling;
+    popup.classList.toggle('active');
+    btn.textContent = popup.classList.contains('active')
+      ? '− Thu gọn'
+      : '＋ Mở rộng';
+  });
+});
+
+function closeBenchmarkModal(modal) {
+  modal.classList.remove('active');
+  document.body.classList.remove('panel-open');
+}
+
+document.addEventListener('click', e => {
+  const openBtn = e.target.closest('[data-open-benchmark-modal]');
+  if (openBtn) {
+    const modal = document.getElementById(openBtn.dataset.openBenchmarkModal);
+    if (!modal) return;
+
+    modal.classList.add('active');
+    document.body.classList.add('panel-open');
+    return;
+  }
+
+  const closeBtn = e.target.closest('.benchmark-modal-close');
+  if (closeBtn) {
+    const modal = closeBtn.closest('.benchmark-modal');
+    if (modal) closeBenchmarkModal(modal);
+    return;
+  }
+
+  const modal = e.target.classList.contains('benchmark-modal') ? e.target : null;
+  if (modal) {
+    closeBenchmarkModal(modal);
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.benchmark-modal.active').forEach(closeBenchmarkModal);
+  }
+});
+
+/* VISUAL COLOR LANGUAGE */
+document.addEventListener('click', e => {
+  const openBtn = e.target.closest('#openColorLanguageBtn');
+  if (openBtn) {
+    const panel = document.getElementById('colorLanguagePanel');
+    if (!panel) return;
+
+    panel.classList.add('active');
+    document.body.classList.add('panel-open');
+    return;
+  }
+
+  const closeBtn = e.target.closest('#closeColorLanguage');
+  if (closeBtn) {
+    const panel = document.getElementById('colorLanguagePanel');
+    if (!panel) return;
+
+    panel.classList.remove('active');
+    document.body.classList.remove('panel-open');
+    return;
+  }
+
+  const panel = e.target.id === 'colorLanguagePanel' ? e.target : null;
+  if (panel) {
+    panel.classList.remove('active');
+    document.body.classList.remove('panel-open');
+  }
+});
 </script>
+
+//COOKING MAMA
+
+<div class="benchmark-modal" id="cookingmama-narrative-loop">
+  <div class="benchmark-modal-panel">
+    <button class="benchmark-modal-close" type="button">×</button>
+
+    <span class="benchmark-modal-kicker">COOKING MAMA - NARRATIVE LOOP LOGIC</span>
+    <h3>Nghệ thuật dệt chuyện vào bếp lửa</h3>
+    <p class="benchmark-modal-lead">
+      Chuyển hóa thao tác nấu ăn đơn giản thành những khoảnh khắc thân thuộc quanh căn bếp của Ngoại.
+    </p>
+
+    <div class="benchmark-modal-grid">
+      <div class="benchmark-modal-card">
+        <h4>Cách Cooking Mama làm tốt</h4>
+        <p>
+          Cooking Mama biến những công đoạn nhàm chán ngoài đời (băm, chặt, cuốn) thành những mini-game cuốn hút, tràn đầy năng lượng tích cực. 
+          Đặc biệt, Mama vẫn luôn âm thầm dõi theo.
+          Kể cả khi người chơi làm cháy khét hay rơi vãi, Mama vẫn hiện ra và nói: "It's okay, Mama will help you!". Phần thưởng lớn nhất không phải là điểm số, mà là nụ cười hạnh phúc và ánh mắt tự hào của Mama khi món ăn được hoàn thành.
+        </p>
+      </div>
+
+      <div class="benchmark-modal-card warm">
+        <h4>Cách Cooking with Ngoại ứng dụng</h4>
+
+        <div class="benchmark-modal-point">
+          <strong>Những câu nói vu vơ của Ngoại</strong>
+          <p>
+            Ngoại không đưa ra đề bài khô khan. Ngoại có thể bảo:
+            “Trời trở gió kiểu này, 
+            giá mà có cái chi nóng nóng, cay cay để ăn thì...hao cơm biết mấy."
+            Từ những câu nói vu vơ, người chơi dần học cách nhớ mùi vị, đoán món ăn và tự tay nấu nên nồi cá kho tộ đậm vị miền Tây. (nấu sai bụt khõ đầu...pặc)
+          </p>
+        </div>
+
+        <div class="benchmark-modal-point">
+          <strong>Đang tiếp tục xây dựng...</strong>
+          <p>
+            Booong !
+          </p>
+        </div>
+
+        <div class="benchmark-modal-point">
+          <strong>Phần thưởng không chỉ là tiền xu</strong>
+          <p>
+            Khi nấu đúng ý, phần thưởng nhận lại đôi khi là cái xoa đầu của Ngoại,
+            hay một câu trách dễ thương: “Biết nấu vậy rồi chắc mai mốt bỏ Ngoại luôn quá.”
+            Hoặc khoảnh khắc Ngoại ngồi lặng đi thật lâu vì món ăn gợi lại một ký ức cũ mà đã nhiều năm rồi không ai nhắc tới.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+//COOKING FEVER
+
+<div class="benchmark-modal" id="cookingfever-progression">
+  <div class="benchmark-modal-panel">
+    <button class="benchmark-modal-close" type="button">×</button>
+
+    <span class="benchmark-modal-kicker">COOKING FEVER / DIARY - MINDFUL PROGRESSION LOGIC</span>
+    <h3>Quá trình tiến triển trong căn bếp của Ngoại</h3>
+
+    <p class="benchmark-modal-lead">
+      Thay vì khiến căn bếp lớn hơn, chúng ta khiến nó ấm dần theo thời gian.
+    </p>
+
+    <div class="benchmark-modal-grid">
+      <div class="benchmark-modal-card">
+        <h4>Cách Cooking Fever làm</h4>
+        <p>
+          Cooking Fever tạo cảm giác tiến triển bằng cách: cho người chơi mua trang thiết bị xịn hơn,
+          nâng cấp nhà hàng, nâng cấp tốc độ phục vụ, tối ưu thao tác và mở thêm nhà hàng mới.
+          Người chơi dễ cảm thấy mình vận hành hiệu quả hơn và xử lý được nhiều đơn hàng hơn trong thời gian ngắn.
+        </p>
+      </div>
+
+      <div class="benchmark-modal-card warm">
+        <h4>Cách Cooking with Ngoại chuyển hóa</h4>
+
+        <div class="benchmark-modal-point">
+          <strong>Sự trọn vẹn của căn bếp</strong>
+          <p>
+            Sự tiến triển không nằm ở thiết bị hiện đại hay quy mô lớn. 
+            Nó thể hiện qua việc căn bếp dần trở nên đầy đặn và có hơi người hơn: hũ gia vị được lấp đầy, dụng cụ được sửa lại, góc bếp sáng hơn, nhiều món ăn mới xuất hiện trên mâm cơm của Ngoại v...v
+          </p>
+        </div>
+
+        <div class="benchmark-modal-point">
+          <strong>Sự trưởng thành của người cháu</strong>
+          <p>
+           Ở những lần chơi đầu, người chơi còn lóng ngóng và dễ làm sai nhịp nấu. 
+           Nhưng càng về sau, trên thông thiên văn, dưới tường địa lý nên thao tác dần trở nên tự nhiên hơn, không chỉ vì quen tay, 
+           mà vì người chơi bắt đầu ghi nhớ công thức, hiểu cách Ngoại nêm nếm, chuẩn bị cho một bữa cơm.
+          </p>
+        </div>
+
+        <div class="benchmark-modal-point">
+          <strong>Cuốn album ký ức được lấp đầy</strong>
+          <p>
+            Thước đo thành tựu lớn nhất không chỉ là điểm số, mà là những trang nhật ký ẩm thực
+            và ảnh tư liệu gia đình được mở ra. Từ vài bức ảnh ố vàng đơn độc,
+            cuốn sổ tay của hai bà cháu ngày một dày lên,
+            lưu giữ tình yêu thương và văn hóa truyền thống qua năm tháng.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+//VENBA
+
+<div class="benchmark-modal" id="venba-memory-puzzle">
+  <div class="benchmark-modal-panel">
+    <button class="benchmark-modal-close" type="button">×</button>
+
+    <span class="benchmark-modal-kicker">VENBA - PUZZLE & NARRATIVE LOGIC</span>
+
+    <h3>Khơi gợi ký ức từ những khoảng trống</h3>
+
+    <p class="benchmark-modal-lead">
+      Làm sao để một công thức nấu ăn bị nhạt nhòa trở thành một câu đố của tình yêu thương?
+    </p>
+
+    <div class="benchmark-modal-grid">
+      <div class="benchmark-modal-card">
+        <h4>Cách Venba làm tốt</h4>
+
+        <p>
+          Cuốn sách nấu ăn của người Mẹ có những đoạn bị mờ chữ, rách nát do thời gian
+          và những biến cố khi di cư.
+          Người chơi cần quan sát những gợi ý còn sót lại trong công thức, 
+          thử suy luận từ ngữ cảnh và tự ghép lại các bước nấu ăn đã bị thời gian làm phai mờ.
+        </p>
+      </div>
+
+      <div class="benchmark-modal-card warm">
+        <h4>Cách Cooking with Ngoại ứng dụng</h4>
+
+        <div class="benchmark-modal-point">
+          <strong>Cuốn sổ tay sờn gáy của Ngoại</strong>
+
+          <p>
+            Cuốn sổ tay nấu ăn cũ kỹ của Ngoại có những trang bị nhòe nước,
+            có những chỗ chữ đã mờ đi theo năm tháng.
+            Người chơi không còn làm theo một công thức hoàn chỉnh, mà phải lắng nghe, quan sát và dần hiểu cách Ngoại nêm nếm qua từng gợi ý nhỏ.
+          </p>
+        </div>
+
+        <div class="benchmark-modal-point">
+          <strong>Giải đố bằng sự thấu hiểu</strong>
+
+          <p>
+            Để tìm ra bước tiếp theo. (cho hành hay cho tỏi trước,
+            kho lửa lớn, vừa hay liu riu)
+            Người chơi phải nhớ lại những lời Ngoại từng nói vu vơ trong lúc nấu ăn, để ý thói quen chuẩn bị nguyên liệu hay cảm nhận xem món ăn hôm đó cần một vị đậm đà hay thanh nhẹ hơn.
+          </p>
+        </div>
+
+        <div class="benchmark-modal-point">
+          <strong>Cái kết chạm lòng</strong>
+          <p>
+            Khi món ăn được hoàn thành đúng hương vị, cuốn sổ tay của Ngoại dần mở ra thêm những ghi chú cũ,
+            dòng chữ bị mờ trong cuốn sổ của Ngoại sẽ sáng lên đầy trọn vẹn,
+            mở khóa một tấm ảnh cũ được cất giữa các trang giấy, hay một câu chuyện mà trước đây Ngoại chưa từng kể.
+            Biến trò chơi thành một chiếc hộp thời gian vô giá.
+            P.S: Cooking with Ngoại không biến công thức thiếu thành thử thách trí tuệ, mà thành cách để người chơi học cách hiểu một con người thông qua căn bếp của họ.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+//SPIRITFARER
+
+<div class="benchmark-modal" id="spiritfarer-pacing">
+  <div class="benchmark-modal-panel">
+    <button class="benchmark-modal-close" type="button">×</button>
+    <span class="benchmark-modal-kicker">SPIRITFARER · EMOTIONAL PACING LOGIC</span>
+    <h3>Thiết kế nhịp cảm xúc bằng khoảng lặng</h3>
+    <p class="benchmark-modal-lead">
+      Làm sao để những khoảnh khắc ít hành động vẫn tạo những phút dao động về mặt cảm xúc. 
+    </p>
+
+    <div class="benchmark-modal-grid">
+      <div class="benchmark-modal-card">
+        <h4>Cách Spiritfarer làm tốt</h4>
+        <p>
+          <span>
+          <p class="indent-paragraph">Spiritfarer không giữ người chơi bằng áp lực của nhiệm vụ, mà bằng sự gắn bó được xây qua những hành động chăm sóc: nấu ăn, trò chuyện, ôm, giúp đỡ và ở cạnh các linh hồn trước khi tiễn họ đi. 
+          Những khoảng lặng trên con tàu không phải thời gian chết, mà là không gian để cảm xúc lắng xuống và các mối quan hệ trở nên có trọng lượng.</p>
+          <p class="indent-paragraph">
+          Vì vậy, Spiritfarer tạo ra cơ chế “ôm”, tuy không mang lại bất kỳ chỉ số nào, nhưng lại là cử chỉ được người chơi yêu thích nhất. 
+          Tham khảo thêm tại: https://www.wired.com/story/cozy-management-games-remind-us-how-to-care/</p></span>
+        </p>
+      </div>
+
+      <div class="benchmark-modal-card warm">
+        <h4>Cách Cooking with Ngoại có thể áp dụng</h4>
+
+        <div class="benchmark-modal-point">
+          <strong>Tạo khoảng nghỉ lúc nhàn rỗi (AFK)</strong>
+          <p>
+            Sau khi nhóm bếp hay trong lúc chờ nồi kho quẹt kẹo lại, game mở ra một tương tác ngẫu nhiên:
+            cháu có thể quạt mát cho Ngoại, Ngoại đưa tay sửa lại mái tóc cho cháu.
+            Những hành động này không tính điểm, nhưng sẽ tạo ra cảm giác thân quen, hình ảnh dễ thương và chữa lành cho tâm hồn.
+          </p>
+        </div>
+
+        <div class="benchmark-modal-point">
+          <strong>Khoảnh lặng trước hiên nhà</strong>
+          <p>
+            Thiết kế những khung cảnh bình yên khi hai nhân vật afk gần nhau: hai bà cháu ngồi đung đưa võng trước hiên,
+            tiếng võng kẽo kẹt hòa cùng tiếng mưa ngoài sân. Người chơi sẽ có phút thư giãn cùng nhân vật, thả trôi theo điệu nhạc và mưa.
+          </p>
+        </div>
+
+        <div class="benchmark-modal-point">
+          <strong>Đang cập nhật...</strong>
+          <p>
+            Booong ! 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+//VISUAL COLOR LANG
+<div class="gameplay-overlay" id="colorLanguagePanel">
+  <div class="gameplay-panel color-language-panel">
+    <button class="gameplay-panel-close" id="closeColorLanguage">×</button>
+
+    <div class="color-language-hero">
+      <span class="panel-tag">05 · VISUAL COLOR LANGUAGE</span>
+      <h3>Màu sắc không chỉ để làm đẹp, mà để giữ cảm giác của một căn bếp có ký ức.</h3>
+      <p>
+        Cooking with Ngoại sử dụng bảng màu ấm, mộc mạc và giàu chất liệu đời sống Việt. 
+        Mỗi sắc thái đại diện cho một tầng cảm xúc riêng biệt: sự chăm sóc, hơi ấm tình thân, ký ức ngủ quên, nhịp sống chậm và niềm hạnh phúc có nơi để trở về.
+      </p>
+    </div>
+
+    <div class="color-section">
+      <h4>Color Philosophy</h4>
+      <p>
+        Trò chơi tránh các gam màu neon, saturation cao hoặc tương phản kỹ thuật số mạnh
+        để giữ trải nghiệm dịu, gần gũi và có chiều sâu cảm xúc.
+      </p>
+    </div>
+
+    <div class="color-palette-grid">
+      <div class="color-card clay">
+        <span></span>
+        <h4>Đất nung</h4>
+        <small>Màu chủ đạo, linh hồn của trò chơi</small>
+        <p>Sắc màu của bếp lửa hồng, của nồi đất nung, của nước màu cá kho kẹo lại và những thớ gỗ cũ sờn theo năm tháng.
+          Dùng cho UI chính và các khoảnh khắc mang cảm giác quê nhà.
+        </p>
+        <b>Ấm áp - Chăm sóc - Thuộc về</b>
+      </div>
+
+      <div class="color-card paper">
+        <span></span>
+        <h4>Giấy dó</h4>
+        <small>Không gian để cảm xúc thở</small>
+        <p>Tông nền kem ấm lấy cảm hứng từ chất liệu giấy dó truyền thống, mang lại ánh sáng dịu nhẹ và hoài cổ cho mái nhà Việt.</p>
+        <b>Breathing Space · Handmade · Calm</b>
+      </div>
+
+      <div class="color-card leaf">
+        <span></span>
+        <h4>Lá chuối</h4>
+        <small>Nhịp sống đời thường</small>
+        <p>Sắc xanh mộc mạc của rau thơm vườn nhà, của lá gói bánh, gợi nhắc không khí thân thương của những phiên chợ sớm quê nhà.</p>
+        <b>Life · Freshness · Nature</b>
+      </div>
+
+      <div class="color-card gac">
+        <span></span>
+        <h4>Gấc đỏ</h4>
+        <small>Điểm chạm cảm xúc</small>
+        <p>Sắc đỏ nồng hậu dành riêng cho những mâm cơm ngày lễ Tết, tạo điểm nhấn thị giác đặc biệt và mang thông điệp của sự sum vầy.</p>
+        <p>Dùng tiết chế do nếu dùng quá nhiều sẽ làm game bị nóng/gắt.</p>
+        <b>Celebration · Energy · Tết Memory</b>
+      </div>
+
+      <div class="color-card taro">
+        <span></span>
+        <h4>Khoai môn</h4>
+        <small>Màu của ký ức</small>
+        <p>Tông tím mộng mơ dành cho cho những khoảng lặng hồi tưởng, những ký ức phiêu lãng và các góc khuất nội tâm sâu lắng.</p>
+        <b>Memory · Reflection · Depth</b>
+      </div>
+    </div>
+
+    <div class="avoid-block">
+      <h4>Những điều cần tránh</h4>
+      <div class="avoid-list">
+        <span>Neon saturation cao</span>
+        <span>Trắng tinh kỹ thuật số</span>
+        <span>Tương phản gắt kiểu arcade</span>
+        <span>Candy pastel quá ngọt</span>
+        <span>Gradient cyber/artificial</span>
+      </div>
+      <p>
+        Vì chúng làm mất cảm giác mộc, gần gũi và chiều sâu cảm xúc của thế giới Cooking with Ngoại.
+      </p>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

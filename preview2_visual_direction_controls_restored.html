@@ -2664,6 +2664,268 @@
   flex-shrink:0;
 }
 
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 34px;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(246,234,210,.95), transparent 28%),
+    radial-gradient(circle at 78% 22%, rgba(122,79,43,.16), transparent 24%),
+    radial-gradient(circle at 28% 78%, rgba(111,143,85,.18), transparent 22%),
+    linear-gradient(135deg, rgba(255,248,234,.72), rgba(246,234,210,.38));
+  z-index: 0;
+}
+
+.hero-card::after {
+  content: "";
+  position: absolute;
+  left: 46px;
+  right: 46px;
+  bottom: 100px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(122,79,43,.08);
+  filter: blur(18px);
+  z-index: 0;
+}
+
+.hero-card .kitchen-bg {
+  position: absolute;
+  left: 54px;
+  right: 54px;
+  bottom: 118px;
+  height: 130px;
+  border-radius: 28px;
+  background:
+    linear-gradient(90deg, rgba(122,79,43,.12) 1px, transparent 1px),
+    linear-gradient(rgba(122,79,43,.08) 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: .45;
+  z-index: 1;
+}
+
+.sun,
+.grandma,
+.quote {
+  position: absolute;
+  z-index: 2;
+}
+
+.kitchen-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.soft-window {
+  position: absolute;
+  left: 54px;
+  top: 72px;
+  width: 150px;
+  height: 190px;
+  border-radius: 36px;
+  background: linear-gradient(
+    180deg,
+    rgba(168,197,162,.22),
+    rgba(246,234,210,.05)
+  );
+  border: 1px solid rgba(168,197,162,.22);
+}
+
+.shelf {
+  position: absolute;
+  left: 70px;
+  right: 78px;
+  bottom: 160px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(122,79,43,.18);
+}
+
+.jar {
+  position: absolute;
+  bottom: 176px;
+  width: 34px;
+  height: 44px;
+  border-radius: 10px 10px 14px 14px;
+  background: rgba(139, 79, 29, 0.16);
+  border: 2px solid rgba(122,79,43,.22);
+}
+
+.jar-1 { left: 88px; }
+.jar-2 { left: 134px; background: rgba(217,130,59,.15); }
+
+.leaf {
+  position: absolute;
+  width: 54px;
+  height: 24px;
+  border-radius: 999px 0 999px 0;
+  background: rgba(136, 209, 122, 0.42);
+  transform: rotate(-22deg);
+}
+
+.leaf-1 {
+  right: 72px;
+  top: 120px;
+}
+
+.leaf-2 {
+  right: 116px;
+  bottom: 180px;
+  transform: rotate(18deg);
+  background: rgba(71, 184, 48, 0.28);
+}
+
+.memory-bubble{
+  position:absolute;
+
+  left:120px;
+  top:70px;
+
+  width:110px;
+  height:110px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(157, 78, 221),
+      rgba(157, 78, 221,.12) 100%
+    );
+
+  border:1px solid rgba(148, 80, 24, 0.12);
+
+  box-shadow:
+    0 12px 30px rgba(122,79,43,.08);
+
+}
+
+.bubble-tail{
+  position:absolute;
+
+  right:-6px;
+  bottom:12px;
+
+  width:18px;
+  height:18px;
+
+  border-radius:50%;
+
+  background:rgba(246,234,210,.9);
+}
+
+.bubble-tail::after{
+  content:"";
+
+  position:absolute;
+
+  right:-14px;
+  bottom:-12px;
+
+  width:10px;
+  height:10px;
+
+  border-radius:50%;
+
+  background:rgba(246,234,210,.8);
+}
+
+.grandchild{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+}
+
+.child-head{
+  width:34px;
+  height:34px;
+
+  border-radius:50%;
+
+  background:#f7caa4;
+
+  border:2px solid var(--ink);
+
+  margin:auto;
+}
+
+.child-body{
+  width:42px;
+  height:50px;
+
+  margin-top:4px;
+
+  border-radius:14px;
+
+  border:2px solid var(--ink);
+
+  background:#A8C5A2;
+}
+
+.thought-dot{
+  position:absolute;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:rgba(255,248,234,.9);
+  border:1px solid rgba(122,79,43,.10);
+  box-shadow:0 8px 18px rgba(122,79,43,.08);
+}
+
+.dot-1{
+  right:-22px;
+  bottom:34px;
+  background:rgba(157, 78, 221,.7);
+}
+
+.dot-2{
+  right:-52px;
+  bottom:16px;
+  width:16px;
+  height:16px;
+  opacity:.88;
+  background:rgba(157, 78, 221,.7);
+}
+
+/*CHILD CHARACTER IN MEMORY BUBBLE*/
+.child-head{
+  position:relative;
+}
+
+.child-eye{
+  position:absolute;
+  top:13px;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:var(--ink);
+}
+
+.eye-left{
+  left:12px;
+}
+
+.eye-right{
+  right:8px;
+}
+
+.child-mouth{
+  position:absolute;
+  left:50%;
+  top:21px;
+  width:12px;
+  height:7px;
+  border-bottom:2px solid #b94b3f;
+  border-radius:50%;
+  transform:translateX(-50%);
+}
+
   </style>
 </head>
 <body>
@@ -2711,8 +2973,32 @@
         </div>
       </div>
       <div class="hero-card">
+        <div class="kitchen-atmosphere">
+        <div class="shelf"></div>
+        <div class="jar jar-1"></div>
+        <div class="jar jar-2"></div>
+        <div class="leaf leaf-1"></div>
+        <div class="leaf leaf-2"></div>
+        <div class="soft-window"></div>
+      </div>
         <div class="sun"></div>
-        <div class="grandma">
+        <div class="kitchen-bg"></div>
+
+        <div class="memory-bubble">
+        <div class="thought-dot dot-1"></div>
+        <div class="thought-dot dot-2"></div>
+
+        <div class="grandchild">
+          <div class="child-head">
+            <span class="child-eye eye-left"></span>
+            <span class="child-eye eye-right"></span>
+            <span class="child-mouth"></span>
+          </div>
+          <div class="child-body"></div>
+        </div>
+      </div>
+
+        <div class="grandma">         
           <div class="headscarf"></div>
           <div class="face"><div class="smile"></div></div>
           <div class="body"></div>
@@ -3155,7 +3441,7 @@
 <div class="swatch sound-swatch" data-sound="leaf" style="background:#6f8f55">Lá chuối</div>
 <div class="swatch sound-swatch" data-sound="gac" style="background:#b94b3f">Gấc đỏ</div>
 <div class="swatch sound-swatch" data-sound="clay" style="background:#7a4f2b">Đất nung</div>
-<div class="swatch sound-swatch" data-sound="taro" style="background:#8b5f9f">Khoai môn</div>
+<div class="swatch sound-swatch" data-sound="taro" style="background:#8b5f9f">Tím mộng mơ</div>
       </div>
 
       <div class="grid" style="margin-top:18px">
@@ -5987,10 +6273,10 @@ document.addEventListener('click', e => {
         </div>
          <h4>Đất nung</h4>
         <small>Màu chủ đạo, linh hồn của trò chơi</small>
-        <p>Sắc màu của bếp lửa hồng, của nồi đất nung, của nước màu cá kho kẹo lại và những thớ gỗ cũ sờn theo năm tháng.
-          Dùng cho UI chính và các khoảnh khắc mang cảm giác quê nhà.
-        </p>
-        <b>Ấm áp - Chăm sóc - Thuộc về</b>
+        <p><strong><b>Gợi ý áp dụng:</b></strong></p>
+        <p>Căn bếp, đồ gỗ, đất nung, vật dụng nấu ăn, các điểm nhấn cảm xúc chính.</p>
+        <p><strong>Ý nghĩa cảm xúc:</strong></p>
+        <b>Ấm áp - Chăm sóc - Hoài niệm</b>
       </div>
 
       <div class="color-card paper">
@@ -5998,9 +6284,11 @@ document.addEventListener('click', e => {
         <div class="color-code">#F5E0C3</div>
         </div>
         <h4>Giấy dó</h4>
-        <small>Không gian để cảm xúc thở</small>
-        <p>Tông nền kem ấm lấy cảm hứng từ chất liệu giấy dó truyền thống, mang lại ánh sáng dịu nhẹ và hoài cổ cho mái nhà Việt.</p>
-        <b>Breathing Space · Handmade · Calm</b>
+        <small>Màu nền của trải nghiệm</small>
+        <p><strong><b>Gợi ý áp dụng:</b></strong></p>
+        <p>Hình nền, UI, không gian mở, cảm giác ánh sáng dịu trong nhà.</p>
+        <p><strong>Ý nghĩa cảm xúc:</strong></p>
+        <b>Nhẹ nhàng - Bình yên - Có khoảng thở</b>
       </div>
 
       <div class="color-card leaf">
@@ -6008,9 +6296,11 @@ document.addEventListener('click', e => {
         <div class="color-code">#A8C5A2</div>
         </div>
         <h4>Lá chuối</h4>
-        <small>Nhịp sống đời thường</small>
-        <p>Sắc xanh mộc mạc của rau thơm vườn nhà, của lá gói bánh, gợi nhắc không khí thân thương của những phiên chợ sớm quê nhà.</p>
-        <b>Life · Freshness · Nature</b>
+        <small>Màu của đời sống thường nhật</small>
+        <p><strong><b>Gợi ý áp dụng:</b></strong></p>
+        <p>Rau củ, cây cối, chợ quê, sân vườn và những chi tiết đời sống.</p>
+        <p><strong>Ý nghĩa cảm xúc:</strong></p>
+        <b>Tự nhiên - Gần gũi - Sinh khí</b>
       </div>
 
       <div class="color-card gac">
@@ -6018,20 +6308,24 @@ document.addEventListener('click', e => {
         <div class="color-code">#E63946</div>
         </div>
         <h4>Gấc đỏ</h4>
-        <small>Điểm chạm cảm xúc</small>
-        <p>Sắc đỏ nồng hậu dành riêng cho những mâm cơm ngày lễ Tết, tạo điểm nhấn thị giác đặc biệt và mang thông điệp của sự sum vầy.</p>
+        <small>Màu điểm nhấn cảm xúc</small>
+        <p><strong><b>Gợi ý áp dụng:</b></strong></p>
+        <p>Tết, lễ cúng, phần thưởng, khoảnh khắc đáng nhớ.</p>
         <p>Dùng tiết chế do nếu dùng quá nhiều sẽ làm game bị nóng/gắt.</p>
-        <b>Celebration · Energy · Tết Memory</b>
+        <p><strong>Ý nghĩa cảm xúc:</strong></p>
+        <b>Niềm vui • Sum họp • Dịp đặc biệt</b>
       </div>
 
             <div class="color-card taro">
         <div class="color-swatch">
           <div class="color-code">#9D4EDD</div>
         </div>
-        <h4>Khoai môn</h4>
-        <small>Màu của ký ức</small>
-        <p>Tông tím mộng mơ dành cho cho những khoảng lặng hồi tưởng, những ký ức phiêu lãng và các góc khuất nội tâm sâu lắng.</p>
-        <b>Memory · Reflection · Depth</b>
+        <h4>Tím mộng mơ</h4>
+        <small>Màu của ký ức và hồi tưởng</small>
+        <p><strong><b>Gợi ý áp dụng:</b></strong></p>
+        <p>Ký ức, hồi tưởng, những câu chuyện riêng và các khoảnh khắc lắng lại.</p>
+        <p><strong>Ý nghĩa cảm xúc:</strong></p>
+        <b>Hoài niệm • Suy ngẫm • Chiều sâu</b>
       </div>
 
     </div>
@@ -6039,7 +6333,7 @@ document.addEventListener('click', e => {
     <div class="avoid-block">
       <h4>Những điều cần tránh</h4>
       <div class="avoid-list">
-        <span>Neon độ tương phảncao</span>
+        <span>Neon độ tương phản cao</span>
         <span>Trắng tinh kỹ thuật số</span>
         <span>Tương phản gắt kiểu arcade</span>
         <span>Candy pastel quá ngọt</span>

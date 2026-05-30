@@ -1445,17 +1445,12 @@
 @media (max-width: 1280px) {
   .hero {
     grid-template-columns: 1fr;
-    gap: 36px;
   }
 
   .hero-card {
-    width: min(760px, 100%);
+    max-width: 760px;
+    width: 100%;
     margin: 0 auto;
-    min-height: 520px;
-  }
-
-  .grandma {
-    transform: translate(-50%, -50%) scale(.95);
   }
 }
 
@@ -6292,7 +6287,7 @@ document.addEventListener('click', e => {
 });
 </script>
 
-//COOKING MAMA
+<!-- COOKING MAMA -->
 
 <div class="benchmark-modal" id="cookingmama-narrative-loop">
   <div class="benchmark-modal-panel">
@@ -6347,7 +6342,7 @@ document.addEventListener('click', e => {
   </div>
 </div>
 
-//COOKING FEVER
+<!-- COOKING FEVER -->
 
 <div class="benchmark-modal" id="cookingfever-progression">
   <div class="benchmark-modal-panel">
@@ -6404,7 +6399,7 @@ document.addEventListener('click', e => {
   </div>
 </div>
 
-//VENBA
+<!-- VENBA -->
 
 <div class="benchmark-modal" id="venba-memory-puzzle">
   <div class="benchmark-modal-panel">
@@ -6468,7 +6463,7 @@ document.addEventListener('click', e => {
   </div>
 </div>
 
-//SPIRITFARER
+/* SPIRITFARER */
 
 <div class="benchmark-modal" id="spiritfarer-pacing">
   <div class="benchmark-modal-panel">
@@ -6523,7 +6518,7 @@ document.addEventListener('click', e => {
   </div>
 </div>
 
-//VISUAL COLOR LANG
+/* VISUAL COLOR LANG */
 <div class="gameplay-overlay" id="colorLanguagePanel">
   <div class="gameplay-panel color-language-panel">
     <button class="gameplay-panel-close" id="closeColorLanguage">×</button>

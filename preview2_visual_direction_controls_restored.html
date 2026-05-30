@@ -3093,7 +3093,7 @@
   </button>
 </div>
 
-<audio id="siteMusic" src="./ASSETS/AUDIO/cooking-theme.mp3" loop></audio>
+<audio id="siteMusic" src="./ASSETS/AUDIO/cooking-theme.mp3" ></audio>
 <audio id="doorClickSound" src="./ASSETS/AUDIO/door-click.mp3"></audio>
 <audio id="curtainOpenSound" src="./ASSETS/AUDIO/curtain-open.mp3"></audio>
 
@@ -5033,6 +5033,20 @@ const enterSiteBtn = document.getElementById('enterSiteBtn');
 const siteMusic = document.getElementById('siteMusic');
 const doorClickSound = document.getElementById('doorClickSound');
 const curtainOpenSound = document.getElementById('curtainOpenSound');
+const musicPlaylist = [
+  './ASSETS/AUDIO/cooking-theme.mp3',
+  './ASSETS/AUDIO/cooking-theme_2.mp3'
+];
+
+let currentMusicIndex = 0;
+
+siteMusic.addEventListener('ended', () => {
+  currentMusicIndex =
+    (currentMusicIndex + 1) % musicPlaylist.length;
+
+  siteMusic.src = musicPlaylist[currentMusicIndex];
+  siteMusic.play().catch(() => {});
+});
 
 enterSiteBtn?.addEventListener('click', () => {
   doorClickSound.volume = 0.55;
@@ -5314,12 +5328,13 @@ enterSiteBtn?.addEventListener('click', () => {
         './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_2_LQ.jpg',
         './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_3_LQ.jpg',
         './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_4_LQ.jpg',
-        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_LQ.jpg',
+        './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_5_LQ.jpg',
         './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_6_LQ.jpg',
         './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_7_LQ.jpg',
         './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_8_LQ.jpg',
         './IMG_MOODBOARD/EMO_MEMORY_MOODBOARD/LQ/With_Ngoai_MB_9.jpg'
       ]
+      
     },
     food: {
       imgId: 'img-e2',

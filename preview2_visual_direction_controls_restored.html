@@ -1442,6 +1442,23 @@
   display: none !important;
 }
 
+@media (max-width: 1280px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-card {
+    width: min(760px, 100%);
+    margin: 0 auto;
+    min-height: 520px;
+  }
+
+  .grandma {
+    transform: translate(-50%, -50%) scale(.95);
+  }
+}
+
     /* RESPONSIVE */
     @media (max-width: 980px) {
       .hero { grid-template-columns: 1fr; min-height: auto; padding: 56px 6vw 80px; }

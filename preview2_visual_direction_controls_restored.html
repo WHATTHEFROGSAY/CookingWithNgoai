@@ -2582,11 +2582,22 @@
 
 .color-card b {
   display: block;
-  margin-top: 14px;
-  font-size: 11px;
-  letter-spacing: .08em;
+  margin-top: 5px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight:800;
+  letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--brown);
+}
+
+.color-card .emotion-text{
+  font-size:13px;
+  line-height:1.5;
+  font-weight:600;
+  color:#5c4a3c;
+  margin-top:0;
+  
 }
 
 .color-card.clay .color-swatch { background:#7a4f2b; }
@@ -2926,6 +2937,59 @@
   transform:translateX(-50%);
 }
 
+.fixed-note-box{
+  width:100%;
+  min-height:82px;
+  max-height:82px;
+
+  padding:10px 12px;
+  overflow:hidden;
+
+  background:rgba(255,248,234,.14);
+  border:1px solid rgba(255,248,234,.25);
+  border-radius:8px;
+
+  font-size:13px;
+  font-weight:600;
+  line-height:1.6;
+  color:#fff8ea;
+
+  cursor:pointer;
+  transition:all .28s ease;
+}
+
+.fixed-note-box:hover{
+  position:absolute;
+  top:36px;
+  left:14px;
+
+  width:calc(100% - 28px);
+  min-height:120px;
+  max-height:260px;
+
+  overflow-y:auto;
+  z-index:9999;
+
+  background:rgba(24,18,14,.96);
+  border:1px solid rgba(255,248,234,.22);
+  box-shadow:0 14px 28px rgba(0,0,0,.35);
+
+  transform:translateY(-4px);
+}
+
+.note-section-title{
+  margin-top:14px;
+  margin-bottom:4px;
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:#fff8ea;
+}
+
+.fixed-note-box .note-section-title:first-child{
+  margin-top:0;
+}
   </style>
 </head>
 <body>
@@ -3159,7 +3223,7 @@
           <tr><td>
   <div class="research-game-name">
     <img class="research-flag-img" src="IMG_MOODBOARD/FLAGS/lithuania.png" alt="Lithuania">
-    <strong>Cooking Diary / Cooking Fever</strong>
+    <strong>Cooking Diary/ Cooking Fever</strong>
   </div>
 </td><td>Tiến trình phát triển rõ ràng và cảm giác tiến bộ dễ hiểu cho người chơi phổ thông.</td><td>Tiến trình cần rõ ràng, tạo cảm giác phát triển nhưng không gây áp lực cày cuốc.</td></tr>
           <tr><td>
@@ -3177,7 +3241,7 @@
           <tr><td>
   <div class="research-game-name">
     <img class="research-flag-img" src="IMG_MOODBOARD/FLAGS/money.png" alt="Money">
-    <strong>Loyalty App / Campaign đổi quà</strong>
+    <strong>Loyalty App/ Campaign đổi quà</strong>
   </div>
 </td><td>Phần thưởng hữu hình như động lực đưa người chơi quay lại và kéo trải nghiệm ra thực tế</td><td>Phần thưởng nên xoá đi khoảng cách giữa thế giới ảo và thực tại, kết nối lối chơi với trải nghiệm thực tế.</td></tr>
         </tbody>
@@ -3688,9 +3752,134 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
 
           <div class="mb-section-label">Ghi chú &amp; Insight</div>
           <div class="mb-caption-row">
-            <div class="mb-caption-card has-tape"><label>Mục tiêu cảm xúc</label><textarea placeholder="Design cần lưu ý"></textarea></div>
-            <div class="mb-caption-card"><label>Insight người chơi</label><textarea placeholder="Design cần lưu ý"></textarea></div>
-            <div class="mb-caption-card has-tape"><label>Từ khoá hình ảnh</label><textarea placeholder="Design cần lưu ý"></textarea></div>
+     <div class="mb-caption-card has-tape emotion-card">
+  <label>Mục tiêu cảm xúc</label>
+
+  <div class="fixed-note-box">
+
+    <div class="note-section-title">
+      CẢM GIÁC CẦN TẠO RA
+    </div>
+    Người chơi cần cảm thấy như đang trở về căn bếp thân thuộc của gia đình: ấm áp, dịu dàng, an toàn và được kết nối với ký ức văn hóa qua từng món ăn.
+
+    <div class="note-section-title">
+      TRẠNG THÁI CẢM XÚC CHÍNH
+    </div>
+    Ấm áp, gần gũi, dịu dàng, hoài niệm.<br>
+    Khám phá không áp lực, được chăm sóc và có cảm giác thuộc về.
+
+    <div class="note-section-title">
+      ĐỊNH HƯỚNG ÁNH SÁNG
+    </div>
+    Tông ánh sáng ấm, gợi cảm giác không gian căn bếp gia đình.<br>
+    Ưu tiên dải 3200K–4200K để giữ cảm giác mềm, gần và thân thuộc.
+
+    <div class="note-section-title">
+      NGÔN NGỮ CHUYỂN ĐỘNG & TƯƠNG TÁC
+    </div>
+    Chuyển động và phản hồi cần mềm mại, có độ thở, tránh cảm giác vội hoặc gắt.<br>
+    Micro-interaction nên nằm trong khoảng ~0.4–0.8s để tạo cảm giác dịu dàng và dễ tiếp nhận.
+
+    <div class="note-section-title">
+      TƯƠNG PHẢN THỊ GIÁC
+    </div>
+    Giữ độ tương phản thấp đến vừa phải, phân tầng thị giác nhẹ nhàng.<br>
+    Tránh tạo cảm giác cảnh báo, căng thẳng hoặc quá giống giao diện arcade.
+
+    <div class="note-section-title">
+      XỬ LÝ BỀ MẶT & VÙNG BẮT SÁNG
+    </div>
+    Tránh bóng đổ gắt, highlight sắc và sắc trắng thuần (#FFFFFF).<br>
+    Ưu tiên bề mặt matte, ánh sáng mềm và vùng bắt sáng có cảm giác thủ công.
+
+    <div class="note-section-title">
+      NGÔN NGỮ CHẤT LIỆU
+    </div>
+    Ưu tiên các chất liệu gợi ký ức gia đình và cảm giác xúc giác đời thường: gỗ, gốm, men sứ, vải, giấy, tre và hơi nước.
+
+  </div>
+</div>
+            <div class="mb-caption-card emotion-card">
+            <label>Insight người chơi</label>
+
+            <div class="fixed-note-box">
+
+              <div class="note-section-title">
+                INSIGHT 1: Khát khao được yêu thương
+              </div>
+              Giữa nhịp sống nhanh và số hoá, người trẻ ngày càng thiếu cảm giác được chăm sóc, an toàn và thực sự thuộc về một nơi nào đó.
+
+              <div class="note-section-title">
+                INSIGHT 2: Khoảng cách với cội nguồn văn hóa
+              </div>
+              Nhiều người trẻ yêu món ăn quê nhà nhưng hiếm khi thực sự hiểu câu chuyện, nguồn gốc hay ký ức văn hoá đằng sau chúng.
+
+              <div class="note-section-title">
+                INSIGHT 3: Học qua trải nghiệm, không qua áp lực
+              </div>
+              Người trẻ thích khám phá và học hỏi thông qua chơi, cảm nhận, thử nghiệm hơn là bị dạy theo cách cứng nhắc, áp lực/ mang cảm giác “đang bị ép học”.
+
+              <div class="note-section-title">
+                INSIGHT 4: Cảm giác đạt thành tựu không áp lực
+              </div>
+              Người chơi hiện đại vẫn thích cảm giác tiến bộ và được ghi nhận/ thưởng, nhưng không thích các hệ thống ép buộc/ gây áp lực liên tục/ phạt nặng/ tạo cảm giác FOMO.
+
+            </div>
+          </div>
+                      <div class="mb-caption-card has-tape emotion-card">
+  <label>Từ khoá hình ảnh</label>
+
+  <div class="fixed-note-box">
+
+    <div class="note-section-title">
+      SẮC THÁI CẢM XÚC THỊ GIÁC
+    </div>
+    Ấm áp, gần gũi, dịu dàng, hoài niệm.<br>
+    An toàn, chữa lành, thân thuộc.<br>
+    Nhẹ nhàng, không áp lực, có cảm giác được chăm sóc.
+
+    <div class="note-section-title">
+      CHẤT LIỆU & KẾT CẤU
+    </div>
+    Gỗ cũ, men sứ, gốm, vải lanh, giấy cũ, tre.<br>
+    Ưu tiên bề mặt có dấu vết đời sống, thủ công và cảm giác chạm thật.
+
+    <div class="note-section-title">
+      KHÔNG GIAN
+    </div>
+    Căn bếp Việt, sân nhà, nồi đất, chợ truyền thống.<br>
+    Lọ gia vị, mẹt tre, bàn ăn gia đình, khói bếp.<br>
+    Cửa sổ ánh chiều, radio cũ, mái ngói, quạt máy cũ, gạch bông.
+
+    <div class="note-section-title">
+      ẨM THỰC
+    </div>
+    Hơi nước bốc lên, rau thơm tươi, nước dùng óng ánh.<br>
+    Kết cấu món ăn phong phú, chân thực ngon mắt, hơi ấm món nhà.<br>
+    Ưu tiên cận cảnh món ăn có cảm giác vừa nấu xong.
+
+    <div class="note-section-title">
+      NHÂN VẬT
+    </div>
+    <strong>Ngoại:</strong> hiền hậu, ấm áp, giàu biểu cảm, có dấu vết đời sống và tuổi tác dịu dàng.<br>
+    Cần giữ tính chân thực văn hóa, tránh làm nhân vật quá hoạt hình hoặc quá trẻ con.<br><br>
+    <strong>Người chơi:</strong> trẻ trung, dễ gần, vui vẻ, tò mò, có cảm giác đang học lại điều thân thuộc.
+
+    <div class="note-section-title">
+      CHUYỂN ĐỘNG
+    </div>
+    Mềm mại, dịu dàng, có độ thở.<br>
+    Phản hồi nên chậm vừa đủ để người chơi cảm nhận được thao tác, tránh cảm giác gấp gáp.
+
+    <div class="note-section-title">
+      UI
+    </div>
+    Bo tròn, mềm, ít sắc cạnh.<br>
+    Layer giấy, card nổi nhẹ, nút bấm có cảm giác thủ công.<br>
+    Tránh UI quá bóng, quá neon hoặc quá giống mobile casual arcade.
+
+  </div>
+</div>
           </div>
           <div class="mb-section-label">Insight nhanh</div>
           <div class="mb-insight-strip">
@@ -3957,7 +4146,7 @@ Công thức, nguyên liệu và cách nấu thay đổi theo vùng miền, th�
     <div class="redemption-accordion-body redemption-impact">
       <ul>
         <li>Khôi phục sổ tay công thức thất lạc</li>
-        <li>Mở khóa NPC / khách quen cũ</li>
+        <li>Mở khóa NPC/ khách quen cũ</li>
         <li>Nâng cấp căn bếp</li>
         <li>Mở vùng miền mới</li>
         <li>Mở khóa những phân đoạn ký ức</li>
@@ -6275,8 +6464,12 @@ document.addEventListener('click', e => {
         <small>Màu chủ đạo, linh hồn của trò chơi</small>
         <p><strong><b>Gợi ý áp dụng:</b></strong></p>
         <p>Căn bếp, đồ gỗ, đất nung, vật dụng nấu ăn, các điểm nhấn cảm xúc chính.</p>
-        <p><strong>Ý nghĩa cảm xúc:</strong></p>
-        <b>Ấm áp - Chăm sóc - Hoài niệm</b>
+        <p><b><strong>Ý nghĩa cảm xúc:</strong></b></p>
+        <div class="emotion-text">
+          - Ấm áp
+          <br>- Chăm sóc
+          <br>- Hoài niệm
+        </div>
       </div>
 
       <div class="color-card paper">
@@ -6287,8 +6480,12 @@ document.addEventListener('click', e => {
         <small>Màu nền của trải nghiệm</small>
         <p><strong><b>Gợi ý áp dụng:</b></strong></p>
         <p>Hình nền, UI, không gian mở, cảm giác ánh sáng dịu trong nhà.</p>
-        <p><strong>Ý nghĩa cảm xúc:</strong></p>
-        <b>Nhẹ nhàng - Bình yên - Có khoảng thở</b>
+        <p><b><strong>Ý nghĩa cảm xúc:</strong></b></p>
+        <div class="emotion-text">
+          - Nhẹ nhàng
+          <br>- Bình yên
+          <br>- Có khoảng thở
+        </div>
       </div>
 
       <div class="color-card banana-leaf">
@@ -6299,8 +6496,12 @@ document.addEventListener('click', e => {
         <small>Màu của đời sống thường nhật</small>
         <p><strong><b>Gợi ý áp dụng:</b></strong></p>
         <p>Rau củ, cây cối, chợ quê, sân vườn và những chi tiết đời sống.</p>
-        <p><strong>Ý nghĩa cảm xúc:</strong></p>
-        <b>Tự nhiên - Gần gũi - Sinh khí</b>
+        <p><b><strong>Ý nghĩa cảm xúc:</strong></b></p>
+        <div class="emotion-text">
+        - Tự nhiên
+        <br>- Gần gũi
+        <br>- Sinh khí
+        </div>
       </div>
 
       <div class="color-card gac">
@@ -6312,8 +6513,12 @@ document.addEventListener('click', e => {
         <p><strong><b>Gợi ý áp dụng:</b></strong></p>
         <p>Tết, lễ cúng, phần thưởng, khoảnh khắc đáng nhớ.</p>
         <p>Dùng tiết chế do nếu dùng quá nhiều sẽ làm game bị nóng/gắt.</p>
-        <p><strong>Ý nghĩa cảm xúc:</strong></p>
-        <b>Niềm vui • Sum họp • Dịp đặc biệt</b>
+        <p><b><strong>Ý nghĩa cảm xúc:</strong></b></p>
+        <div class="emotion-text">
+        - Niềm vui
+        <br>- Sum họp
+        <br>- Dịp đặc biệt
+        </div>
       </div>
 
             <div class="color-card taro">
@@ -6324,8 +6529,12 @@ document.addEventListener('click', e => {
         <small>Màu của ký ức và hồi tưởng</small>
         <p><strong><b>Gợi ý áp dụng:</b></strong></p>
         <p>Ký ức, hồi tưởng, những câu chuyện riêng và các khoảnh khắc lắng lại.</p>
-        <p><strong>Ý nghĩa cảm xúc:</strong></p>
-        <b>Hoài niệm • Suy ngẫm • Chiều sâu</b>
+        <p><b><strong>Ý nghĩa cảm xúc:</strong></b></p>
+        <div class="emotion-text">
+          - Hoài niệm
+          <br>- Suy ngẫm
+          <br>- Chiều sâu
+        </div>
       </div>
 
     </div>
@@ -6335,9 +6544,9 @@ document.addEventListener('click', e => {
       <div class="avoid-list">
         <span>Neon độ tương phản cao</span>
         <span>Trắng tinh kỹ thuật số</span>
-        <span>Tương phản gắt kiểu arcade</span>
-        <span>Candy pastel quá ngọt</span>
-        <span>Gradient cyber/artificial</span>
+        <span>Tương phản màu quá mạnh</span>
+        <span>Bảng màu pastel bão hòa cao</span>
+        <span>Hiệu ứng chuyển màu mang cảm giác công nghệ/ nhân tạo</span>
       </div>
       <p>
         Vì chúng làm mất cảm giác mộc mạc, gần gũi và chiều sâu cảm xúc của thế giới Cooking with Ngoại.
